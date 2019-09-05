@@ -1,0 +1,19 @@
+Package: nutricheckr
+Type: Package
+Title: Tools for Nutrition Assessment and Analysis
+Version: 0.1.0
+Authors@R: person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
+                  email = "ernest@guevarra.io", role = c("aut", "cre"))
+Description: Nutrition assessment involves various methods and techniques. This
+    package provides tools to support the implementation of these methods and
+    techniques.
+License: GPL-3
+Imports:
+    zscorer,
+    tidyr,
+    nipnTK (>= 0.1.0)
+Remotes: 
+    nutriverse/nipnTK
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
