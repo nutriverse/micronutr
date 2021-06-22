@@ -6,7 +6,7 @@ Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
                   email = "ernest@guevarra.io", role = c("aut", "cre")),
     person("Nicholus", "Tint Zaw", email = "nicholustintzaw@gmail.com",
-           role = "ctb"))
+           role = "aut"))
 Description: Nutrition assessment involves various methods and techniques. This
     package provides tools to support the implementation of these methods and
     techniques.
