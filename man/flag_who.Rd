@@ -9,24 +9,24 @@ flag_who(df, haz = NULL, waz = NULL, whz = NULL, add = TRUE)
 }
 \arguments{
 \item{df}{A data.frame containing anthropometric z-score indices for
-`height-for-age`, `weight-for-age` and/or `weight-for-height`}
+\verb{height-for-age}, \verb{weight-for-age} and/or \verb{weight-for-height}}
 
-\item{haz}{A character value indicating the variable name in `df` for the
-`height-for-age z-score`}
+\item{haz}{A character value indicating the variable name in \code{df} for the
+\verb{height-for-age z-score}}
 
-\item{waz}{A character value indicating the variable name in `df` for the
-`weight-for-age z-score`}
+\item{waz}{A character value indicating the variable name in \code{df} for the
+\verb{weight-for-age z-score}}
 
-\item{whz}{A character value indicating the variable name in `df` for the
-`weight-for-height z-score`}
+\item{whz}{A character value indicating the variable name in \code{df} for the
+\verb{weight-for-height z-score}}
 
-\item{add}{Logical. Should flag values be added to `df`. Default is TRUE.}
+\item{add}{Logical. Should flag values be added to \code{df}. Default is TRUE.}
 }
 \value{
-If `add` FALSE, returns a vector of `flag` coded values indicating
-  problematic measurements. if `add` TRUE, returns `df` with additional
-  column named `flag` containing coded values indicating problematic
-  measurements
+If \code{add} FALSE, returns a vector of \code{flag} coded values indicating
+problematic measurements. if \code{add} TRUE, returns \code{df} with additional
+column named \code{flag} containing coded values indicating problematic
+measurements
 }
 \description{
 Apply World Health Organization (WHO) anthropometric z-score indices flagging

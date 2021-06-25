@@ -4,8 +4,10 @@
 \alias{get_hcfa_zchart}
 \title{get_hcfa_zchart}
 \usage{
-get_hcfa_zchart(baseurl = "http://www.who.int/childgrowth/standards/",
-  gender = c("boys", "girls"))
+get_hcfa_zchart(
+  baseurl = "http://www.who.int/childgrowth/standards/",
+  gender = c("boys", "girls")
+)
 }
 \arguments{
 \item{baseurl}{Character value for the base URL of the WHO Child Growth
@@ -21,14 +23,14 @@ A data frame in tidy format with 5 coloumns and 33426 rows:
 \describe{
 \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
 \item{\code{month}}{Age of child in months. This is calculated from the
-    original data using that data for age of child in days}
+original data using that data for age of child in days}
 \item{\code{day}}{Age of child in days. This is provided for by default in
-    the original data}
+the original data}
 \item{\code{sd_type}}{Type of z-score. Can be one of \code{4SD}, \code{3SD},
-    \code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
-    \code{-4SD}}
+\code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
+\code{-4SD}}
 \item{\code{sd_value}}{Head circumference (in centimetres) value for the specified
-    \code{sd_type}}
+\code{sd_type}}
 }
 }
 \description{

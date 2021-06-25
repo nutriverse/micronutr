@@ -4,8 +4,10 @@
 \alias{get_wfh_pchart}
 \title{get_wfh_pchart}
 \usage{
-get_wfh_pchart(baseurl = "http://www.who.int/childgrowth/standards/",
-  gender = c("boys", "girls"))
+get_wfh_pchart(
+  baseurl = "http://www.who.int/childgrowth/standards/",
+  gender = c("boys", "girls")
+)
 }
 \arguments{
 \item{baseurl}{Character value for the base URL of the WHO Child Growth
@@ -22,16 +24,16 @@ A data frame in tidy format with 7 coloumns and 36060 rows:
 \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
 \item{\code{lh}}{Length/height (in centimetres) of child in months.}
 \item{\code{l}}{\code{L} component of the LMS method for normalising growth
-    centile standards. \code{L} is the trend in the optimal power to obtain
-    normality}
+centile standards. \code{L} is the trend in the optimal power to obtain
+normality}
 \item{\code{m}}{\code{M} component of the LMS method for normalising growth
-    centile standards. \code{M} is the trend in the mean}
+centile standards. \code{M} is the trend in the mean}
 \item{\code{s}}{\code{S} component of the LMS method for normalising growth
-    centile standards. \code{S} is the trend in the coefficient of variation}
+centile standards. \code{S} is the trend in the coefficient of variation}
 \item{\code{p_type}}{Type of z-score. Can be one of \code{0.10th}, \code{1st},
-    \code{3rd}, \code{5th}, \code{10th}, \code{15th}, \code{25th}, \code{50th},
-    \code{75th}, \code{85th}, \code{90th}, \code{95th}, \code{97th},
-    \code{99th} and \code{99.9th}}
+\code{3rd}, \code{5th}, \code{10th}, \code{15th}, \code{25th}, \code{50th},
+\code{75th}, \code{85th}, \code{90th}, \code{95th}, \code{97th},
+\code{99th} and \code{99.9th}}
 \item{\code{p_value}}{Weight (kgs) value for the specified \code{p_type}}
 }
 }
