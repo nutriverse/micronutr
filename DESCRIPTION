@@ -4,7 +4,7 @@ Title: Tools for Nutrition Assessment and Analysis
 Version: 0.1.0
 Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
-                  email = "ernest@guevarra.io", role = c("aut", "cre")),
+           email = "ernest@guevarra.io", role = c("aut", "cre")),
     person("Nicholus", "Tint Zaw", email = "nicholustintzaw@gmail.com",
            role = "aut"))
 Description: Nutrition assessment involves various methods and techniques. This
@@ -14,9 +14,11 @@ License: GPL-3
 Imports:
     zscorer,
     tidyr,
-    nipnTK (>= 0.1.0)
-Remotes: 
-    nutriverse/nipnTK
+    nipnTK
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+Language: en-GB
+RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
+URL: https://nutriverse/nutricheckr/, https://github.com/nutriverse/nutricheckr
+BugReports: https://github.com/nutriverse/nutricheckr/issues
