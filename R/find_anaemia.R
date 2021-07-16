@@ -279,7 +279,6 @@ flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL,
 #
 ################################################################################
 
-cut()
 
 flag_anaemia <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
   ##
