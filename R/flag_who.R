@@ -26,12 +26,19 @@
 #'   *weight-for-age* z-score.
 #' @param whlz A character value indicating the variable name in `df` for the
 #'   *weight-for-height* or *weight-for-length* z-score.
+#' @param verbose Logical. Should an additional flag description be returned?
+#'   Default is TRUE.
 #' @param add Logical. Should flag values be added to `df`. Default is TRUE.
 #'
-#' @return If `add` FALSE, returns a vector of `flag` coded values indicating
-#'   problematic measurements. if `add` TRUE, returns `df` with additional
-#'   column named `flag` containing coded values indicating problematic
-#'   measurements
+#' @return Returns `df` with additional column named `flag` containing coded
+#'   values indicating problematic measurements and a column named
+#'   `flag_description` containing text describing which anthropometric
+#'   measurement/s are likely problematic. If `add` FALSE and `verbose` FALSE,
+#'   returns a vector of `flag` coded values indicating problematic
+#'   measurements. if `add` FALSE and `verbose` TRUE, returns a data.frame with
+#'   a column named `flag` containing coded values indicating problematic
+#'   measurements and a column named `flag_description` containing text
+#'   describing which anthropometric measurement/s are likely problematic.
 #'
 #' @author Ernest Guevarra
 #'
@@ -44,27 +51,58 @@
 #
 ################################################################################
 
-flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL, add = TRUE) {
-  ##
-  flag <- vector(mode = "numeric", length = nrow(df))
-  ##
+flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
+                     verbose = TRUE, add = TRUE) {
+  ## Apply WHO HLAZ flagging criteria
   if(!is.null(hlaz)) {
-    flag <- ifelse(!is.na(df[[hlaz]]) & (df[[hlaz]] < -6 | df[[hlaz]] > 6), flag + 1, flag)
+    flag1 <- flag_hlaz(hlaz = df[[hlaz]])
+  } else {
+    warning(
+      "hlaz is NULL hence flagging criteria for height-for-age or length-for-age
+      z-score not applied."
+    )
   }
-  ##
+
+  ## Apply WHO WHLZ flagging criteria
   if(!is.null(whlz)) {
-    flag <- ifelse(!is.na(df[[whlz]]) & (df[[whlz]] < -5 | df[[whlz]] > 5), flag + 2, flag)
+    flag2 <- flag_whlz(whlz = df[[whlz]])
+  } else {
+    warning(
+      "hwlz is NULL hence flaggting criteria for weight-for-height or weight-
+      for-length z-score not applied."
+    )
   }
-  ##
+
+  ## Apply WHO WAZ flagging criteria
   if(!is.null(waz)) {
-    flag <- ifelse(!is.na(df[[waz]]) & (df[[waz]] < -6 | df[[waz]] > 5), flag + 4, flag)
+    flag4 <- flag_waz(waz = df[[waz]])
+  } else {
+    "waz is NULL hence flagging criteria for weight-for-age z-score not applied."
   }
-  ##
+
+  ## Sum flag codes and create flag_description
+  flag <- flag1 + flag2 + flag4
+  flag_description <- vector(mode = "character", length = length(flag))
+  flag_description[flag == 0] <- "No flagged measurements"
+  flag_description[flag == 1] <- "Check height and age measurements"
+  flag_description[flag == 2] <- "Check weight and height measurements"
+  flag_description[flag == 3] <- "Check height measurement"
+  flag_description[flag == 4] <- "Check weight and age measurements"
+  flag_description[flag == 5] <- "Check age measurement"
+  flag_description[flag == 6] <- "Check weight measurement"
+  flag_description[flag == 7] <- "Check age, height and weight measurements"
+
+  if (verbose) {
+    flag <- data.frame(flag, flag_description)
+  }
+
+  ## Check if add is TRUE
   if(add) {
-    df$flag <- flag
-    flag <- df
+    flag <- data.frame(df, flag)
   }
-  return(flag)
+
+  ## Return flag
+  flag
 }
 
 
@@ -140,4 +178,39 @@ flag_whlz <- function(whlz = NULL) {
   flag
 }
 
+
+################################################################################
+#
+#'
+#' Apply World Health Organization (WHO) anthropometric z-score indices flagging
+#' criteria to weight-for-age z-score
+#'
+#' @param waz A numeric value or vector of numeric values for
+#'   *weight-for-age z-score* (*waz*).
+#'
+#' @return A numeric value or vector of values of either *0* or *4* with a
+#'   value of *0* indicating that z-score value is not flagged and a value of
+#'   *4* indicating that z-score value is flagged.
+#'
+#' @author Ernest Guevarra
+#'
+#' @examples
+#' ## Check if a single weight-for-age z-score value is within WHO recommended
+#' ## limits
+#' flag_waz(zscorer::anthro1$waz[1])
+#'
+#' ## Check if a vector of weight-for-age z-score values are within WHO
+#' ## recommended limits
+#' flag_waz(zscorer::anthro1$waz)
+#'
+#' @export
+#'
+#
+################################################################################
+
+flag_waz <- function(waz = NULL) {
+  flag <- vector(mode = "numeric", length = length(waz))
+  flag <- ifelse(waz < -6 | waz > 5, flag + 4, flag)
+  flag
+}
 
