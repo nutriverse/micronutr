@@ -4,29 +4,66 @@
 #'
 #' Perform anaemia diagnosis based on age, sex and pregnancy status
 #'
-#' @param df Survey dataset (as an R data.frame) with indices present
-#' @param age Observation's age in year format
-#' @param hb Observation's HB level in grams per litre (g/L)
-#' @param sex Observation's sex category. Which is dummy variable and coded as
-#'   `1` for "male" and `0` for female
-#' @param pregnant Observation pregnancy status. Dummy variable with `1` for
-#'   pregnant and `0` for non-pregnant
-#' @param add add new generated variable (column) - `anaemia_all` which
-#'   mentioned level of anameia for each observation with no-missing value in
-#'   critical variables required for calculation
-#' @param export exported anaemic observations for future data processing in
-#'   excel file (if necessary)
+#' @param df Survey dataset (as an R data.frame) with the following variables
+#'    present; sex, age, haemoglobin value, and pregnancy status. If the study
+#'    sample population did not contain the pregnancy population, the pregnancy
+#'    status (dummy variable yes/no) might not be required for this function.
+#'    But, the other variables are compulsory for function processing. If the
+#'    dataset did not contain those variables, please perform data processing
+#'    to have those variables in the dataset.
+#' @param age Sample observation's age from the dataset. This variable should
+#'    be recorded in the year format. If your dataset has only an age variable
+#'    with month, please converts it into year format before using this function.
+#' @param hb Sample observation's haemoglobin level from the dataset. The Hb
+#'    values should record in the grams per liter (g/L) units.
+#' @param sex Sample observation's sex identifies from the dataset. This
+#'    variable should be coded in the dummy variable as `1` for "male" and `0`
+#'    for "female". If your dataset's respondent sex variable was not recorded
+#'    this way, please make necessary data recoding before using this function.
+#' @param pregnant Sample observation's pregnancy status from the dataset. This
+#'    variable should be coded as a dummy variable: `1` for pregnant and `0`
+#'    for non-pregnant. Please perform the necessary data processing for
+#'    recoding if your dataset observation's pregnancy status was not in dummy
+#'    variable format.
+#' @param add This parameter's default option is TRUE and will add new
+#'    generated variables `anaemia_all` to your existing dataset applied in
+#'    this function. This newly developed categorical variable comprises three
+#'    types of flag categories resulting from data checking results; no anaemia,
+#'     mild anaemia, moderate anaemia, and severe anaemia. The following table
+#'     explains the cut-off points applied in this diagnostic function.
 #'
-#' @return anaemia   A data.frame with same structure as `df` with a `anaemia_all` variable
-#' @export `anemia_report.xlsx` only anameic observations were exported as excel file using file name "anemia_report.xlsx"
+#'    | **Population** | **Mild** |	**Moderate** | **Severe** |
+#'    | :--- | :--- | :--- | :--- |
+#'    | Children 6-59 months of age |	100 - 109 |	70 - 99 |	< 70 |
+#'    | Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
+#'    | Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
+#'    | Non-pregnant women |  |  |  |
+#'    | (15 years and above) | 110 - 119	| 80 - 109 | < 80 |
+#'    |Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
+#'    |Men |  |  |  |
+#'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
+#'
+#'
+#' @return anaemia   A data frame with the same structure as `df` is named
+#'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
+#'    observed, containing the information which observation was affected by
+#'    what type of anaemia: mild, moderate, or severe.
 #'
 #' @examples
-#'   flag_anaemia(df = )
+#'   flag_anaemia(df = df,
+#'                age = age,
+#'                hb = hb
+#'                sex = sex,
+#'                pregnant = pregnant,
+#'                add = TRUE)
+#'
+#' @export
+#'
 #'
 #
 ################################################################################
 
-flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL, add = TRUE, export = TRUE) {
+flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL, add = TRUE) {
   ##
   anaemia_all <- vector(mode = "numeric", length = nrow(df)) # anaemia level category
   ##
@@ -149,22 +186,131 @@ flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL,
     df$anaemia_all <- anaemia_all
     anaemia        <- df
   }
-  ##
-  if(export) {
-    df_anaemia <- df[!is.na(df$anaemia_all), ]
-    xlsx::write.xlsx(df_anaemia, file = "anemia_report.xlsx") # error loading pakage, reltaed to Java
-  }
+
   return(anaemia)
 }
 
 
 
 ################################################################################
+# alternated function using cut
+################################################################################
+
+################################################################################
 #
+#' Anaemia Diagnosis
+#'
+#' Perform anaemia diagnosis based on age, sex and pregnancy status
+#'
+#' @param df Survey dataset (as an R data.frame) with the following variables
+#'    present; sex, age, haemoglobin value, and pregnancy status. If the study
+#'    sample population did not contain the pregnancy population, the pregnancy
+#'    status (dummy variable yes/no) might not be required for this function.
+#'    But, the other variables are compulsory for function processing. If the
+#'    dataset did not contain those variables, please perform data processing
+#'    to have those variables in the dataset.
+#' @param pop_group This variable contains information about the characteristic
+#'    of observation required to identify the anaemia status. In anaemia diagnosis,
+#'    Hb thresholds are different among different populations, such as age group,
+#'    gender, and special condition (like pregnancy). Therefore, one variable
+#'    can indicate the type of sample population characteristic requirement for
+#'    anaemia diagnosis. The required population group for this variable is
+#'    mentioned in the below table.
+#'
+#'    | **Population** | **Valye** |
+#'    | :--- | :--- |
+#'    | Children 6-59 months of age |	1 |
+#'    | Children 5-11 years of age |	2 |
+#'    | Children 12-14 years of age	| 3 |
+#'    | Non-pregnant women (15 years and above) | 4 |
+#'    | Pregnant women	| 5 |
+#'    | Men (15 years and above) |	6 |
+#'
+#'    if the dataset did not include this variable yet, please create one before
+#'    using this function. Sample r code for generating this variable is
+#'    mentioned below using the sample dataset `hbData`.
+#'
+#' df$pop_group <- with(df,ifelse(
+#'  m.age >= 6 & m.age < 60, 1, ifelse(
+#'  ch.age >= 5 & ch.age < 12, 2, ifelse(
+#'  ch.age >= 12 & ch.age < 15, 3, ifelse(
+#'  ch.age >= 15 & !is.na(ch.age) & sex == 2, 4, ifelse(
+#'  group == "Pregnant Not Principal Carer" |
+#'    group == "Pregnant and lactating Principal Carer" |
+#'    group == "Pregnant Principal carer", 5, ifelse(
+#'  ch.age >= 15 & !is.na(ch.age) & sex == 1, 6, NA)))))))
+#'
+#'
+#' @param hb Sample observation's haemoglobin level from the dataset. The Hb
+#'    values should record in the grams per liter (g/L) units.
+#' @param add This parameter's default option is TRUE and will add new
+#'    generated variables `anaemia_all` to your existing dataset applied in
+#'    this function. This newly developed categorical variable comprises three
+#'    types of flag categories resulting from data checking results; no anaemia,
+#'     mild anaemia, moderate anaemia, and severe anaemia. The following table
+#'     explains the cut-off points applied in this diagnostic function.
+#'
+#'    | **Population** | **Mild** |	**Moderate** | **Severe** |
+#'    | :--- | :--- | :--- | :--- |
+#'    | Children 6-59 months of age |	100 - 109 |	70 - 99 |	< 70 |
+#'    | Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
+#'    | Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
+#'    | Non-pregnant women |  |  |  |
+#'    | (15 years and above) | 110 - 119	| 80 - 109 | < 80 |
+#'    |Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
+#'    |Men |  |  |  |
+#'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
+#'
+#'
+#' @return anaemia   A data frame with the same structure as `df` is named
+#'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
+#'    observed, containing the information which observation was affected by
+#'    what type of anaemia: mild, moderate, or severe.
+#'
+#' @examples
+#'   flag_anaemia(df = df,
+#'                pop_group = pop_group,
+#'                hb = hb
+#'                add = TRUE)
+#'
+#' @export
+#'
+#'
 #
 ################################################################################
 
-
 cut()
-findInterval()
 
+flag_anaemia <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
+  ##
+  anaemia_all <- vector(mode = "numeric", length = nrow(df)) # anaemia level category
+  ##
+  # All group
+  if(!is.na(pop_group) & !is.na(hb)){
+    anaemia_all <- ifelse(pop_group == 1 | pop_group == 5,
+                          cut(df$hb,
+                              breaks = c(-Inf, 70, 99, 109, Inf),
+                              labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                          ifelse(pop_group == 3 | pop_group == 4,
+                                 cut(df$hb,
+                                     breaks = c(-Inf, 80, 109, 119, Inf),
+                                     labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                                 ifelse(pop_group == 2,
+                                        cut(df$hb,
+                                            breaks = c(-Inf, 80, 109, 114, Inf),
+                                            labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                                        ifelse(pop_group == 6,
+                                               cut(df$hb,
+                                                   breaks = c(-Inf, 80, 109, 129, Inf),
+                                                   labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                                               NA))))
+  }
+
+  ##
+  if(add) {
+    df$anaemia_all <- anaemia_all
+    anaemia        <- df
+  }
+
+  return(anaemia)
+}
