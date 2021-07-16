@@ -27,7 +27,7 @@ flag_hlaz(zscorer::anthro1$haz[1])
 
 ## Check if a vector of height-for-age and length-for-age z-score values are
 ## within WHO recommended limits
-flag_hlaz(zscorer::anthro1$haz[1])
+flag_hlaz(zscorer::anthro1$haz)
 
 }
 \author{

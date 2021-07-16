@@ -5,35 +5,55 @@
 \title{Apply World Health Organization (WHO) anthropometric z-score indices flagging
 criteria}
 \usage{
-flag_who(df, haz = NULL, waz = NULL, whz = NULL, add = TRUE)
+flag_who(df, hlaz = NULL, waz = NULL, whlz = NULL, verbose = TRUE, add = TRUE)
 }
 \arguments{
 \item{df}{A data.frame containing anthropometric z-score indices for
-\verb{height-for-age}, \verb{weight-for-age} and/or \verb{weight-for-height}}
+\emph{height-for-age} or \emph{length-for-age}, \emph{weight-for-age}, and/or
+\emph{weight-for-height} or \emph{weight-for-length}.}
 
-\item{haz}{A character value indicating the variable name in \code{df} for the
-\verb{height-for-age z-score}}
+\item{hlaz}{A character value indicating the variable name in \code{df} for the
+\emph{height-for-age} or \emph{length-for-age} z-score.}
 
 \item{waz}{A character value indicating the variable name in \code{df} for the
-\verb{weight-for-age z-score}}
+\emph{weight-for-age} z-score.}
 
-\item{whz}{A character value indicating the variable name in \code{df} for the
-\verb{weight-for-height z-score}}
+\item{whlz}{A character value indicating the variable name in \code{df} for the
+\emph{weight-for-height} or \emph{weight-for-length} z-score.}
+
+\item{verbose}{Logical. Should an additional flag description be returned?
+Default is TRUE.}
 
 \item{add}{Logical. Should flag values be added to \code{df}. Default is TRUE.}
 }
 \value{
-If \code{add} FALSE, returns a vector of \code{flag} coded values indicating
-problematic measurements. if \code{add} TRUE, returns \code{df} with additional
-column named \code{flag} containing coded values indicating problematic
-measurements
+Returns \code{df} with additional column named \code{flag} containing coded
+values indicating problematic measurements and a column named
+\code{flag_description} containing text describing which anthropometric
+measurement/s are likely problematic. If \code{add} FALSE and \code{verbose} FALSE,
+returns a vector of \code{flag} coded values indicating problematic
+measurements. if \code{add} FALSE and \code{verbose} TRUE, returns a data.frame with
+a column named \code{flag} containing coded values indicating problematic
+measurements and a column named \code{flag_description} containing text
+describing which anthropometric measurement/s are likely problematic.
 }
 \description{
-Apply World Health Organization (WHO) anthropometric z-score indices flagging
-criteria
+Flagging is a process of checking whether values of anthropometric indices
+are outside a given range and recording the result in one or more new
+variables. The result may be a set of logical (i.e. 1/0 or true/false) flag
+variables (i.e. one flag variable per anthropometric index) or a single
+variable holding a code number that classifies the nature of the detected
+problem(s).
+}
+\details{
+The WHO flagging criteria are simple biologically plausible ranges. If, for
+example, a value for weight-for-height z-score is below -5 or above +5 then
+the record is flagged to indicate a likely problem with weight-for-height
+z-score. This will usually be caused by an erroneous weight or height value
+being recorded.
 }
 \examples{
-flag_who(df = zscorer::anthro1, haz = "haz", waz = "waz", whz = "whz")
+flag_who(df = zscorer::anthro1, hlaz = "haz", waz = "waz", whlz = "whz")
 
 }
 \author{
