@@ -2,10 +2,13 @@
 % Please edit documentation in R/flag_who.R
 \name{flag_who}
 \alias{flag_who}
+\alias{flag_zscore}
 \title{Apply World Health Organization (WHO) anthropometric z-score indices flagging
 criteria}
 \usage{
 flag_who(df, hlaz = NULL, waz = NULL, whlz = NULL, verbose = TRUE, add = TRUE)
+
+flag_zscore(x = NULL, z = c("hlaz", "whlz", "waz"))
 }
 \arguments{
 \item{df}{A data.frame containing anthropometric z-score indices for
@@ -25,6 +28,16 @@ flag_who(df, hlaz = NULL, waz = NULL, whlz = NULL, verbose = TRUE, add = TRUE)
 Default is TRUE.}
 
 \item{add}{Logical. Should flag values be added to \code{df}. Default is TRUE.}
+
+\item{x}{A numeric value or vector of numeric values for
+\emph{height-for-age z-score} (\emph{haz}) and/or \emph{length-for-age z-score} (\emph{laz}),
+\emph{weight-for-height z-score} (\emph{whz}) and/or \emph{weight-for-length z-score}
+(\emph{wlz}), or \emph{weight-for-age z-score} (\emph{waz}).}
+
+\item{z}{A character value for type of z-score value provided. Can be one of
+either \emph{hlaz} for \emph{height-for-age} or \emph{length-for-age} \emph{z-score}, \emph{whlz}
+for \emph{weight-for-height} or \emph{weight-for-length} \emph{z-score}, or \emph{waz} for
+\emph{weight-for-age z-score}. If no value selected, will default to \emph{hlaz}.}
 }
 \value{
 Returns \code{df} with additional column named \code{flag} containing coded
@@ -36,6 +49,18 @@ measurements. if \code{add} FALSE and \code{verbose} TRUE, returns a data.frame 
 a column named \code{flag} containing coded values indicating problematic
 measurements and a column named \code{flag_description} containing text
 describing which anthropometric measurement/s are likely problematic.
+
+A numeric value or vector of values indicating whether a z-score
+value/s is/are flagged. For \emph{height-for-age} or \emph{length-for-age} \emph{z-score},
+this will be values of either \emph{0} or \emph{1} with a value of \emph{0} indicating
+that z-score value is not flagged and a value of \emph{1} indicating that
+z-score value is flagged. For \emph{weight-for-height} or \emph{weight-for-length}
+\emph{z-score}, this will be values of either \emph{0} or \emph{2} with a
+value of \emph{0} indicating that z-score value is not flagged and a value of
+\emph{2} indicating that z-score value is flagged. For \emph{weight-for-age z-score},
+this will be values of either \emph{0} or \emph{4} with a value of \emph{0} indicating
+that z-score value is not flagged and a value of \emph{4} indicating that
+z-score value is flagged.
 }
 \description{
 Flagging is a process of checking whether values of anthropometric indices
@@ -55,7 +80,25 @@ being recorded.
 \examples{
 flag_who(df = zscorer::anthro1, hlaz = "haz", waz = "waz", whlz = "whz")
 
+## Check if a single height-for-age or length-for-age z-score value is
+## within WHO recommended limits
+flag_zscore(x = zscorer::anthro1$haz[1], z = "hlaz")
+
+## Check if a vector of height-for-age and length-for-age z-score values are
+## within WHO recommended limits
+flag_zscore(x = zscorer::anthro1$haz, z = "hlaz")
+
+## Check if a single weight-for-height or weight-for-length z-score value is
+## within WHO recommended limits
+flag_zscore(x = zscorer::anthro1$whz[1], z = "whlz")
+
+## Check if a vector of weight-for-height and weight-for-length z-score
+## values are within WHO recommended limits
+flag_zscore(x = zscorer::anthro1$haz, z = "whlz")
+
 }
 \author{
+Ernest Guevarra
+
 Ernest Guevarra
 }

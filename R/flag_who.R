@@ -55,7 +55,7 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
                      verbose = TRUE, add = TRUE) {
   ## Apply WHO HLAZ flagging criteria
   if(!is.null(hlaz)) {
-    flag1 <- flag_hlaz(hlaz = df[[hlaz]])
+    flag1 <- flag_zscore(x = df[[hlaz]], z = "hlaz")
   } else {
     warning(
       "hlaz is NULL hence flagging criteria for height-for-age or length-for-age
@@ -65,7 +65,7 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
 
   ## Apply WHO WHLZ flagging criteria
   if(!is.null(whlz)) {
-    flag2 <- flag_whlz(whlz = df[[whlz]])
+    flag2 <- flag_zscore(x = df[[whlz]], z = "whlz")
   } else {
     warning(
       "hwlz is NULL hence flaggting criteria for weight-for-height or weight-
@@ -75,7 +75,7 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
 
   ## Apply WHO WAZ flagging criteria
   if(!is.null(waz)) {
-    flag4 <- flag_waz(waz = df[[waz]])
+    flag4 <- flag_zscore(x = df[[waz]], z = "waz")
   } else {
     "waz is NULL hence flagging criteria for weight-for-age z-score not applied."
   }
@@ -110,107 +110,78 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
 #
 #'
 #' Apply World Health Organization (WHO) anthropometric z-score indices flagging
-#' criteria to height- and/or length-for-age z-score
+#' criteria to various z-score values
 #'
-#' @param hlaz A numeric value or vector of numeric values for
-#'   *height-for-age z-score* (*haz*) and/or *length-for-age z-score* (*laz*).
+#' @param x A numeric value or vector of numeric values for
+#'   *height-for-age z-score* (*haz*) and/or *length-for-age z-score* (*laz*),
+#'   *weight-for-height z-score* (*whz*) and/or *weight-for-length z-score*
+#'   (*wlz*), or *weight-for-age z-score* (*waz*).
 #'
-#' @return A numeric value or vector of values of either *0* or *1* with a
+#' @param z A character value for type of z-score value provided. Can be one of
+#'   either *hlaz* for *height-for-age* or *length-for-age* *z-score*, *whlz*
+#'   for *weight-for-height* or *weight-for-length* *z-score*, or *waz* for
+#'   *weight-for-age z-score*. If no value selected, will default to *hlaz*.
+#'
+#' @return A numeric value or vector of values indicating whether a z-score
+#'   value/s is/are flagged. For *height-for-age* or *length-for-age* *z-score*,
+#'   this will be values of either *0* or *1* with a value of *0* indicating
+#'   that z-score value is not flagged and a value of *1* indicating that
+#'   z-score value is flagged. For *weight-for-height* or *weight-for-length*
+#'   *z-score*, this will be values of either *0* or *2* with a
 #'   value of *0* indicating that z-score value is not flagged and a value of
-#'   *1* indicating that z-score value is flagged.
+#'   *2* indicating that z-score value is flagged. For *weight-for-age z-score*,
+#'   this will be values of either *0* or *4* with a value of *0* indicating
+#'   that z-score value is not flagged and a value of *4* indicating that
+#'   z-score value is flagged.
 #'
 #' @author Ernest Guevarra
 #'
 #' @examples
 #' ## Check if a single height-for-age or length-for-age z-score value is
 #' ## within WHO recommended limits
-#' flag_hlaz(zscorer::anthro1$haz[1])
+#' flag_zscore(x = zscorer::anthro1$haz[1], z = "hlaz")
 #'
 #' ## Check if a vector of height-for-age and length-for-age z-score values are
 #' ## within WHO recommended limits
-#' flag_hlaz(zscorer::anthro1$haz)
+#' flag_zscore(x = zscorer::anthro1$haz, z = "hlaz")
 #'
-#' @export
-#'
-#
-################################################################################
-
-flag_hlaz <- function(hlaz = NULL) {
-  flag <- vector(mode = "numeric", length = length(hlaz))
-  flag <- ifelse(hlaz < -6 | hlaz > 6, flag + 1, flag)
-  flag
-}
-
-
-################################################################################
-#
-#'
-#' Apply World Health Organization (WHO) anthropometric z-score indices flagging
-#' criteria to weight-for-height and/or weight-for-length z-score
-#'
-#' @param whlz A numeric value or vector of numeric values for
-#'   *weight-for-height z-score* (*whz*) and/or
-#'   *weight-for-length z-score* (*wlz*).
-#'
-#' @return A numeric value or vector of values of either *0* or *2* with a
-#'   value of *0* indicating that z-score value is not flagged and a value of
-#'   *2* indicating that z-score value is flagged.
-#'
-#' @author Ernest Guevarra
-#'
-#' @examples
 #' ## Check if a single weight-for-height or weight-for-length z-score value is
 #' ## within WHO recommended limits
-#' flag_whlz(zscorer::anthro1$whz[1])
+#' flag_zscore(x = zscorer::anthro1$whz[1], z = "whlz")
 #'
 #' ## Check if a vector of weight-for-height and weight-for-length z-score
-#' ##values are within WHO recommended limits
-#' flag_whlz(zscorer::anthro1$whz)
+#' ## values are within WHO recommended limits
+#' flag_zscore(x = zscorer::anthro1$haz, z = "whlz")
 #'
+#' @rdname flag_who
 #' @export
 #'
 #
 ################################################################################
 
-flag_whlz <- function(whlz = NULL) {
-  flag <- vector(mode = "numeric", length = length(whlz))
-  flag <- ifelse(whlz < -5 | whlz > 5, flag + 2, flag)
+flag_zscore <- function(x = NULL, z = c("hlaz", "whlz", "waz")) {
+
+  z <- match.arg(z)
+
+  flag <- vector(mode = "numeric", length = length(x))
+
+  ## if z == "hlaz"
+  if (z == "hlaz") {
+    flag <- ifelse(x < -6 | x > 6, flag + 1, flag)
+  }
+
+  ## if z == "whlz"
+  if (z == "whlz") {
+    flag <- ifelse(x < -5 | x > 5, flag + 2, flag)
+  }
+
+  ## if z == "waz"
+  if (z == "waz") {
+    flag <- ifelse(x < -6 | x > 5, flag + 4, flag)
+  }
+
+  ## Return flag
   flag
 }
 
-
-################################################################################
-#
-#'
-#' Apply World Health Organization (WHO) anthropometric z-score indices flagging
-#' criteria to weight-for-age z-score
-#'
-#' @param waz A numeric value or vector of numeric values for
-#'   *weight-for-age z-score* (*waz*).
-#'
-#' @return A numeric value or vector of values of either *0* or *4* with a
-#'   value of *0* indicating that z-score value is not flagged and a value of
-#'   *4* indicating that z-score value is flagged.
-#'
-#' @author Ernest Guevarra
-#'
-#' @examples
-#' ## Check if a single weight-for-age z-score value is within WHO recommended
-#' ## limits
-#' flag_waz(zscorer::anthro1$waz[1])
-#'
-#' ## Check if a vector of weight-for-age z-score values are within WHO
-#' ## recommended limits
-#' flag_waz(zscorer::anthro1$waz)
-#'
-#' @export
-#'
-#
-################################################################################
-
-flag_waz <- function(waz = NULL) {
-  flag <- vector(mode = "numeric", length = length(waz))
-  flag <- ifelse(waz < -6 | waz > 5, flag + 4, flag)
-  flag
-}
 
