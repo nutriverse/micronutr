@@ -2,7 +2,12 @@
 % Please edit documentation in R/ssfa_chart_data.R
 \name{get_ssfa_zchart}
 \alias{get_ssfa_zchart}
-\title{get_ssfa_zchart}
+\title{Function to extract subscapular skinfold-for-age z-score data from the World Health
+Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for subscapular skinfold-for-age z-scores.}
 \usage{
 get_ssfa_zchart(
   baseurl = "http://www.who.int/childgrowth/standards/",
@@ -45,4 +50,7 @@ growth charts for subscapular skinfold-for-age z-scores.
 # Get subscapular skinfold-for-age z-score expanded tables for charting
 get_ssfa_zchart()
 
+}
+\author{
+Ernest Guevarra
 }

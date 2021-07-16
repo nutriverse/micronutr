@@ -2,7 +2,12 @@
 % Please edit documentation in R/tsfa_chart_data.R
 \name{get_tsfa_pchart}
 \alias{get_tsfa_pchart}
-\title{get_tsfa_pchart}
+\title{Function to extract triceps skinfold-for-age percentiles data from the
+World Health Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for triceps skinfold-for-age z-scores.}
 \usage{
 get_tsfa_pchart(
   baseurl = "http://www.who.int/childgrowth/standards/",
@@ -29,13 +34,13 @@ the original data}
 \item{\code{sd_type}}{Type of z-score. Can be one of \code{4SD}, \code{3SD},
 \code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
 \code{-4SD}}
-\item{\code{sd_value}}{Triceps skinfold (in centimetres) value for the specified
-\code{sd_type}}
+\item{\code{sd_value}}{Triceps skinfold (in centimetres) value for the
+specified \code{sd_type}}
 }
 }
 \description{
-Function to extract triceps skinfold-for-age percentiles data from the World Health
-Organization (WHO) website on Child Growth Standards
+Function to extract triceps skinfold-for-age percentiles data from the
+World Health Organization (WHO) website on Child Growth Standards
 \url{http://www.who.int/childgrowth/standards/"} which contains a
 collection of reference data from the WHO Multicentre Growth Reference Study
 (MGRS). This function extracts the expanded data provided by WHO for creating
@@ -45,4 +50,7 @@ growth charts for triceps skinfold-for-age z-scores.
 # Get triceps skinfold-for-age percentiles expanded tables for charting
 get_tsfa_pchart()
 
+}
+\author{
+Ernest Guevarra
 }

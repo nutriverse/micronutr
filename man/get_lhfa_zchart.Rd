@@ -2,7 +2,12 @@
 % Please edit documentation in R/lhfa_chart_data.R
 \name{get_lhfa_zchart}
 \alias{get_lhfa_zchart}
-\title{get_lhfa_zchart}
+\title{Function to extract length/height-for-age z-score data from the World Health
+Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for length/height-for-age z-scores.}
 \usage{
 get_lhfa_zchart(
   baseurl = "http://www.who.int/childgrowth/standards/",
@@ -44,4 +49,7 @@ growth charts for length/height-for-age z-scores.
 # Get length/height-for-age z-score expanded tables for charting
 get_lhfa_zchart()
 
+}
+\author{
+Ernest Guevarra
 }

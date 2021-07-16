@@ -36,3 +36,6 @@ criteria
 flag_who(df = zscorer::anthro1, haz = "haz", waz = "waz", whz = "whz")
 
 }
+\author{
+Ernest Guevarra
+}

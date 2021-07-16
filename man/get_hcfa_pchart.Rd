@@ -34,8 +34,8 @@ the original data}
 }
 }
 \description{
-Function to extract head circumference-for-age percentiles data from the World Health
-Organization (WHO) website on Child Growth Standards
+Function to extract head circumference-for-age percentiles data from the
+World Health Organization (WHO) website on Child Growth Standards
 \url{http://www.who.int/childgrowth/standards/"} which contains a
 collection of reference data from the WHO Multicentre Growth Reference Study
 (MGRS). This function extracts the expanded data provided by WHO for creating
@@ -45,4 +45,7 @@ growth charts for head circumference-for-age z-scores.
 # Get head circumference-for-age percentiles expanded tables for charting
 get_hcfa_pchart()
 
+}
+\author{
+Ernest Guevarra
 }

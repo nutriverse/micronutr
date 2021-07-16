@@ -2,7 +2,12 @@
 % Please edit documentation in R/lhfa_chart_data.R
 \name{get_lhfa_pchart}
 \alias{get_lhfa_pchart}
-\title{get_lhfa_pchart}
+\title{Function to extract length/height-for-age percentile data from the
+World Health Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for length/height-for-age percentiles.}
 \usage{
 get_lhfa_pchart(
   baseurl = "http://www.who.int/childgrowth/standards/",
@@ -41,8 +46,8 @@ centile standards. \code{S} is the trend in the coefficient of variation}
 }
 }
 \description{
-Function to extract length/height-for-age percentile data from the World Health
-Organization (WHO) website on Child Growth Standards
+Function to extract length/height-for-age percentile data from the
+World Health Organization (WHO) website on Child Growth Standards
 \url{http://www.who.int/childgrowth/standards/"} which contains a
 collection of reference data from the WHO Multicentre Growth Reference Study
 (MGRS). This function extracts the expanded data provided by WHO for creating
@@ -52,4 +57,7 @@ growth charts for length/height-for-age percentiles.
 # Get length/height-for-age percentile expanded tables for charting
 get_lhfa_pchart()
 
+}
+\author{
+Ernest Guevarra
 }

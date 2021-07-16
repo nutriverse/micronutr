@@ -27,7 +27,7 @@ You can install the development version of `nutricheckr` from [GitHub](https://g
 
 ```{r install, echo = TRUE, eval = FALSE}
 if(!require(remotes)) install.packages("remotes")
-remotes::install_githbu("nutriverse/nutricheckr")
+remotes::install_github("nutriverse/nutricheckr")
 ```
 
 ## Usage
