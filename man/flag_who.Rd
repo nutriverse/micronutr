@@ -94,7 +94,15 @@ flag_zscore(x = zscorer::anthro1$whz[1], z = "whlz")
 
 ## Check if a vector of weight-for-height and weight-for-length z-score
 ## values are within WHO recommended limits
-flag_zscore(x = zscorer::anthro1$haz, z = "whlz")
+flag_zscore(x = zscorer::anthro1$whz, z = "whlz")
+
+## Check if a single weight-for-age z-score value is within WHO recommended
+## limits
+flag_zscore(x = zscorer::anthro1$waz[1], z = "waz")
+
+## Check if a vector of weight-for-age z-score values are within WHO
+## recommended limits
+flag_zscore(x = zscorer::anthro1$waz, z = "waz")
 
 }
 \author{

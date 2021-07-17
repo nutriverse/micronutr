@@ -58,8 +58,14 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
     flag1 <- flag_zscore(x = df[[hlaz]], z = "hlaz")
   } else {
     warning(
-      "hlaz is NULL hence flagging criteria for height-for-age or length-for-age
-      z-score not applied."
+      paste(
+        strwrap(
+          x = "hlaz is NULL hence flagging criteria for height-for-age or
+               length-for-age z-score not applied.",
+          width = 80
+        ),
+        collapse = "\n"
+      )
     )
   }
 
@@ -68,8 +74,14 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
     flag2 <- flag_zscore(x = df[[whlz]], z = "whlz")
   } else {
     warning(
-      "hwlz is NULL hence flaggting criteria for weight-for-height or weight-
-      for-length z-score not applied."
+      paste(
+        strwrap(
+          x = "hwlz is NULL hence flaggting criteria for weight-for-height or
+               weight-for-length z-score not applied.",
+          width = 80
+        ),
+        collapse = "\n"
+      )
     )
   }
 
@@ -77,7 +89,14 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
   if(!is.null(waz)) {
     flag4 <- flag_zscore(x = df[[waz]], z = "waz")
   } else {
-    "waz is NULL hence flagging criteria for weight-for-age z-score not applied."
+    paste(
+      strwrap(
+        x = "waz is NULL hence flagging criteria for weight-for-age z-score not
+             applied.",
+        width = 80
+      ),
+      collapse = "\n"
+    )
   }
 
   ## Sum flag codes and create flag_description
@@ -151,7 +170,15 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
 #'
 #' ## Check if a vector of weight-for-height and weight-for-length z-score
 #' ## values are within WHO recommended limits
-#' flag_zscore(x = zscorer::anthro1$haz, z = "whlz")
+#' flag_zscore(x = zscorer::anthro1$whz, z = "whlz")
+#'
+#' ## Check if a single weight-for-age z-score value is within WHO recommended
+#' ## limits
+#' flag_zscore(x = zscorer::anthro1$waz[1], z = "waz")
+#'
+#' ## Check if a vector of weight-for-age z-score values are within WHO
+#' ## recommended limits
+#' flag_zscore(x = zscorer::anthro1$waz, z = "waz")
 #'
 #' @rdname flag_who
 #' @export
@@ -160,9 +187,10 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
 ################################################################################
 
 flag_zscore <- function(x = NULL, z = c("hlaz", "whlz", "waz")) {
-
+  ## Get value for z
   z <- match.arg(z)
 
+  ## Create empty flag vector
   flag <- vector(mode = "numeric", length = length(x))
 
   ## if z == "hlaz"
