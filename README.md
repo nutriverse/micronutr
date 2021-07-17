@@ -5,8 +5,12 @@
 
 <!-- badges: start -->
 
+[![Project Status:
+WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/nutriverse/nutricheckr/workflows/R-CMD-check/badge.svg)](https://github.com/nutriverse/nutricheckr/actions)
+[![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/nutricheckr/badge)](https://www.codefactor.io/repository/github/nutriverse/nutricheckr)
 <!-- badges: end -->
 
 Nutrition assessment involves various methods and techniques. This
@@ -20,7 +24,7 @@ You can install the development version of `nutricheckr` from
 
 ``` r
 if(!require(remotes)) install.packages("remotes")
-remotes::install_githbu("nutriverse/nutricheckr")
+remotes::install_github("nutriverse/nutricheckr")
 ```
 
 ## Usage

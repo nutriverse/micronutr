@@ -8,21 +8,21 @@ find_child_stunting(df, zscore = "haz", flag = NULL, add = TRUE)
 }
 \arguments{
 \item{df}{A data.frame containing anthropometric z-score indices for
-`height-for-age`}
+\verb{height-for-age}}
 
-\item{zscore}{A character value for variable name for `height-for-age z-score`
-in `df`. Default is `haz`}
+\item{zscore}{A character value for variable name for \verb{height-for-age z-score}
+in \code{df}. Default is \code{haz}}
 
 \item{flag}{A character value for variable name of coded flags applied to
-`height-for-age z-score` values in `df`. Default is NULL indicating
+\verb{height-for-age z-score} values in \code{df}. Default is NULL indicating
 that flags have already been applied and flagged values have been censored.}
 
 \item{add}{Logical. Should recode values for stunting/stunted be added to
-`df`? Default is TRUE}
+\code{df}? Default is TRUE}
 }
 \value{
-if `add` TRUE, returns `df` with recode values indicating stunting
-  or stunted cases.
+if \code{add} TRUE, returns \code{df} with recode values indicating stunting
+or stunted cases.
 }
 \description{
 Find children who are stunting/stunted from an anthropometric dataset
