@@ -24,7 +24,7 @@
 #' @source will update later!
 #'
 #' @examples
-#' explore the first 6 observations from the dataset
+#' # explore the first 6 observations from the dataset
 #' head(hbData)
 #'
 #

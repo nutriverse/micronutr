@@ -49,15 +49,13 @@
 #'    observed, containing the information which observation was affected by
 #'    what type of anaemia: mild, moderate, or severe.
 #'
-#' @examples
-#'   flag_anaemia(df = df,
-#'                age = age,
-#'                hb = hb
-#'                sex = sex,
-#'                pregnant = pregnant,
-#'                add = TRUE)
+#' # flag_anaemia(df = df,
+#' #              age = age,
+#' #                hb = hb
+#' #                sex = sex,
+#' #                pregnant = pregnant,
+#' #                add = TRUE)
 #'
-#' @export
 #'
 #'
 #
@@ -267,20 +265,18 @@ flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL,
 #'    observed, containing the information which observation was affected by
 #'    what type of anaemia: mild, moderate, or severe.
 #'
-#' @examples
-#'   flag_anaemia(df = df,
-#'                pop_group = pop_group,
-#'                hb = hb
-#'                add = TRUE)
+#' #  flag_anaemia_2(df = df,
+#' #                pop_group = pop_group,
+#' #                hb = hb,
+#' #                add = TRUE)
 #'
-#' @export
 #'
 #'
 #
 ################################################################################
 
 
-flag_anaemia <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
+flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
   ##
   anaemia_all <- vector(mode = "numeric", length = nrow(df)) # anaemia level category
   ##
@@ -398,7 +394,15 @@ flag_anaemia <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'    what type of anaemia: mild, moderate, or severe.
 #'
 #' @examples
-#'   For individual target group function;
+#'  # Create testing data
+#'  x <- runif(20, min = 60, max = 130)
+#'
+#'  hb <- runif(50, min = 60, max = 130)
+#'  gender <- rep(c("male", "female"), each = 25)
+#'
+#'  df <- data.frame(gender, hb)
+#'
+#'  # For individual target group function;
 #'   name_anaemia_u5(x) # U5 Children
 #'   name_anaemia_c5to11(x) # Children 5 - 11 years
 #'   name_anaemia_c12to14(x) # Children 12 - 14 years
@@ -407,87 +411,21 @@ flag_anaemia <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   name_anaemia_men(x) # Men
 #'
 #'
-#'   For overall population function;
-#'   flag_anaemia(df = df,
+#'  # For overall population function;
+#'   name_anaemia(df = df,
 #'                hb = hb,
-#'                goup = c("u5", "c5to11", "c12to14", "nonpreg_women",
+#'                group = c("u5", "c5to11", "c12to14", "nonpreg_women",
 #'                        "pregnant", "men"),
 #'                add = TRUE)
 #'
 #' @export
 #'
+#' @rdname name_anaemia
+#'
 #'
 #
 ################################################################################
 
-
-# create sample datset for testing
-x <- runif(20, min = 60, max = 130)
-
-hb <- runif(50, min = 60, max = 130)
-gender <- rep(c("male", "female"), each = 25)
-
-df <- data.frame(gender, hb)
-
-################################################################################
-# individual target group function
-# function: U5 Children
-name_anaemia_u5 <- function(x){
-  anaemia_cat_u5 <- cut(x,
-                        breaks = c(-Inf, 70, 99, 109, Inf),
-                        labels = c("severe anaemia", "moderate anaemia",
-                                   "mild anaemia", "no anaemia"))
-  return(anaemia_cat_u5)
-}
-
-# function: child 5-11 years
-name_anaemia_c5to11 <- function(x){
-  anaemia_cat_c5to11 <- cut(x,
-                            breaks = c(-Inf, 80, 109, 114, Inf),
-                            labels = c("severe anaemia", "moderate anaemia",
-                                       "mild anaemia", "no anaemia"))
-  return(anaemia_cat_c5to11)
-}
-
-# function: child 12-14 years
-name_anaemia_c12to14 <- function(x){
-  anaemia_cat_c12to14 <- cut(x,
-                             breaks = c(-Inf, 80, 109, 119, Inf),
-                             labels = c("severe anaemia", "moderate anaemia",
-                                        "mild anaemia", "no anaemia"))
-  return(anaemia_cat_c12to14)
-}
-
-# function: non-pregnant women
-name_anaemia_nonpreg_women <- function(x){
-  anaemia_cat_nonpreg_women <- cut(x,
-                           breaks = c(-Inf, 80, 109, 119, Inf),
-                           labels = c("severe anaemia", "moderate anaemia",
-                                      "mild anaemia", "no anaemia"))
-  return(anaemia_cat_nonpreg_women)
-}
-
-# function: Pregnant women
-name_anaemia_pregnant <- function(x){
-  anaemia_cat_pregnant <- cut(x,
-                          breaks = c(-Inf, 70, 99, 109, Inf),
-                          labels = c("severe anaemia", "moderate anaemia",
-                                     "mild anaemia", "no anaemia"))
-  return(anaemia_cat_pregnant)
-}
-
-
-# function: Men
-name_anaemia_men <- function(x){
-  anaemia_cat_men <- cut(x,
-                         breaks = c(-Inf, 80, 109, 129, Inf),
-                         labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia"))
-  return(anaemia_cat_men)
-}
-
-################################################################################
-
-# overall function
 name_anaemia <- function(df, group = c("u5", "c5to11", "c12to14",
                                        "nonpreg_women", "pregnant", "men"),
                          hb = NULL, add = TRUE){
@@ -559,14 +497,75 @@ name_anaemia <- function(df, group = c("u5", "c5to11", "c12to14",
     }
   }
 
-  # U5 child
-  if (group == "u5") {
-    name_anaemia_u5(df$hb)
-
-    ##
-    if(add) {
-      df$anaemia_cat_men <- name_anaemia_men(df$hb)
-      anaemia        <- df
-    }
-  }
+  return(anaemia)
 }
+
+################################################################################
+#' @export
+#' @rdname name_anaemia
+#'
+
+name_anaemia_u5 <- function(x){
+  anaemia_cat_u5 <- cut(x,
+                        breaks = c(-Inf, 70, 99, 109, Inf),
+                        labels = c("severe anaemia", "moderate anaemia",
+                                   "mild anaemia", "no anaemia"))
+  return(anaemia_cat_u5)
+}
+
+#' @export
+#' @rdname name_anaemia
+#'
+name_anaemia_c5to11 <- function(x){
+  anaemia_cat_c5to11 <- cut(x,
+                            breaks = c(-Inf, 80, 109, 114, Inf),
+                            labels = c("severe anaemia", "moderate anaemia",
+                                       "mild anaemia", "no anaemia"))
+  return(anaemia_cat_c5to11)
+}
+
+#' @export
+#' @rdname name_anaemia
+#'
+name_anaemia_c12to14 <- function(x){
+  anaemia_cat_c12to14 <- cut(x,
+                             breaks = c(-Inf, 80, 109, 119, Inf),
+                             labels = c("severe anaemia", "moderate anaemia",
+                                        "mild anaemia", "no anaemia"))
+  return(anaemia_cat_c12to14)
+}
+
+#' @export
+#' @rdname name_anaemia
+#'
+name_anaemia_nonpreg_women <- function(x){
+  anaemia_cat_nonpreg_women <- cut(x,
+                           breaks = c(-Inf, 80, 109, 119, Inf),
+                           labels = c("severe anaemia", "moderate anaemia",
+                                      "mild anaemia", "no anaemia"))
+  return(anaemia_cat_nonpreg_women)
+}
+
+#' @export
+#' @rdname name_anaemia
+#'
+name_anaemia_pregnant <- function(x){
+  anaemia_cat_pregnant <- cut(x,
+                          breaks = c(-Inf, 70, 99, 109, Inf),
+                          labels = c("severe anaemia", "moderate anaemia",
+                                     "mild anaemia", "no anaemia"))
+  return(anaemia_cat_pregnant)
+}
+
+
+#' @export
+#' @rdname name_anaemia
+#'
+name_anaemia_men <- function(x){
+  anaemia_cat_men <- cut(x,
+                         breaks = c(-Inf, 80, 109, 129, Inf),
+                         labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia"))
+  return(anaemia_cat_men)
+}
+
+################################################################################

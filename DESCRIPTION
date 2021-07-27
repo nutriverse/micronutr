@@ -11,20 +11,16 @@ Description: Nutrition assessment involves various methods and techniques. This
     package provides tools to support the implementation of these methods and
     techniques.
 License: GPL-3
+Depends: 
+    R (>= 2.10)
 Imports:
     zscorer,
     tidyr,
     nipnTK
 Encoding: UTF-8
 LazyData: true
-<<<<<<< HEAD
-RoxygenNote: 6.1.1
-Depends: 
-    R (>= 2.10)
-=======
 Language: en-GB
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse/nutricheckr/, https://github.com/nutriverse/nutricheckr
 BugReports: https://github.com/nutriverse/nutricheckr/issues
->>>>>>> upstream/master
