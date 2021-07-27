@@ -2,10 +2,17 @@
 % Please edit documentation in R/lhfa_chart_data.R
 \name{get_lhfa_zchart}
 \alias{get_lhfa_zchart}
-\title{get_lhfa_zchart}
+\title{Function to extract length/height-for-age z-score data from the World Health
+Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for length/height-for-age z-scores.}
 \usage{
-get_lhfa_zchart(baseurl = "http://www.who.int/childgrowth/standards/",
-  gender = c("boys", "girls"))
+get_lhfa_zchart(
+  baseurl = "http://www.who.int/childgrowth/standards/",
+  gender = c("boys", "girls")
+)
 }
 \arguments{
 \item{baseurl}{Character value for the base URL of the WHO Child Growth
@@ -21,12 +28,12 @@ A data frame in tidy format with 5 coloumns and 33426 rows:
 \describe{
 \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
 \item{\code{month}}{Age of child in months. This is calculated from the
-    original data using that data for age of child in days}
+original data using that data for age of child in days}
 \item{\code{day}}{Age of child in days. This is provided for by default in
-    the original data}
+the original data}
 \item{\code{sd_type}}{Type of z-score. Can be one of \code{4SD}, \code{3SD},
-    \code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
-    \code{-4SD}}
+\code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
+\code{-4SD}}
 \item{\code{sd_value}}{Length/height value for the specified \code{sd_type}}
 }
 }
@@ -42,4 +49,7 @@ growth charts for length/height-for-age z-scores.
 # Get length/height-for-age z-score expanded tables for charting
 get_lhfa_zchart()
 
+}
+\author{
+Ernest Guevarra
 }

@@ -2,10 +2,17 @@
 % Please edit documentation in R/lhfa_chart_data.R
 \name{get_lhfa_pchart}
 \alias{get_lhfa_pchart}
-\title{get_lhfa_pchart}
+\title{Function to extract length/height-for-age percentile data from the
+World Health Organization (WHO) website on Child Growth Standards
+\url{http://www.who.int/childgrowth/standards/"} which contains a
+collection of reference data from the WHO Multicentre Growth Reference Study
+(MGRS). This function extracts the expanded data provided by WHO for creating
+growth charts for length/height-for-age percentiles.}
 \usage{
-get_lhfa_pchart(baseurl = "http://www.who.int/childgrowth/standards/",
-  gender = c("boys", "girls"))
+get_lhfa_pchart(
+  baseurl = "http://www.who.int/childgrowth/standards/",
+  gender = c("boys", "girls")
+)
 }
 \arguments{
 \item{baseurl}{Character value for the base URL of the WHO Child Growth
@@ -21,26 +28,26 @@ A data frame in tidy format with 8 coloumns and 55710 rows:
 \describe{
 \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
 \item{\code{month}}{Age of child in months. This is calculated from the
-    original data using that data for age of child in days}
+original data using that data for age of child in days}
 \item{\code{day}}{Age of child in days. This is provided for by default in
-    the original data}
+the original data}
 \item{\code{l}}{\code{L} component of the LMS method for normalising growth
-    centile standards. \code{L} is the trend in the optimal power to obtain
-    normality}
+centile standards. \code{L} is the trend in the optimal power to obtain
+normality}
 \item{\code{m}}{\code{M} component of the LMS method for normalising growth
-    centile standards. \code{M} is the trend in the mean}
+centile standards. \code{M} is the trend in the mean}
 \item{\code{s}}{\code{S} component of the LMS method for normalising growth
-    centile standards. \code{S} is the trend in the coefficient of variation}
+centile standards. \code{S} is the trend in the coefficient of variation}
 \item{\code{p_type}}{Type of z-score. Can be one of \code{0.10th}, \code{1st},
-    \code{3rd}, \code{5th}, \code{10th}, \code{15th}, \code{25th}, \code{50th},
-    \code{75th}, \code{85th}, \code{90th}, \code{95th}, \code{97th},
-    \code{99th} and \code{99.9th}}
+\code{3rd}, \code{5th}, \code{10th}, \code{15th}, \code{25th}, \code{50th},
+\code{75th}, \code{85th}, \code{90th}, \code{95th}, \code{97th},
+\code{99th} and \code{99.9th}}
 \item{\code{p_value}}{Length/height value for the specified \code{p_type}}
 }
 }
 \description{
-Function to extract length/height-for-age percentile data from the World Health
-Organization (WHO) website on Child Growth Standards
+Function to extract length/height-for-age percentile data from the
+World Health Organization (WHO) website on Child Growth Standards
 \url{http://www.who.int/childgrowth/standards/"} which contains a
 collection of reference data from the WHO Multicentre Growth Reference Study
 (MGRS). This function extracts the expanded data provided by WHO for creating
@@ -50,4 +57,7 @@ growth charts for length/height-for-age percentiles.
 # Get length/height-for-age percentile expanded tables for charting
 get_lhfa_pchart()
 
+}
+\author{
+Ernest Guevarra
 }

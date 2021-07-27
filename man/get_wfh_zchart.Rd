@@ -4,8 +4,10 @@
 \alias{get_wfh_zchart}
 \title{get_wfh_zchart}
 \usage{
-get_wfh_zchart(baseurl = "http://www.who.int/childgrowth/standards/",
-  gender = c("boys", "girls"))
+get_wfh_zchart(
+  baseurl = "http://www.who.int/childgrowth/standards/",
+  gender = c("boys", "girls")
+)
 }
 \arguments{
 \item{baseurl}{Character value for the base URL of the WHO Child Growth
@@ -22,8 +24,8 @@ A data frame in tidy format with 4 coloumns and 21636 rows:
 \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
 \item{\code{lh}}{Length/height of child in centimetres.}
 \item{\code{sd_type}}{Type of z-score. Can be one of \code{4SD}, \code{3SD},
-    \code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
-    \code{-4SD}}
+\code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
+\code{-4SD}}
 \item{\code{sd_value}}{Weight (kgs) value for the specified \code{sd_type}}
 }
 }
