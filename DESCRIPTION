@@ -24,3 +24,6 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse/nutricheckr/, https://github.com/nutriverse/nutricheckr
 BugReports: https://github.com/nutriverse/nutricheckr/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
