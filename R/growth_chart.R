@@ -3,33 +3,35 @@
 #'
 #' Extract weight-for-length/height z-score data
 #'
-#' Function to extract weight-for-length/height z-score data from the World Health
-#' Organization (WHO) website on Child Growth Standards
-#' \url{http://www.who.int/childgrowth/standards/"} which contains a
+#' Function to extract weight-for-length/height z-score data from the World
+#' Health Organization (WHO) website on Child Growth Standards
+#' (http://www.who.int/childgrowth/standards/) which contains a
 #' collection of reference data from the WHO Multicentre Growth Reference Study
 #' (MGRS). This function extracts the expanded data provided by WHO for creating
 #' growth charts for weight-for-length/height z-scores.
 #'
 #' @param baseurl Character value for the base URL of the WHO Child Growth
-#'     Standards. The default is \url{http://www.who.int/childgrowth/standards/}.
+#'     Standards. The default is http://www.who.int/childgrowth/standards/.
 #'     This can be adjusted should WHO change the base URL for the Child Growth
 #'     Standards section of their website.
 #' @param gender A character value or vector that specifies the sex-specific
-#'     reference data to extract. The default is \code{c("boys", "girls")}.
+#'     reference data to extract. The default is `c("boys", "girls")`.
 #'
 #' @return A data frame in tidy format with 4 coloumns and 21636 rows:
-#' \describe{
-#' \item{\code{sex}}{Sex of child. 1 = boy; 2 = girl}
-#' \item{\code{lh}}{Length/height of child in centimetres.}
-#' \item{\code{sd_type}}{Type of z-score. Can be one of \code{4SD}, \code{3SD},
-#'     \code{2SD}, \code{1SD}, \code{0}, \code{-1SD}, \code{-2SD}, \code{-3SD},
-#'     \code{-4SD}}
-#' \item{\code{sd_value}}{Weight (kgs) value for the specified \code{sd_type}}
-#' }
+#'
+#' **Variable** | **Description**
+#' :--- | :---
+#' *sex* | Sex of child. 1 = boy; 2 = girl
+#' *lh* | Length/height of child in centimetres
+#' *sd_type* | Type of z-score. Can be one of *4SD*, *3SD*, *2SD*, *1SD*, *0*,
+#' &nbsp; | *-1SD*, *-2SD*, *-3SD*, *-4SD*
+#' *sd_value* | Weight (kgs) value for the specified `sd_type`
+#'
+#' @author Ernest Guevarra
 #'
 #' @examples
 #' # Get weight-for-length/height z-score expanded tables for charting
-#' #get_wfh_zchart()
+#' #if (interactive) get_wfh_zchart()
 #'
 #'
 #
@@ -37,42 +39,50 @@
 
 get_wfh_zchart <- function(baseurl = "http://www.who.int/childgrowth/standards/",
                            gender = c("boys", "girls")) {
-  ##
+  ## Concatenating object
   temp <- NULL
 
   ##
   for(i in gender) {
-    ##
-    z_data_2 <- read.table(file = paste(baseurl, "wfl_", i, "_z_exp.txt", sep = ""),
-                           header = TRUE)
-    z_data_5 <- read.table(file = paste(baseurl, "wfh_", i, "_z_exp.txt", sep = ""),
-                           header = TRUE)
-    ##
-    z_data_2 <- data.frame("sex" = i, z_data_2)
-    names(z_data_2) <- c("sex", "lh", "-4SD", "-3SD", "-2SD", "-1SD", "0",
-                         "1SD", "2SD", "3SD", "4SD")
-    ##
-    z_data_5 <- data.frame("sex" = i, z_data_5)
-    names(z_data_5) <- c("sex", "lh", "-4SD", "-3SD", "-2SD", "-1SD", "0",
-                         "1SD", "2SD", "3SD", "4SD")
-    ##
-    z_data   <- data.frame(rbind(z_data_2, z_data_5))
+    ## For under 2 years children
+    z_data_2 <- read.table(
+      file = paste(baseurl, "wfl_", i, "_z_exp.txt", sep = ""), header = TRUE
+    )
 
-    ##
+    z_data_2 <- data.frame("sex" = i, z_data_2)
+    names(z_data_2) <- c("sex", "lh",
+                         "-4SD", "-3SD", "-2SD", "-1SD", "0",
+                         "1SD", "2SD", "3SD", "4SD")
+
+    ## For under 5 children
+    z_data_5 <- read.table(
+      file = paste(baseurl, "wfh_", i, "_z_exp.txt", sep = ""), header = TRUE
+    )
+
+    z_data_5 <- data.frame("sex" = i, z_data_5)
+    names(z_data_5) <- c("sex", "lh",
+                         "-4SD", "-3SD", "-2SD", "-1SD", "0",
+                         "1SD", "2SD", "3SD", "4SD")
+
+    ## Combine datasets
+    z_data   <- data.frame(rbind(z_data_2, z_data_5))
     temp <- data.frame(rbind(temp, z_data))
   }
 
-  ##
+  ## Rename dataset
   names(temp) <- c("sex", "lh", "-4SD", "-3SD", "-2SD", "-1SD", "0",
                    "1SD", "2SD", "3SD", "4SD")
-  ##
+
+  ## Tidy up dataset
   wfh_chart <- tidyr::gather(data = temp, key = "sd_type", value = "sd_value",
                              names(temp)[3]:names(temp)[ncol(temp)])
   names(wfh_chart) <- c("sex", "lh", "sd_type", "sd_value")
-  wfh_chart$sd_type <- factor(wfh_chart$sd_type,
-                              levels = c("4SD", "3SD", "2SD", "1SD", "0", "-1SD",
-                                         "-2SD", "-3SD", "-4SD"))
-  ##
+  wfh_chart$sd_type <- factor(
+    wfh_chart$sd_type,
+    levels = c("4SD", "3SD", "2SD", "1SD", "0", "-1SD", "-2SD", "-3SD", "-4SD")
+  )
+
+  ## Return chart data
   wfh_chart
 }
 
