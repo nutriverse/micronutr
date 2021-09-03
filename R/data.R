@@ -63,3 +63,38 @@
 #
 ################################################################################
 "iodine_sample"
+
+################################################################################
+#
+#'
+#' Urinary iodine (μg/L) values for women and children
+#'
+#' This sample dataset (`iodine_sample`) contained 312 observations and 8 variables.
+#' The detailed variable's description are mentioned in the following table.
+#'
+#' @format A data frame with 8 columns and 312 rows.
+#'
+#'
+#' **Variables** | **Description**
+#' :--- | :---
+#' *psu* | Primary sampling unit identifier
+#' *state* | State identifier
+#' *locality* | Locality identifier
+#' *sex* | Sex (1 = Male; 2 = Female)
+#' *m.age* | Age (in years) of female/mother with ages > 5 years
+#' *ch.age* | Age (in months) of children with ages less than 5 years
+#' *group* | Group classification
+#' *crp* | acute phase response proteine: C-reactive protein (CRP) value (mg/L)
+#' *ferritin* | Serum ferritin (μg/L) values
+#' *agp* | acute phase response proteine: α1-acid-glycoprotein (AGP) value (g/L)
+#'
+#' @source will update later!
+#'
+#' @examples
+#' # explore the first 6 observations from the dataset
+#' head(ferritin_sample)
+#'
+#
+################################################################################
+"ferritin_sample"
+
