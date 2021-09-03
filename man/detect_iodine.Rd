@@ -7,7 +7,7 @@
 \alias{detect_iodine_lactating}
 \title{Determining Iodine Status in Population}
 \usage{
-detect_iodine(x, group = c("general", "pregnant", "lactating"))
+detect_iodine(x, group = NULL)
 
 detect_iodine_general(x)
 
@@ -16,7 +16,9 @@ detect_iodine_pregnant(x)
 detect_iodine_lactating(x)
 }
 \arguments{
-\item{x}{a vector which contains urinary iodine (μg/L) values.}
+\item{x}{This parameter accepts either the single median value of the
+interested population urinary iodine (μg/L) values or the vector which
+contains urinary iodine (μg/L) values of the interest population.}
 
 \item{group}{The cut-off point for population iodine intake based on the
 urinary iodine value is different. Therefore, the parameter which require
@@ -27,7 +29,12 @@ is mentioned in the below table.\tabular{ll}{
    School-age-children (6 years or odler) \tab "general" \cr
    Pregnant Women \tab "pregnant" \cr
    Lactating Mothers and Children under 2 years old \tab "lactating" \cr
-}}
+}
+
+
+Please note that the group parameter only accepts a single value of the
+specific group's name, not the combination of more than one groups' name
+in vector form. (for example, group == "general")}
 }
 \value{
 iodine   the iodine intake stauts of the study (sample) population
@@ -47,6 +54,18 @@ Identification of population iodine intake using urinary iodine concentration
 
  # For overall population function;
   detect_iodine(x = x,
-               group = c("general", "pregnant", "lactating"))
+               group = "general")
+
+  detect_iodine(x = x,
+               group = "pregnant")
+
+  detect_iodine(x = x,
+               group = "lactating")
+
+ # test with sample dataset
+ dta <- subset(iodine_sample, group == "Child")
+ detect_iodine(x = dta$iodine,
+               group = "general")
+
 
 }

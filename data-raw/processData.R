@@ -7,3 +7,7 @@ download.file(
 
 hbData <- read.csv("data-raw/hbData.csv")
 usethis::use_data(hbData, overwrite = TRUE, compress = "xz")
+
+
+iodine_sample <- read.csv("data-raw/iodine_sample.csv")
+usethis::use_data(iodine_sample, overwrite = TRUE, compress = "xz")
