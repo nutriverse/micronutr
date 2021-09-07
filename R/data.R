@@ -67,12 +67,13 @@
 ################################################################################
 #
 #'
-#' Urinary iodine (μg/L) values for women and children
+#' Serum ferritin (µg/l) level sample dataset
 #'
-#' This sample dataset (`iodine_sample`) contained 312 observations and 8 variables.
-#' The detailed variable's description are mentioned in the following table.
+#' This sample dataset (`ferritin_sample`) contained 19449 observations and
+#' 10 variables. The detailed variable's description are mentioned in the
+#' following table.
 #'
-#' @format A data frame with 8 columns and 312 rows.
+#' @format A data frame with 10 columns and 19449 rows.
 #'
 #'
 #' **Variables** | **Description**

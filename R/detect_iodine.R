@@ -25,7 +25,8 @@
 #'    in vector form. (for example, group == "general")
 #'
 #'
-#' @return iodine   the iodine intake stauts of the study (sample) population
+#' @return A character vector which indicates the iodine intake status of the
+#'    study (sample) population
 #'
 #' @examples
 #'  # Create testing data

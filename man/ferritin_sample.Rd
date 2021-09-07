@@ -3,9 +3,9 @@
 \docType{data}
 \name{ferritin_sample}
 \alias{ferritin_sample}
-\title{Urinary iodine (μg/L) values for women and children}
+\title{Serum ferritin (µg/l) level sample dataset}
 \format{
-A data frame with 8 columns and 312 rows.\tabular{ll}{
+A data frame with 10 columns and 19449 rows.\tabular{ll}{
    \strong{Variables} \tab \strong{Description} \cr
    \emph{psu} \tab Primary sampling unit identifier \cr
    \emph{state} \tab State identifier \cr
@@ -26,8 +26,9 @@ will update later!
 ferritin_sample
 }
 \description{
-This sample dataset (\code{iodine_sample}) contained 312 observations and 8 variables.
-The detailed variable's description are mentioned in the following table.
+This sample dataset (\code{ferritin_sample}) contained 19449 observations and
+10 variables. The detailed variable's description are mentioned in the
+following table.
 }
 \examples{
 # explore the first 6 observations from the dataset

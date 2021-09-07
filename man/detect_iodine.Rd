@@ -37,7 +37,8 @@ specific group's name, not the combination of more than one groups' name
 in vector form. (for example, group == "general")}
 }
 \value{
-iodine   the iodine intake stauts of the study (sample) population
+A character vector which indicates the iodine intake status of the
+study (sample) population
 }
 \description{
 Identification of population iodine intake using urinary iodine concentration
