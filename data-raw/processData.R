@@ -23,6 +23,8 @@ ferritin_sample <- read.csv("data-raw/ferritin_sample.csv")
 names(ferritin_sample)[1] <- "psu"
 
 ferritin_sample$agp <- round(runif(nrow(ferritin_sample), min = 0.5, max = 50), 1)
+ferritin_sample$age_group <- factor(ifelse(!is.na(ferritin_sample$m.age), "under 5 years", "5 years and older"))
+
 
 usethis::use_data(ferritin_sample, overwrite = TRUE, compress = "xz")
 

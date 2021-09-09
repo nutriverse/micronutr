@@ -88,6 +88,7 @@
 #' *crp* | acute phase response proteine: C-reactive protein (CRP) value (mg/L)
 #' *ferritin* | Serum ferritin (μg/L) values
 #' *agp* | acute phase response proteine: α1-acid-glycoprotein (AGP) value (g/L)
+#' *age_group* | indicate study population (Under 5 or over 5 years old)
 #'
 #' @source will update later!
 #'
