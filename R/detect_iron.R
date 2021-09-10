@@ -1,9 +1,9 @@
 ################################################################################
 #
-#' Determining Iron Storage Status in individual
+#' @title Determining Iron Storage Status in individual
 #'
-#' Identification of individual iron storage status on the basis of serum
-#' ferritin concentration
+#' @description Identification of individual iron storage status on the basis of
+#' serum ferritin concentration
 #'
 #'
 #' This package includes two main components of functions; (1) to identify the
@@ -24,7 +24,13 @@
 #' line and generate one variable to indicate the study dataset's individual
 #' observation iron storage status.
 #'
-#' Individual target group functions
+#' For overall population function;
+#'
+#' The arguments applied in this overall population function is almost identical
+#' with the individual commends:`detect_iron_u5` and `detect_iron_over5`. The
+#' only exception is this overall function has one additional argument, which is
+#' `age_group`.
+#'
 #'
 #' @param df Survey dataset (as an R data.frame) with the presence of serum
 #'    ferritin variable recorded in (µg/l) uint. The following variables were
@@ -95,18 +101,6 @@
 #'    | >= 5 years old (Male) |	Ferritin < 15	|  15 >= Ferritin >= 200 |	Ferritin > 200 |
 #'    | >= 5 years old (Female)	| Ferritin < 15	| 15 >= Ferritin >= 150 |	Ferritin > 150 |
 #'
-#' @param return A data frame with the same structure as `df` is named
-#'    `iron_storage`. In this data.frame, the new variable called `iron_storage`
-#'    contains the result of iron storage status for each observation in the
-#'    dataset.
-#'
-#'
-#' For overall population function;
-#'
-#' The arguments applied in this overall population function is almost identical
-#' with the individual commends:`detect_iron_u5` and `detect_iron_over5`. The
-#' only exception is this overall function has one additional argument, which is
-#' `age_group`.
 #'
 #' @param age_group The variable name that identifies the type of target
 #'    population included in the dataset was required to execute this function
@@ -114,6 +108,12 @@
 #'    which were coded as `1` for "5 years and older" and `2` for "under 5
 #'    years". In this argument, you only need to mention that age group assigned
 #'    variable name (from your dataset) in the commend.
+#'
+#'
+#' @return iron_storage A data frame with the same structure as `df` is named
+#'    `iron_storage`. In this data.frame, the new variable called `iron_storage`
+#'    contains the result of iron storage status for each observation in the
+#'    dataset.
 #'
 #' @examples
 #'
@@ -184,7 +184,7 @@
 #' @rdname detect_iron
 #'
 #'
-#'################################################################################
+#################################################################################
 
 # Overall fucntion for all population
 detect_iron <- function(df, ferritin = NULL, sex = NULL, age_group = NULL,
