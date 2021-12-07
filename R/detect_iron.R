@@ -29,7 +29,13 @@
 #' The arguments applied in this overall population function is almost identical
 #' with the individual commends:`detect_iron_u5` and `detect_iron_over5`. The
 #' only exception is this overall function has one additional argument, which is
-#' `age_group`.
+#' `age_group`. In the survey, which did not have the variables related to lab
+#' values to identify the infection and inflammation, the `detect_iron_infu5`
+#' function will be helpful to deal with the identification of iron storage
+#' status using qualitative information on the presence of disease or not. For
+#' that function, the user needs to identify the variable name that contains the
+#' dummy value of the existence of infection or not (`infection` argument and
+#' should be coded as `1` for the presence of disease and `0` for no condition).
 #'
 #'
 #' @param df Survey dataset (as an R data.frame) with the presence of serum
@@ -110,7 +116,12 @@
 #'    variable name (from your dataset) in the commend.
 #'
 #'
-#' @return iron_storage A data frame with the same structure as `df` is named
+#' @param infection This should be the dummy variable containing the value of
+#'    `1`, which means the presence of disease or inflammation, and `0` for no
+#'    condition.
+#'
+#'
+#' @return A data frame with the same structure as `df` is named
 #'    `iron_storage`. In this data.frame, the new variable called `iron_storage`
 #'    contains the result of iron storage status for each observation in the
 #'    dataset.
@@ -178,6 +189,10 @@
 #'                      app = c("crp", "agp"), crp = crp, agp = agp,
 #'                      add = TRUE)
 #'
+#'  ## with qualitative information on infection
+#'  detect_iron_infu5(df = ferritin_sample, ferritin = ferritin,
+#'                      infection = infection)
+#'
 #'
 #' @export
 #'
@@ -186,190 +201,200 @@
 #'
 #################################################################################
 
-# Overall fucntion for all population
-detect_iron <- function(df, ferritin = NULL, sex = NULL, age_group = NULL,
-                       app = NULL, crp = NULL, agp = NULL, add = TRUE){
+#################################################################################
+# Evaluation of inflammation - overall function
+#################################################################################
 
-  iron_storage <- vector(mode = "character", length = nrow(df))
+# Both CRP and AGP for different category
+detect_inflammation <- function(x, y){
+  # for crp
+  inflammation_1 <- def_incubation(x, y)
+  inflammation_1 <- ifelse(inflammation_1 == "Incubation", 1, 0)
 
-  # if both agp and crp were mentioned
-  if("crp" %in% app & "crp" %in% names(df) &
-     "agp" %in% app & "agp" %in% names(df)){
+  # for agp
+  inflammation_2 <- def_lateconvale(x, y)
+  inflammation_2 <- ifelse(inflammation_2 == "Late Convalescence", 1, 0)
+  inflammation_2 <- inflammation_2 * 2
 
-    df$ferritin <- ifelse(df$crp > 1 & df$crp > 5,
-                          (df$ferritin * 0.53), df$ferritin)
-    iron_storage <- ifelse((df$ferritin < 15 & df$age_group == 1) |
-                                   (df$ferritin < 12 & df$age_group == 2), "deficiency",
-                                 ifelse((df$ferritin > 200 & df$age_group == 1 & df$sex == 1), "iron overload",
-                                        ifelse(df$ferritin > 150 & df$age_group == 1 & df$sex == 2, "iron overload",
-                                               "no deficiency")))
-  }
+  # for crp & agp
+  inflammation_3 <- def_earlyconvale(x, y)
+  inflammation_3 <- ifelse(inflammation_3 == "Early Convalescence", 1, 0)
+  inflammation_3 <- inflammation_3 * 3
 
-  # if crp was mentioned
-  if("crp" %in% app & "crp" %in% names(df) & (
-    !("agp" %in% names(df)) |
-    !("agp" %in% app))){
+  # consolidation
+  inflammation_all <- rowSums(cbind (inflammation_3, inflammation_2, inflammation_1),
+                              na.rm = T)
+  inflammation <- ifelse(inflammation_all == 0, "No Inflammation",
+                         ifelse(inflammation_all == 1, "Incubation",
+                                ifelse(inflammation_all == 2, "Late Convalescence",
+                                       ifelse(inflammation_all == 6, "Early Convalescence", NA))))
 
-    df$ferritin <- ifelse(df$crp > 5, (df$ferritin * 0.77), df$ferritin)
-    iron_storage <- ifelse((df$ferritin < 15 & df$age_group == 1) |
-                             (df$ferritin < 12 & df$age_group == 2), "deficiency",
-                           ifelse((df$ferritin > 200 & df$age_group == 1 & df$sex == 1), "iron overload",
-                                  ifelse(df$ferritin > 150 & df$age_group == 1 & df$sex == 2, "iron overload",
-                                         "no deficiency")))
-  }
-
-
-  # if agp was mentioned
-  if("agp" %in% app & "agp" %in% names(df) & (
-    !("crp" %in% names(df)) |
-    !("crp" %in% app))){
-
-    df$ferritin <- ifelse(df$agp > 1, (df$ferritin * 0.75), df$ferritin)
-    iron_storage <- ifelse((df$ferritin < 15 & df$age_group == 1) |
-                             (df$ferritin < 12 & df$age_group == 2), "deficiency",
-                           ifelse((df$ferritin > 200 & df$age_group == 1 & df$sex == 1), "iron overload",
-                                  ifelse(df$ferritin > 150 & df$age_group == 1 & df$sex == 2, "iron overload",
-                                         "no deficiency")))
-  }
-
-  # if both agp and crp were not  mentioned
-  if(missing(app) & missing(agp) & missing(crp)){
-
-    iron_storage <- ifelse((df$ferritin < 15 & df$age_group == 1) |
-                             (df$ferritin < 12 & df$age_group == 2), "deficiency",
-                           ifelse((df$ferritin > 200 & df$age_group == 1 & df$sex == 1), "iron overload",
-                                  ifelse(df$ferritin > 150 & df$age_group == 1 & df$sex == 2, "iron overload",
-                                         "no deficiency")))
-  }
-
-  ##
-  if(add) {
-    iron_storage <- data.frame(df, iron_storage)
-  }
-
-  return(iron_storage)
+  return(inflammation)
 }
 
-
-################################################################################
 #' @export
 #' @rdname detect_iron
 #'
 
-# Children Under 5 years old
-detect_iron_u5 <- function(df, ferritin = NULL, sex = NULL, app = NULL,
-                           crp = NULL, agp = NULL, add = TRUE){
+################################################################################
 
-  iron_storage <- vector(mode = "character", length = nrow(df))
+# Evaluation of inflammation - individual stage
+# (1) elevated CRP only
+def_incubation <- function(x, y){
 
-  # if both agp and crp were mentioned
-  if("crp" %in% app & "crp" %in% names(df) &
-     "agp" %in% app & "agp" %in% names(df)){
+  inflammation <- ifelse(x > 5 & y <= 1, "Incubation",
+                         "No Inflammation")
 
-    df$ferritin <- ifelse(df$crp > 1 & df$crp > 5,
-                          (df$ferritin * 0.53), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 12, "deficiency", "no deficiency")
-  }
-
-  # if crp was mentioned
-  if("crp" %in% app & "crp" %in% names(df) & (
-    !("agp" %in% names(df)) |
-    !("agp" %in% app))){
-
-    df$ferritin <- ifelse(df$crp > 5, (df$ferritin * 0.77), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 12, "deficiency", "no deficiency")
-  }
-
-
-  # if agp was mentioned
-  if("agp" %in% app & "agp" %in% names(df) & (
-    !("crp" %in% names(df)) |
-    !("crp" %in% app))){
-
-    df$ferritin <- ifelse(df$agp > 1, (df$ferritin * 0.75), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 12, "deficiency", "no deficiency")
-  }
-
-  # if both agp and crp were not  mentioned
-  if(missing(app) & missing(agp) & missing(crp)){
-
-    iron_storage <- ifelse(df$ferritin < 12, "deficiency", "no deficiency")
-  }
-
-  ##
-  if(add) {
-    iron_storage <- data.frame(df, iron_storage)
-  }
-
-  return(iron_storage)
+  return(inflammation)
 }
 
-################################################################################
 #' @export
 #' @rdname detect_iron
 #'
 
-# Children 5 years old and older
 
-detect_iron_over5 <- function(df, ferritin = NULL, sex = NULL, app = NULL,
-                           crp = NULL, agp = NULL, add = TRUE){
+# (2) elevated AGP only
+def_lateconvale <- function(x, y){
 
-  iron_storage <- vector(mode = "character", length = nrow(df))
+  inflammation <- ifelse(x <= 5 & y > 1, "Late Convalescence",
+                        "No Inflammation")
 
-  # if both agp and crp were mentioned
-  if("crp" %in% app & "crp" %in% names(df) &
-     "agp" %in% app & "agp" %in% names(df)){
+  return(inflammation)
+}
 
-
-    df$ferritin <- ifelse(df$crp > 1 & df$crp > 5,
-                          (df$ferritin * 0.53), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 15, "deficiency",
-                                 ifelse(df$ferritin > 200 & df$sex == 1, "iron overload",
-                                        ifelse(df$ferritin > 150 & df$sex == 2, "iron overload",
-                                               "no deficiency")))
-  }
-
-  # if crp was mentioned
-  if("crp" %in% app & "crp" %in% names(df) & (
-    !("agp" %in% names(df)) |
-    !("agp" %in% app))){
-
-    df$ferritin <- ifelse(df$crp > 5, (df$ferritin * 0.77), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 15, "deficiency",
-                                 ifelse(df$ferritin > 200 & df$sex == 1, "iron overload",
-                                        ifelse(df$ferritin > 150 & df$sex == 2, "iron overload",
-                                               "no deficiency")))
-  }
+#' @export
+#' @rdname detect_iron
+#'
 
 
-  # if agp was mentioned
-  if("agp" %in% app & "agp" %in% names(df) & (
-    !("crp" %in% names(df)) |
-    !("crp" %in% app))){
+# (3) elevated both CRP and AGP
+def_earlyconvale <- function(x, y){
 
-    df$ferritin <- ifelse(df$agp > 1, (df$ferritin * 0.75), df$ferritin)
-    iron_storage <- ifelse(df$ferritin < 15, "deficiency",
-                                 ifelse(df$ferritin > 200 & df$sex == 1, "iron overload",
-                                        ifelse(df$ferritin > 150 & df$sex == 2, "iron overload",
-                                               "no deficiency")))
-  }
+  inflammation <- ifelse(x > 5 & y > 1, "Early Convalescence",
+                         "No Inflammation")
 
-  # if both agp and crp were not  mentioned
-  if(missing(app) & missing(agp) & missing(crp)){
+  return(inflammation)
+}
 
-    iron_storage <- ifelse(df$ferritin < 15, "deficiency",
-                                 ifelse(df$ferritin > 200 & df$sex == 1, "iron overload",
-                                        ifelse(df$ferritin > 150 & df$sex == 2, "iron overload",
-                                               "no deficiency")))
-  }
+#' @export
+#' @rdname detect_iron
+#'
 
-  ##
-  if(add) {
-    iron_storage <- data.frame(df, iron_storage)
-  }
+################################################################################
+
+# Evaluation of inflammation - by individual protein
+# (1) by CRP only
+def_crp <- function(x){
+
+  inflammation <- ifelse(x > 5, "inflammation", "No Inflammation")
+
+  return(inflammation)
+}
+
+#' @export
+#' @rdname detect_iron
+#'
+
+
+# (2) by AGP only
+def_agp <- function(y){
+
+  inflammation <- ifelse(y > 1, "inflammation", "No Inflammation")
+
+  return(inflammation)
+}
+
+#' @export
+#' @rdname detect_iron
+#'
+
+#################################################################################
+
+#################################################################################
+# Ferritin Correction
+#################################################################################
+
+# Based on the inflammation identified by individual protein
+# (1) inflammation by CRP only
+correct_ferritin_crp <- function(x, y){
+
+  ferritin_corrected <- ifelse(y == "inflammation", x * 0.65, x)
+
+  return(ferritin_corrected)
+}
+
+#' @export
+#' @rdname detect_iron
+#'
+
+
+# (2) inflammation by AGP only
+correct_ferritin_agp <- function(x, y){
+
+  ferritin_corrected <- ifelse(y == "inflammation", x * 0.72, x)
+
+  return(ferritin_corrected)
+}
+
+#' @export
+#' @rdname detect_iron
+#'
+
+
+#################################################################################
+
+# Based on the different stages of inflammation
+
+correct_ferritin <- function(x, y){
+
+  ferritin_corrected <- ifelse(y == "inflammation", x * 0.65, x)
+
+  ferritin_corrected <- ifelse(y == "Incubation", x * 0.77,
+                               ifelse(y == "Late Convalescence", x * 0.53,
+                                      ifelse(y == "Early Convalescence", x * 0.75,
+                                             x)))
+
+
+  return(ferritin_corrected)
+}
+
+#' @export
+#' @rdname detect_iron
+#'
+
+#################################################################################
+
+#################################################################################
+# Iron Storage Identification
+#################################################################################
+
+# detection of iron storage status based on corrected ferritin value
+detect_iron <- function(x, y){
+
+  iron_storage <- ifelse((x < 12 & y == "under 5 years") |
+                           (x < 15 & y == "5 years and older") ,
+                         "deficiency", "no deficiency")
 
   return(iron_storage)
+
 }
 
 
+#' @export
+#' @rdname detect_iron
+#'
+
+#################################################################################
+# detection of iron storage status based on qualitative information on inflammation
+detect_iron_quali <- function(x, y){
+
+  iron_storage <- ifelse(x < 30 & y == 1, "deficiency", "no deficiency")
+
+  return(iron_storage)
+
+}
+
+#' @export
+#' @rdname detect_iron
+#'
 

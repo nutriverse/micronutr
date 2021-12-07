@@ -4,6 +4,7 @@
 \alias{detect_iron}
 \alias{detect_iron_u5}
 \alias{detect_iron_over5}
+\alias{detect_iron_infu5}
 \title{Determining Iron Storage Status in individual}
 \usage{
 detect_iron(
@@ -36,6 +37,8 @@ detect_iron_over5(
   agp = NULL,
   add = TRUE
 )
+
+detect_iron_infu5(df, ferritin = NULL, infection = NULL, add = TRUE)
 }
 \arguments{
 \item{df}{Survey dataset (as an R data.frame) with the presence of serum
@@ -110,6 +113,10 @@ each category is mentioned in the below table.\tabular{llll}{
    >= 5 years old (Male) \tab Ferritin < 15 \tab 15 >= Ferritin >= 200 \tab Ferritin > 200 \cr
    >= 5 years old (Female) \tab Ferritin < 15 \tab 15 >= Ferritin >= 150 \tab Ferritin > 150 \cr
 }}
+
+\item{infection}{This should be the dummy variable containing the value of
+\code{1}, which means the presence of disease or inflammation, and \code{0} for no
+condition.}
 }
 \value{
 iron_storage A data frame with the same structure as \code{df} is named
@@ -144,7 +151,13 @@ For overall population function;
 The arguments applied in this overall population function is almost identical
 with the individual commends:\code{detect_iron_u5} and \code{detect_iron_over5}. The
 only exception is this overall function has one additional argument, which is
-\code{age_group}.
+\code{age_group}. In the survey, which did not have the variables related to lab
+values to identify the infection and inflammation, the \code{detect_iron_infu5}
+function will be helpful to deal with the identification of iron storage
+status using qualitative information on the presence of disease or not. For
+that function, the user needs to identify the variable name that contains the
+dummy value of the existence of infection or not (\code{infection} argument and
+should be coded as \code{1} for the presence of disease and \code{0} for no condition).
 }
 \examples{
 
@@ -208,6 +221,10 @@ only exception is this overall function has one additional argument, which is
                      sex = sex, age_group = age_group,
                      app = c("crp", "agp"), crp = crp, agp = agp,
                      add = TRUE)
+
+ ## with qualitative information on infection
+ detect_iron_infu5(df = ferritin_sample, ferritin = ferritin,
+                     infection = infection)
 
 
 }

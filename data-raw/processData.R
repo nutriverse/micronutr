@@ -22,9 +22,11 @@ usethis::use_data(iodine_sample, overwrite = TRUE, compress = "xz")
 ferritin_sample <- read.csv("data-raw/ferritin_sample.csv")
 names(ferritin_sample)[1] <- "psu"
 
-ferritin_sample$agp <- round(runif(nrow(ferritin_sample), min = 0.5, max = 50), 1)
+ferritin_sample$agp <- round(runif(nrow(ferritin_sample), min = 0.2, max = 10), 1)
+ferritin_sample$agp[ferritin_sample$agp >9 & ferritin_sample$agp < 11] <- "NA"
 ferritin_sample$age_group <- factor(ifelse(!is.na(ferritin_sample$m.age), "under 5 years", "5 years and older"))
 
+ferritin_sample$infection <- round(runif(nrow(ferritin_sample), min = 0, max = 1))
 
 usethis::use_data(ferritin_sample, overwrite = TRUE, compress = "xz")
 
