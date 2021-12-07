@@ -26,6 +26,8 @@
 #' find_child_wasting(df = zscorer::anthro1, zscore = "whz", muac = "muac",
 #'                    flag = NULL, add = TRUE)
 #'
+#' find_child_wasting(df = zscorer::anthro1, muac = "muac")
+#'
 #' @export
 #'
 #
@@ -35,47 +37,54 @@ find_child_wasting <- function(df, index = c("whz", "muac"),
                                zscore = "whz", muac = "muac",
                                flag = NULL, add = TRUE) {
   ## weight-for-height z-score
-  if("whz" %in% index) {
-    if(is.null(flag)) {
+  if ("whz" %in% index) {
+    if (is.null(flag)) {
       gam.whz <- ifelse(df[[zscore]] < -2, 1, 0)
       mam.whz <- ifelse(df[[zscore]] >= -3 & df[[zscore]] < -2, 1, 0)
       sam.whz <- ifelse(df[[zscore]] < -3, 1, 0)
-      ##
+
+      ## Concatenate results into a data.frame
       anthroDF1 <- data.frame(gam.whz, mam.whz, sam.whz)
-      ##
-      if(add) {
-        anthroDF1 <- data.frame(df, anthroDF1)
-      }
-    }
-    if(!is.null(flag)) {
+    } else {
       gam.whz <- ifelse(df[[zscore]] < -2, 1, 0)
       gam.whz[df[[flag]] %in% c(2, 3, 6, 7)] <- NA
       mam.whz <- ifelse(df[[zscore]] >= -3 & df[[zscore]] < -2, 1, 0)
       mam.whz[df[[flag]] %in% c(2, 3, 6, 7)] <- NA
       sam.whz <- ifelse(df[[zscore]] < -3, 1, 0)
       sam.whz[df[[flag]] %in% c(2, 3, 6, 7)] <- NA
-      ##
+
+      ## Concatenate results into a data.frame
       anthroDF1 <- data.frame(gam.whz, mam.whz, sam.whz)
-      ##
-      if(add) {
-        anthroDF1 <- data.frame(df, anthroDF1)
-      }
     }
   }
   ##
-  if("muac" %in% index) {
+  if ("muac" %in% index) {
     gam.muac <- ifelse(df[[muac]] < 12.5, 1, 0)
     mam.muac <- ifelse(df[[muac]] < 12.5 & df[[muac]] >= 11.5, 1, 0)
     sam.muac <- ifelse(df[[muac]] < 11.5, 1, 0)
+
+    ## Concatenate results into a data.frame
+    anthroDF2 <- data.frame(gam.muac, mam.muac, sam.muac)
   }
-  ##
-  anthroDF2 <- data.frame(anthroDF1, gam.muac, mam.muac, sam.muac)
-  ##
-  if(add) {
-    anthroDF2 <- data.frame(anthroDF1, gam.muac, mam.muac, sam.muac)
+
+  ## Check if both WHZ and MUAC are specified
+  if (length(index) == 2) {
+    anthroDF <- data.frame(anthroDF1, anthroDF2)
+  } else {
+    if (index == "whz") {
+      anthroDF <- anthroDF1
+    } else {
+      anthroDF <- anthroDF2
+    }
   }
-  ##
-  return(anthroDF2)
+
+  ## Check if anthroDF to be added to original data.frame
+  if (add) {
+    anthroDF <- data.frame(df, anthroDF)
+  }
+
+  ## Return anthroDF
+  anthroDF
 }
 
 
