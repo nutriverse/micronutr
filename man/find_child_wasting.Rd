@@ -46,4 +46,6 @@ Find children with acute wasting from an anthropometric dataset
 find_child_wasting(df = zscorer::anthro1, zscore = "whz", muac = "muac",
                    flag = NULL, add = TRUE)
 
+find_child_wasting(df = zscorer::anthro1, muac = "muac")
+
 }
