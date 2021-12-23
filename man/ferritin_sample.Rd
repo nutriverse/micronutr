@@ -17,6 +17,7 @@ A data frame with 10 columns and 19449 rows.\tabular{ll}{
    \emph{crp} \tab acute phase response proteine: C-reactive protein (CRP) value (mg/L) \cr
    \emph{ferritin} \tab Serum ferritin (μg/L) values \cr
    \emph{agp} \tab acute phase response proteine: α1-acid-glycoprotein (AGP) value (g/L) \cr
+   \emph{age_group} \tab indicate study population (Under 5 or over 5 years old) \cr
 }
 }
 \source{
