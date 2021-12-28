@@ -28,20 +28,14 @@ test_that("The output objects of individual inflammation detection function have
 
   expect_type(inflam_crp_yes, "character")
   expect_type(inflam_crp_no, "character")
-  expect_type(inflam_crp_na, "logical")
 
   expect_type(inflam_agp_yes, "character")
   expect_type(inflam_agp_no, "character")
-  expect_type(inflam_agp_na, "logical")
 
   expect_type(inflam_all_incu, "character")
   expect_type(inflam_all_late, "character")
   expect_type(inflam_all_early, "character")
   expect_type(inflam_all_no, "character")
-
-  expect_type(inflam_all_na1, "logical")
-  expect_type(inflam_all_na2, "logical")
-  expect_type(inflam_all_na3, "logical")
 
 })
 
@@ -50,20 +44,20 @@ test_that("Individual inflammation detection functions define anaema category co
 
   expect_equal(inflam_crp_yes, "inflammation")
   expect_equal(inflam_crp_no, "No Inflammation")
-  expect_equal(inflam_crp_na, NA)
+  expect_equal(is.na(inflam_crp_na), TRUE)
 
   expect_equal(inflam_agp_yes, "inflammation")
   expect_equal(inflam_agp_no, "No Inflammation")
-  expect_equal(inflam_agp_na, NA)
+  expect_equal(is.na(inflam_agp_na), TRUE)
 
   expect_equal(inflam_all_incu, "Incubation")
   expect_equal(inflam_all_late, "Late Convalescence")
   expect_equal(inflam_all_early, "Early Convalescence")
   expect_equal(inflam_all_no, "No Inflammation")
 
-  expect_equal(inflam_all_na1, NA)
-  expect_equal(inflam_all_na2, NA)
-  expect_equal(inflam_all_na3, NA)
+  expect_equal(is.na(inflam_all_na1), TRUE)
+  expect_equal(is.na(inflam_all_na2), TRUE)
+  expect_equal(is.na(inflam_all_na3), TRUE)
 
 })
 
@@ -79,24 +73,11 @@ test_that("The output objects of ferritine correction function has correct varia
   expect_type(correct_ferritin_agp(30, "inflammation"), "double")
   expect_type(correct_ferritin_agp(30, "No Inflammation"), "double")
 
-  expect_type(correct_ferritin_crp(30, NA), "logical")
-  expect_type(correct_ferritin_crp(NA, "inflammation"), "logical")
-  expect_type(correct_ferritin_crp(NA, "No Inflammation"), "logical")
-  expect_type(correct_ferritin_agp(30, NA), "logical")
-  expect_type(correct_ferritin_agp(NA, "inflammation"), "logical")
-  expect_type(correct_ferritin_agp(NA, "No Inflammation"), "logical")
-
   # correction with both CRP and AGP
   expect_type(correct_ferritin(30, "No Inflammation"), "double")
   expect_type(correct_ferritin(30, "Incubation"), "double")
   expect_type(correct_ferritin(30, "Late Convalescence"), "double")
   expect_type(correct_ferritin(30, "Early Convalescence"), "double")
-
-  expect_type(correct_ferritin(30, NA), "logical")
-  expect_type(correct_ferritin(NA, "No Inflammation"), "logical")
-  expect_type(correct_ferritin(NA, "Incubation"), "logical")
-  expect_type(correct_ferritin(NA, "Late Convalescence"), "logical")
-  expect_type(correct_ferritin(NA, "Early Convalescence"), "logical")
 
 })
 
@@ -109,12 +90,12 @@ test_that("iron deficiency detection function defines anaema category correctly"
   expect_equal(correct_ferritin_agp(30, "inflammation"), 30 * 0.72)
   expect_equal(correct_ferritin_agp(30, "No Inflammation"), 30)
 
-  expect_equal(correct_ferritin_crp(30, NA), NA)
-  expect_equal(correct_ferritin_crp(NA, "inflammation"), NA)
-  expect_equal(correct_ferritin_crp(NA, "No Inflammation"), NA)
-  expect_equal(correct_ferritin_agp(30, NA), NA)
-  expect_equal(correct_ferritin_agp(NA, "inflammation"), NA)
-  expect_equal(correct_ferritin_agp(NA, "No Inflammation"), NA)
+  expect_equal(is.na(correct_ferritin_crp(30, NA)), TRUE)
+  expect_equal(is.na(correct_ferritin_crp(NA, "inflammation")), TRUE)
+  expect_equal(is.na(correct_ferritin_crp(NA, "No Inflammation")), TRUE)
+  expect_equal(is.na(correct_ferritin_agp(30, NA)), TRUE)
+  expect_equal(is.na(correct_ferritin_agp(NA, "inflammation")), TRUE)
+  expect_equal(is.na(correct_ferritin_agp(NA, "No Inflammation")), TRUE)
 
   # correction with both CRP and AGP
   expect_equal(correct_ferritin(30, "No Inflammation"), 30)
@@ -122,11 +103,11 @@ test_that("iron deficiency detection function defines anaema category correctly"
   expect_equal(correct_ferritin(30, "Late Convalescence"), 30 * 0.53)
   expect_equal(correct_ferritin(30, "Early Convalescence"), 30 * 0.75)
 
-  expect_equal(correct_ferritin(30, NA), NA)
-  expect_equal(correct_ferritin(NA, "No Inflammation"), NA)
-  expect_equal(correct_ferritin(NA, "Incubation"), NA)
-  expect_equal(correct_ferritin(NA, "Late Convalescence"), NA)
-  expect_equal(correct_ferritin(NA, "Early Convalescence"), NA)
+  expect_equal(is.na(correct_ferritin(30, NA)), TRUE)
+  expect_equal(is.na(correct_ferritin(NA, "No Inflammation")), TRUE)
+  expect_equal(is.na(correct_ferritin(NA, "Incubation")), TRUE)
+  expect_equal(is.na(correct_ferritin(NA, "Late Convalescence")), TRUE)
+  expect_equal(is.na(correct_ferritin(NA, "Early Convalescence")), TRUE)
 
 })
 
@@ -141,20 +122,13 @@ test_that("The output objects of iron deficiency detection function has correct 
   expect_type(detect_iron(12, "5 years and older"), "character")
   expect_type(detect_iron(11, "under 5 years"), "character")
   expect_type(detect_iron(11, "5 years and older"), "character")
-  expect_type(detect_iron(12, NA), "logical")
-  expect_type(detect_iron(11, NA), "logical")
-  expect_type(detect_iron(NA, "under 5 years"), "logical")
-  expect_type(detect_iron(NA, "5 years and older"), "logical")
 
   # for over 5 pop
   expect_type(detect_iron(15, "under 5 years"), "character")
   expect_type(detect_iron(15, "5 years and older"), "character")
   expect_type(detect_iron(14, "under 5 years"), "character")
   expect_type(detect_iron(14, "5 years and older"), "character")
-  expect_type(detect_iron(15, NA), "logical")
-  expect_type(detect_iron(14, NA), "logical")
-  expect_type(detect_iron(NA, "under 5 years"), "logical")
-  expect_type(detect_iron(NA, "5 years and older"), "logical")
+
 })
 
 
@@ -166,20 +140,20 @@ test_that("iron deficiency detection function defines anaema category correctly"
   expect_equal(detect_iron(12, "5 years and older"), "deficiency")
   expect_equal(detect_iron(11, "under 5 years"), "deficiency")
   expect_equal(detect_iron(11, "5 years and older"), "deficiency")
-  expect_equal(detect_iron(12, NA), NA)
-  expect_equal(detect_iron(11, NA), NA)
-  expect_equal(detect_iron(NA, "under 5 years"), NA)
-  expect_equal(detect_iron(NA, "5 years and older"), NA)
+  expect_equal(is.na(detect_iron(12, NA)), TRUE)
+  expect_equal(is.na(detect_iron(11, NA)), TRUE)
+  expect_equal(is.na(detect_iron(NA, "under 5 years")), TRUE)
+  expect_equal(is.na(detect_iron(NA, "5 years and older")), TRUE)
 
   # for over 5 pop
   expect_equal(detect_iron(15, "under 5 years"), "no deficiency")
   expect_equal(detect_iron(15, "5 years and older"), "no deficiency")
   expect_equal(detect_iron(14, "under 5 years"), "no deficiency")
   expect_equal(detect_iron(14, "5 years and older"), "deficiency")
-  expect_equal(detect_iron(15, NA), NA)
-  expect_equal(detect_iron(14, NA), NA)
-  expect_equal(detect_iron(NA, "under 5 years"), NA)
-  expect_equal(detect_iron(NA, "5 years and older"), NA)
+  expect_equal(is.na(detect_iron(15, NA)), TRUE)
+  expect_equal(is.na(detect_iron(14, NA)), TRUE)
+  expect_equal(is.na(detect_iron(NA, "under 5 years")), TRUE)
+  expect_equal(is.na(detect_iron(NA, "5 years and older")), TRUE)
 
 })
 
@@ -192,10 +166,6 @@ test_that("The output objects of iron deficiency detection function has correct 
   expect_type(detect_iron_quali(30, 0), "character")
   expect_type(detect_iron_quali(29, 1), "character")
   expect_type(detect_iron_quali(29, 0), "character")
-  expect_type(detect_iron_quali(29, NA), "logical")
-  expect_type(detect_iron_quali(30, NA), "logical")
-  expect_type(detect_iron_quali(NA, 1), "logical")
-  expect_type(detect_iron_quali(NA, 0), "logical")
 
 })
 
@@ -206,9 +176,9 @@ test_that("iron deficiency detection function defines anaema category correctly"
   expect_equal(detect_iron_quali(30, 0), "no deficiency")
   expect_equal(detect_iron_quali(29, 1), "deficiency")
   expect_equal(detect_iron_quali(29, 0), "no deficiency")
-  expect_equal(detect_iron_quali(29, NA), NA)
-  expect_equal(detect_iron_quali(30, NA), NA)
-  expect_equal(detect_iron_quali(NA, 1), NA)
-  expect_equal(detect_iron_quali(NA, 0), NA)
+  expect_equal(is.na(detect_iron_quali(29, NA)), TRUE)
+  expect_equal(is.na(detect_iron_quali(30, NA)), TRUE)
+  expect_equal(is.na(detect_iron_quali(NA, 1)), TRUE)
+  expect_equal(is.na(detect_iron_quali(NA, 0)), TRUE)
 
 })
