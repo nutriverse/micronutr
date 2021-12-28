@@ -49,7 +49,7 @@
 #'                group = "lactating")
 #'
 #'  # test with sample dataset
-#'  dta <- subset(iodine_sample, group == "Child")
+#'  dta <- subset(iodine, group == "Child")
 #'  detect_iodine(x = dta$iodine,
 #'                group = "general")
 #'

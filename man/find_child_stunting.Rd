@@ -10,8 +10,8 @@ find_child_stunting(df, zscore = "haz", flag = NULL, add = TRUE)
 \item{df}{A data.frame containing anthropometric z-score indices for
 \verb{height-for-age}}
 
-\item{zscore}{A character value for variable name for \verb{height-for-age z-score}
-in \code{df}. Default is \code{haz}}
+\item{zscore}{A character value for variable name for
+\verb{height-for-age z-score} in \code{df}. Default is \code{haz}}
 
 \item{flag}{A character value for variable name of coded flags applied to
 \verb{height-for-age z-score} values in \code{df}. Default is NULL indicating
@@ -29,6 +29,8 @@ Find children who are stunting/stunted from an anthropometric dataset
 }
 \examples{
 
-find_child_stunting(df = zscorer::anthro1, zscore = "haz", flag = NULL, add = TRUE)
+find_child_stunting(df = zscorer::anthro1,
+                    zscore = "haz",
+                    flag = NULL, add = TRUE)
 
 }

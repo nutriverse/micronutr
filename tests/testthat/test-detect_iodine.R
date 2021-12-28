@@ -1,9 +1,9 @@
 library(nutricheckr)
 
 # Create testing data
-dta_child <- subset(iodine_sample, group == "Child")
-dta_preg <- subset(iodine_sample, group == "Pregnant Principal carer")
-dta_lact <- subset(iodine_sample, group == "Lactating Principal carer")
+dta_child <- subset(iodine, group == "Child")
+dta_preg <- subset(iodine, group == "Pregnant Principal carer")
+dta_lact <- subset(iodine, group == "Lactating Principal carer")
 
 
 # For individual target group function;

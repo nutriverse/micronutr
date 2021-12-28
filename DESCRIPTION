@@ -20,7 +20,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 Language: en-GB
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse/nutricheckr/, https://github.com/nutriverse/nutricheckr
 BugReports: https://github.com/nutriverse/nutricheckr/issues

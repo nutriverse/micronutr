@@ -67,10 +67,10 @@ explains the cut-off points applied in this diagnostic function.\tabular{llll}{
 }}
 }
 \value{
-anaemia   A data frame with the same structure as \code{df} is named
+A data frame with the same structure as \code{df} is named
 \code{anaemia}. In this new data.frame, the new variable \code{anaemia_all} can be
 observed, containing the information which observation was affected by
-what type of anaemia: mild, moderate, or severe.flag_anaemia_2(df = df,pop_group = pop_group,hb = hb,add = TRUE)
+what type of anaemia: mild, moderate, or severe.
 }
 \description{
 Perform anaemia diagnosis based on age, sex and pregnancy status

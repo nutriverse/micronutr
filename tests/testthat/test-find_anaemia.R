@@ -13,12 +13,12 @@ hb <- runif(50, min = 60, max = 130)
 gender <- rep(c("male", "female"), each = 25)
 df <- data.frame(gender, hb)
 
-anaemia_u5 <- name_anaemia_u5(u5)
-anaemia_c5to11 <- name_anaemia_c5to11(c5to11)
-anaemia_c12to14 <- name_anaemia_c12to14(c12to14)
-anaemia_nonpreg_women <- name_anaemia_nonpreg_women(nonpreg_women)
-anaemia_pregnant <- name_anaemia_pregnant(pregnant)
-anaemia_men <- name_anaemia_men(men)
+anaemia_u5 <- find_anaemia_u5(u5)
+anaemia_c5to11 <- find_anaemia_c5to11(c5to11)
+anaemia_c12to14 <- find_anaemia_c12to14(c12to14)
+anaemia_nonpreg_women <- find_anaemia_nonpreg_women(nonpreg_women)
+anaemia_pregnant <- find_anaemia_pregnant(pregnant)
+anaemia_men <- find_anaemia_men(men)
 
 test_that("Individual `name_anaemia` function define anaema category correctly", {
 
@@ -48,7 +48,7 @@ test_that("The output vector has same non - `NA` value", {
 
 
 # data.frame
-anaemia <-  name_anaemia(df = df,
+anaemia <-  find_anaemia(df = df,
                          hb = hb,
                          group = c("u5", "c5to11", "c12to14", "nonpreg_women",
                                    "pregnant", "men"),

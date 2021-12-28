@@ -44,148 +44,168 @@
 #'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #'
-#' @return anaemia   A data frame with the same structure as `df` is named
-#'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
-#'    observed, containing the information which observation was affected by
-#'    what type of anaemia: mild, moderate, or severe.
-#'
-#' # flag_anaemia(df = df,
-#' #              age = age,
-#' #                hb = hb
-#' #                sex = sex,
-#' #                pregnant = pregnant,
-#' #                add = TRUE)
-#'
-#'
+#' @return A data frame with the same structure as `df`. The new variable
+#'   `anaemia_all` can be observed, containing the information the type of
+#'   anaemia present: mild, moderate, or severe.
 #'
 #
 ################################################################################
 
-flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL, add = TRUE) {
-  ##
-  anaemia_all <- vector(mode = "numeric", length = nrow(df)) # anaemia level category
-  ##
-  # category value: mid = 1, moderate = 2, severe = 3
+flag_anaemia <- function(df,
+                         age = NULL, hb = NULL, sex = NULL, pregnant = NULL,
+                         add = TRUE) {
+  ## Create concatenating vector
+  anaemia_all <- vector(mode = "numeric", length = nrow(df))
+
+  # category value: mild = 1, moderate = 2, severe = 3
   # pregnant category
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 1) & # pregnant == 1 is pregnant
-                            (df$hb >= 100  & df$hb < 110 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 1) &
-                            (df$hb >= 70  & df$hb < 100 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 1) &
-                            (df$hb < 70 ), 3, anaemia_all)
-  }
-  ##
-  # non-pregnant category
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 0) &
-                            (df$hb >= 110  & df$hb < 120 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 0) &
-                            (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
-                            (df$age > 15 & df$pregnant == 0) &
-                            (df$hb < 80 ), 3, anaemia_all)
-  }
-  ##
-  # men category
-  if(!is.null(age) & !is.na(hb) & !is.na(sex)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
-                            (df$age > 15 & df$sex == 1) & # sex == 1 is male
-                            (df$hb >= 110  & df$hb < 130 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(sex)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
-                            (df$age > 15 & df$sex == 1) &
-                            (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb) & !is.na(sex)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
-                            (df$age > 15 & df$sex == 1) &
-                            (df$hb < 80 ), 3, anaemia_all)
-  }
-  ##
-  # child U5 category
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age < 5) &
-                            (df$hb >= 100  & df$hb < 110 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age < 5) &
-                            (df$hb >= 70  & df$hb < 100 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age < 5) &
-                            (df$hb < 70 ), 3, anaemia_all)
-  }
-  ##
-  # child 5 - 11 category
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 5 & df$age < 12) &
-                            (df$hb >= 110  & df$hb < 115 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 5 & df$age < 12) &
-                            (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 5 & df$age < 12) &
-                            (df$hb < 80 ), 3, anaemia_all)
-  }
-  ##
-  # child 12 - 14 category
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 12 & df$age < 15) &
-                            (df$hb >= 110  & df$hb < 120 ), 1, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 12 & df$age < 15) &
-                            (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all)
-  }
-  ##
-  if(!is.null(age) & !is.na(hb)) {
-    anaemia_all <- ifelse(!is.na(df$age) & !is.na(df$hb) &
-                            (df$age >= 12 & df$age < 15) &
-                            (df$hb < 80 ), 3, anaemia_all)
-  }
-  ##
-  if(add) {
-    df$anaemia_all <- anaemia_all
-    anaemia        <- df
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 1) &
+        (df$hb >= 100  & df$hb < 110 ), 1, anaemia_all
+    )
   }
 
-  return(anaemia)
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 1) &
+        (df$hb >= 70  & df$hb < 100 ), 2, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 1) &
+        (df$hb < 70 ), 3, anaemia_all
+    )
+  }
+
+  # non-pregnant category
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 0) &
+        (df$hb >= 110  & df$hb < 120 ), 1, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 0) &
+        (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb) & !is.na(pregnant)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$pregnant) &
+        (df$age > 15 & df$pregnant == 0) &
+        (df$hb < 80 ), 3, anaemia_all
+    )
+  }
+
+  # men category
+  if (!is.null(age) & !is.na(hb) & !is.na(sex)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
+        (df$age > 15 & df$sex == 1) &
+        (df$hb >= 110  & df$hb < 130 ), 1, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb) & !is.na(sex)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
+        (df$age > 15 & df$sex == 1) &
+        (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb) & !is.na(sex)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & !is.na(df$sex) &
+        (df$age > 15 & df$sex == 1) &
+        (df$hb < 80 ), 3, anaemia_all
+    )
+  }
+
+  # child U5 category
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) &
+        (df$age < 5) & (df$hb >= 100  & df$hb < 110 ), 1, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) &
+        (df$age < 5) & (df$hb >= 70  & df$hb < 100 ), 2, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age < 5) &
+        (df$hb < 70 ), 3, anaemia_all
+    )
+  }
+
+  # child 5 - 11 category
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 5 & df$age < 12) &
+        (df$hb >= 110  & df$hb < 115 ), 1, anaemia_all)
+  }
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 5 & df$age < 12) &
+        (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 5 & df$age < 12) &
+        (df$hb < 80 ), 3, anaemia_all
+    )
+  }
+
+  # child 12 - 14 category
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 12 & df$age < 15) &
+        (df$hb >= 110  & df$hb < 120 ), 1, anaemia_all
+    )
+  }
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 12 & df$age < 15) &
+        (df$hb >= 80  & df$hb < 110 ), 2, anaemia_all
+    )
+  }
+
+
+  if (!is.null(age) & !is.na(hb)) {
+    anaemia_all <- ifelse(
+      !is.na(df$age) & !is.na(df$hb) & (df$age >= 12 & df$age < 15) &
+        (df$hb < 80 ), 3, anaemia_all
+    )
+  }
+
+  if (add) {
+    df$anaemia_all <- anaemia_all
+    anaemia <- df
+  }
+
+  ## Return
+  anaemia
 }
 
 
@@ -260,17 +280,10 @@ flag_anaemia <- function(df, age = NULL, hb = NULL, sex = NULL, pregnant = NULL,
 #'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #'
-#' @return anaemia   A data frame with the same structure as `df` is named
+#' @return A data frame with the same structure as `df` is named
 #'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
 #'    observed, containing the information which observation was affected by
 #'    what type of anaemia: mild, moderate, or severe.
-#'
-#' #  flag_anaemia_2(df = df,
-#' #                pop_group = pop_group,
-#' #                hb = hb,
-#' #                add = TRUE)
-#'
-#'
 #'
 #
 ################################################################################
@@ -388,7 +401,7 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #'
-#' @return anaemia   A data frame with the same structure as `df` is named
+#' @return A data frame with the same structure as `df` is named
 #'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
 #'    observed, containing the information which observation was affected by
 #'    what type of anaemia: mild, moderate, or severe.
@@ -403,66 +416,65 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'  df <- data.frame(gender, hb)
 #'
 #'  # For individual target group function;
-#'   name_anaemia_u5(x) # U5 Children
-#'   name_anaemia_c5to11(x) # Children 5 - 11 years
-#'   name_anaemia_c12to14(x) # Children 12 - 14 years
-#'   name_anaemia_nonpreg_women(x) # Non-pregnant Women
-#'   name_anaemia_pregnant(x) # Pregnant Women
-#'   name_anaemia_men(x) # Men
+#'   find_anaemia_u5(x) # U5 Children
+#'   find_anaemia_c5to11(x) # Children 5 - 11 years
+#'   find_anaemia_c12to14(x) # Children 12 - 14 years
+#'   find_anaemia_nonpreg_women(x) # Non-pregnant Women
+#'   find_anaemia_pregnant(x) # Pregnant Women
+#'   find_anaemia_men(x) # Men
 #'
 #'
 #'  # For overall population function;
-#'   name_anaemia(df = df,
+#'   find_anaemia(df = df,
 #'                hb = hb,
 #'                group = c("u5", "c5to11", "c12to14", "nonpreg_women",
 #'                        "pregnant", "men"),
 #'                add = TRUE)
 #'
 #' @export
-#'
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
 #'
 #
 ################################################################################
 
-name_anaemia <- function(df, group = c("u5", "c5to11", "c12to14",
-                                       "nonpreg_women", "pregnant", "men"),
-                         hb = NULL, add = TRUE){
-  # group <- match.arg(group)
-
+find_anaemia <- function(df,
+                         group = c("u5", "c5to11", "c12to14",
+                                   "nonpreg_women", "pregnant", "men"),
+                         hb = NULL,
+                         add = TRUE){
   anaemia <- data.frame(matrix(nrow = nrow(df), ncol = length(group)))
   names(anaemia) <- paste("anaemia", group, sep = "_")
 
   # U5 children
   if ("u5" %in% group) {
-    anaemia$anaemia_u5 <- name_anaemia_u5(df$hb)
+    anaemia$anaemia_u5 <- find_anaemia_u5(df$hb)
   }
 
   # Children 5 - 11 years
   if ("c5to11" %in% group) {
-    anaemia$anaemia_c5to11 <- name_anaemia_c5to11(df$hb)
+    anaemia$anaemia_c5to11 <- find_anaemia_c5to11(df$hb)
 
   }
 
   # Children 12 - 14 years
   if ("c12to14" %in% group) {
-    anaemia$anaemia_c12to14 <- name_anaemia_c12to14(df$hb)
+    anaemia$anaemia_c12to14 <- find_anaemia_c12to14(df$hb)
   }
 
   # Non-pregnant Women
   if ("nonpreg_women" %in% group) {
-    anaemia$anaemia_nonpreg_women <- name_anaemia_nonpreg_women(df$hb)
+    anaemia$anaemia_nonpreg_women <- find_anaemia_nonpreg_women(df$hb)
   }
 
   # Pregnant Women
   if ("pregnant" %in% group) {
-    anaemia$anaemia_pregnant <- name_anaemia_pregnant(df$hb)
+    anaemia$anaemia_pregnant <- find_anaemia_pregnant(df$hb)
   }
 
   # Men
   if ("men" %in% group) {
-    anaemia$anaemia_men <- name_anaemia_men(df$hb)
+    anaemia$anaemia_men <- find_anaemia_men(df$hb)
   }
 
   ##
@@ -476,10 +488,10 @@ name_anaemia <- function(df, group = c("u5", "c5to11", "c12to14",
 
 ################################################################################
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
 
-name_anaemia_u5 <- function(x){
+find_anaemia_u5 <- function(x){
   anaemia_cat_u5 <- cut(x,
                         breaks = c(-Inf, 70, 100, 110, Inf),
                         labels = c("severe anaemia", "moderate anaemia",
@@ -489,9 +501,9 @@ name_anaemia_u5 <- function(x){
 }
 
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
-name_anaemia_c5to11 <- function(x){
+find_anaemia_c5to11 <- function(x){
   anaemia_cat_c5to11 <- cut(x,
                             breaks = c(-Inf, 80, 110, 115, Inf),
                             labels = c("severe anaemia", "moderate anaemia",
@@ -501,9 +513,9 @@ name_anaemia_c5to11 <- function(x){
 }
 
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
-name_anaemia_c12to14 <- function(x){
+find_anaemia_c12to14 <- function(x){
   anaemia_cat_c12to14 <- cut(x,
                              breaks = c(-Inf, 80, 110, 120, Inf),
                              labels = c("severe anaemia", "moderate anaemia",
@@ -513,9 +525,9 @@ name_anaemia_c12to14 <- function(x){
 }
 
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
-name_anaemia_nonpreg_women <- function(x){
+find_anaemia_nonpreg_women <- function(x){
   anaemia_cat_nonpreg_women <- cut(x,
                            breaks = c(-Inf, 80, 110, 120, Inf),
                            labels = c("severe anaemia", "moderate anaemia",
@@ -525,9 +537,9 @@ name_anaemia_nonpreg_women <- function(x){
 }
 
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
-name_anaemia_pregnant <- function(x){
+find_anaemia_pregnant <- function(x){
   anaemia_cat_pregnant <- cut(x,
                           breaks = c(-Inf, 70, 100, 110, Inf),
                           labels = c("severe anaemia", "moderate anaemia",
@@ -538,9 +550,9 @@ name_anaemia_pregnant <- function(x){
 
 
 #' @export
-#' @rdname name_anaemia
+#' @rdname find_anaemia
 #'
-name_anaemia_men <- function(x){
+find_anaemia_men <- function(x){
   anaemia_cat_men <- cut(x,
                          breaks = c(-Inf, 80, 110, 130, Inf),
                          labels = c("severe anaemia", "moderate anaemia",

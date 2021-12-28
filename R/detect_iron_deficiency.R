@@ -180,57 +180,59 @@
 #'
 #'  #  Identification of the inflammation status
 #'  ## CRP only
-#'  def_crp(ferritin_sample$crp)
+#'  def_crp(ferritin$crp)
 #'
 #'  ## AGP only
-#'  def_agp(ferritin_sample$agp)
+#'  def_agp(ferritin$agp)
 #'
 #'  ## Both CRP and AGP
-#'  detect_inflammation(ferritin_sample$crp, ferritin_sample$agp)
+#'  detect_inflammation(ferritin$crp, ferritin$agp)
 #'
 #'  #  Ferritin correction
 #'  #  (based on inflammation status and marker protein used in identification)
 #'  ## inflammation identified by CRP only
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- def_crp(ferritin_sample$crp)
-#'  correct_ferritin_crp(ferritin_sample$ferritin, ferritin_sample$inflammation)
+#'  ferritin$inflammation <- def_crp(ferritin$crp)
+#'  correct_ferritin_crp(ferritin$ferritin, ferritin$inflammation)
 #'
 #'  ## inflammation identified by AGP only
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- def_agp(ferritin_sample$agp)
-#'  correct_ferritin_agp(ferritin_sample$ferritin, ferritin_sample$inflammation)
+#'  ferritin$inflammation <- def_agp(ferritin$agp)
+#'  correct_ferritin_agp(ferritin$ferritin, ferritin$inflammation)
 #'
 #'  ## inflammation identified by both CRP and AGP
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- detect_inflammation(
-#'    ferritin_sample$crp, ferritin_sample$agp)
-#'  correct_ferritin(ferritin_sample$ferritin, ferritin_sample$inflammation)
+#'  ferritin$inflammation <- detect_inflammation(ferritin$crp, ferritin$agp)
+#'  correct_ferritin(ferritin$ferritin, ferritin$inflammation)
 #'
 #'  #  Iron storage status identification
 #'  ## Based on inflammation status defined by acute-phase protein
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- def_crp(ferritin_sample$crp)
-#'  ferritin_sample$ferritin_corrected <- correct_ferritin_crp(
-#'    ferritin_sample$ferritin, ferritin_sample$inflammation)
-#'  detect_iron(ferritin_sample$ferritin_corrected, ferritin_sample$age_group)
+#'  ferritin$inflammation <- def_crp(ferritin$crp)
+#'  ferritin$ferritin_corrected <- correct_ferritin_crp(
+#'    ferritin$ferritin, ferritin$inflammation
+#'  )
+#'  detect_iron(ferritin$ferritin_corrected, ferritin$age_group)
 #'
 #'  ## inflammation identified by AGP only
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- def_agp(ferritin_sample$agp)
-#'  ferritin_sample$ferritin_corrected <- correct_ferritin_agp(
-#'    ferritin_sample$ferritin, ferritin_sample$inflammation)
-#'  detect_iron(ferritin_sample$ferritin_corrected, ferritin_sample$age_group)
+#'  ferritin$inflammation <- def_agp(ferritin$agp)
+#'  ferritin$ferritin_corrected <- correct_ferritin_agp(
+#'    ferritin$ferritin, ferritin$inflammation
+#'  )
+#'  detect_iron(ferritin$ferritin_corrected, ferritin$age_group)
 #'
 #'  ## inflammation identified by both CRP and AGP
 #'  ### identify the inflammation status and perform ferritin value correction
-#'  ferritin_sample$inflammation <- detect_inflammation(
-#'    ferritin_sample$crp, ferritin_sample$agp)
-#'  ferritin_sample$ferritin_corrected <- correct_ferritin(
-#'    ferritin_sample$ferritin, ferritin_sample$inflammation)
-#'  detect_iron(ferritin_sample$ferritin_corrected, ferritin_sample$age_group)
+#'  ferritin$inflammation <- detect_inflammation(
+#'    ferritin$crp, ferritin$agp)
+#'  ferritin$ferritin_corrected <- correct_ferritin(
+#'    ferritin$ferritin, ferritin$inflammation
+#'  )
+#'  detect_iron(ferritin$ferritin_corrected, ferritin$age_group)
 #'
 #'  ## Based on the qualitative information of infection or inflammation
-#'  detect_iron_quali(ferritin_sample$ferritin, ferritin_sample$infection)
+#'  detect_iron_quali(ferritin$ferritin, ferritin$infection)
 #'
 #'
 #' @export
@@ -246,42 +248,15 @@
 
 # Both CRP and AGP for different category
 detect_inflammation <- function(crp, agp){
-  # for crp
-  #inflammation_1 <- def_incubation(crp, agp)
-  #inflammation_1 <- ifelse(inflammation_1 == "Incubation", 1, 0)
-
-  # for agp
-  #inflammation_2 <- def_lateconvale(crp, agp)
-  #inflammation_2 <- ifelse(inflammation_2 == "Late Convalescence", 1, 0)
-  #inflammation_2 <- inflammation_2 * 2
-
-  # for crp & agp
-  #inflammation_3 <- def_earlyconvale(crp, agp)
-  #inflammation_3 <- ifelse(inflammation_3 == "Early Convalescence", 1, 0)
-  #inflammation_3 <- inflammation_3 * 3
-
-  # consolidation
-  #inflammation_all <- rowSums(cbind (inflammation_3, inflammation_2,
-  #                                   inflammation_1), na.rm = T)
-
   inflammation <- ifelse(crp <= 5 & agp <= 1, "No Inflammation",
                          ifelse(crp > 5 & agp <= 1, "Incubation",
                                 ifelse(crp <= 5 & agp > 1, "Late Convalescence",
                                        ifelse(crp > 5 & agp > 1,
                                               "Early Convalescence", NA))))
 
-  #inflammation <- ifelse(inflammation_all == 0, "No Inflammation",
-  #                       ifelse(inflammation_all == 1, "Incubation",
-  #                              ifelse(inflammation_all == 2, "Late Convalescence",
-  #                                     ifelse(inflammation_all == 3,
-  #                                            "Early Convalescence", NA))))
-
-  return(inflammation)
+  inflammation
 }
 
-#' @export
-#' @rdname detect_iron
-#'
 
 ################################################################################
 
@@ -294,12 +269,6 @@ detect_inflammation <- function(crp, agp){
 #
 #  return(inflammation)
 #}
-
-#' @export
-#' @rdname detect_iron
-#'
-
-
 # (2) elevated AGP only
 #def_lateconvale <- function(crp, agp){
 #
@@ -308,12 +277,6 @@ detect_inflammation <- function(crp, agp){
 #
 #  return(inflammation)
 #}
-
-#' @export
-#' @rdname detect_iron
-#'
-
-
 # (3) elevated both CRP and AGP
 #def_earlyconvale <- function(crp, agp){
 #
@@ -348,12 +311,10 @@ def_agp <- function(agp){
 
   inflammation <- ifelse(agp > 1, "inflammation", "No Inflammation")
 
-  return(inflammation)
+  ## Return
+  inflammation
 }
 
-#' @export
-#' @rdname detect_iron
-#'
 
 #################################################################################
 
@@ -363,37 +324,42 @@ def_agp <- function(agp){
 
 # Based on the inflammation identified by individual protein
 # (1) inflammation by CRP only
-correct_ferritin_crp <- function(ferritin, inflammation){
-
-  ferritin_corrected <- ifelse(inflammation == "inflammation",
-                               ferritin * 0.65, ferritin)
-
-  return(ferritin_corrected)
-}
 
 #' @export
 #' @rdname detect_iron
 #'
+correct_ferritin_crp <- function(ferritin, inflammation){
+
+  ferritin_corrected <- ifelse(
+    inflammation == "inflammation", ferritin * 0.65, ferritin)
+
+  ## Return
+  ferritin_corrected
+}
 
 
 # (2) inflammation by AGP only
-correct_ferritin_agp <- function(ferritin, inflammation){
-
-  ferritin_corrected <- ifelse(inflammation == "inflammation",
-                               ferritin * 0.72, ferritin)
-
-  return(ferritin_corrected)
-}
 
 #' @export
 #' @rdname detect_iron
 #'
+correct_ferritin_agp <- function(ferritin, inflammation){
+
+  ferritin_corrected <- ifelse(
+    inflammation == "inflammation", ferritin * 0.72, ferritin)
+
+  ## Return
+  ferritin_corrected
+}
 
 
-#################################################################################
+################################################################################
 
 # Based on the different stages of inflammation
 
+#' @export
+#' @rdname detect_iron
+#'
 correct_ferritin <- function(ferritin, inflammation){
 
   ferritin_corrected <- ifelse(inflammation == "Incubation", ferritin * 0.77,
@@ -402,21 +368,22 @@ correct_ferritin <- function(ferritin, inflammation){
                                       ifelse(inflammation == "Early Convalescence",
                                              ferritin * 0.75, ferritin)))
 
-
-  return(ferritin_corrected)
+  ## Return
+  ferritin_corrected
 }
+
+
+################################################################################
+
+################################################################################
+# Iron Storage Identification
+################################################################################
+
+# detection of iron storage status based on corrected ferritin value
 
 #' @export
 #' @rdname detect_iron
 #'
-
-#################################################################################
-
-#################################################################################
-# Iron Storage Identification
-#################################################################################
-
-# detection of iron storage status based on corrected ferritin value
 detect_iron <- function(ferritin_corrected, age_group){
 
   iron_storage <- ifelse((ferritin_corrected < 12 &
@@ -427,17 +394,18 @@ detect_iron <- function(ferritin_corrected, age_group){
                          ifelse(is.na(ferritin_corrected) | is.na(age_group),
                                 NA, "no deficiency"))
 
-  return(iron_storage)
-
+  # Return
+  iron_storage
 }
 
+
+################################################################################
+# detection of iron storage status based on qualitative information on
+# inflammation
 
 #' @export
 #' @rdname detect_iron
 #'
-
-#################################################################################
-# detection of iron storage status based on qualitative information on inflammation
 detect_iron_quali <- function(ferritin, inflammation_quali){
 
   iron_storage <- ifelse(ferritin < 30 & inflammation_quali == 1,
@@ -445,11 +413,8 @@ detect_iron_quali <- function(ferritin, inflammation_quali){
                          ifelse(is.na(ferritin) | is.na(inflammation_quali),
                                 NA, "no deficiency"))
 
-  return(iron_storage)
-
+  ## Return
+  iron_storage
 }
 
-#' @export
-#' @rdname detect_iron
-#'
 

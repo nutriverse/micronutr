@@ -3,11 +3,10 @@
 #'
 #' Serum haemoglobin values for women and children
 #'
-#' This sample dataset (`hbData`) contained 18,487 observations and 9 variables.
-#' The detailed variable's description are mentioned in the following table.
+#' This sample dataset contains 18,487 observations and 9 variables and is
+#' described below.
 #'
 #' @format A data frame with 9 columns and 18487 rows.
-#'
 #'
 #' **Variables** | **Description**
 #' :--- | :---
@@ -21,15 +20,15 @@
 #' *hb* | Haemoglobin values (g/L)
 #' *altitude* | Altitude of sampling location above sea level (metres)
 #'
-#' @source will update later!
+#' @source From a micronutrient survey in a country in East Africa
 #'
 #' @examples
-#' # explore the first 6 observations from the dataset
-#' head(hbData)
+#' # explore the first 20 observations from the dataset
+#' head(haemoglobin, 20)
 #'
 #
 ################################################################################
-"hbData"
+"haemoglobin"
 
 
 ################################################################################
@@ -37,11 +36,9 @@
 #'
 #' Urinary iodine (μg/L) values for women and children
 #'
-#' This sample dataset (`iodine_sample`) contained 312 observations and 8 variables.
-#' The detailed variable's description are mentioned in the following table.
+#' This sample dataset contains 312 observations and 8 variables.
 #'
 #' @format A data frame with 8 columns and 312 rows.
-#'
 #'
 #' **Variables** | **Description**
 #' :--- | :---
@@ -54,27 +51,24 @@
 #' *group* | Group classification
 #' *iodine* | Urinary iodine (μg/L) values
 #'
-#' @source will update later!
+#' @source From a micronutrient survey in a country in East Africa
 #'
 #' @examples
-#' # explore the first 6 observations from the dataset
-#' head(iodine_sample)
+#' # explore the first 20 observations from the dataset
+#' head(iodine, 20)
 #'
 #
 ################################################################################
-"iodine_sample"
+"iodine"
 
 ################################################################################
 #
 #'
 #' Serum ferritin (µg/l) level sample dataset
 #'
-#' This sample dataset (`ferritin_sample`) contained 19449 observations and
-#' 10 variables. The detailed variable's description are mentioned in the
-#' following table.
+#' This sample dataset contains 19449 observations and 10 variables.
 #'
 #' @format A data frame with 10 columns and 19449 rows.
-#'
 #'
 #' **Variables** | **Description**
 #' :--- | :---
@@ -90,13 +84,13 @@
 #' *agp* | acute phase response proteine: α1-acid-glycoprotein (AGP) value (g/L)
 #' *age_group* | indicate study population (Under 5 or over 5 years old)
 #'
-#' @source will update later!
+#' @source From a micronutrient survey in a country in East Africa
 #'
 #' @examples
-#' # explore the first 6 observations from the dataset
-#' head(ferritin_sample)
+#' # explore the first 20 observations from the dataset
+#' head(ferritin, 20)
 #'
 #
 ################################################################################
-"ferritin_sample"
+"ferritin"
 
