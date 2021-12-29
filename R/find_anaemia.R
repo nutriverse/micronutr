@@ -395,10 +395,10 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'    | Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
 #'    | Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
 #'    | Non-pregnant women |  |  |  |
-#'    | (15 years and above) | 110 - 119	| 80 - 109 | < 80 |
-#'    |Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
+#'    | 15 years and above | 110 - 119	| 80 - 109 | < 80 |
+#'    | Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
 #'    |Men |  |  |  |
-#'    |(15 years and above) |	110 - 129 |	80 - 109 |	< 80 |
+#'    | 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #'
 #' @return A data frame with the same structure as `df` is named

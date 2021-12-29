@@ -69,10 +69,10 @@ explains the cut-off points applied in this diagnostic function.\tabular{llll}{
    Children 5-11 years of age \tab 110 - 114 \tab 80 - 109 \tab < 80 \cr
    Children 12-14 years of age \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
    Non-pregnant women \tab  \tab  \tab  \cr
-   (15 years and above) \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
+   15 years and above \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
    Pregnant women \tab 100 - 109 \tab 70 - 99 \tab < 70 \cr
    Men \tab  \tab  \tab  \cr
-   (15 years and above) \tab 110 - 129 \tab 80 - 109 \tab < 80 \cr
+   15 years and above \tab 110 - 129 \tab 80 - 109 \tab < 80 \cr
 }}
 
 \item{x}{a vector which contains haemoglobin value in grams per litre (g/L)
