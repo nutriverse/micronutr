@@ -208,8 +208,6 @@ flag_anaemia <- function(df,
   anaemia
 }
 
-
-
 ################################################################################
 # alternated function using cut
 ################################################################################
@@ -325,7 +323,7 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 
 
 ################################################################################
-# alternated function using cut
+# alternatiove function using cut
 # and using separate function for different target group
 ################################################################################
 
@@ -343,7 +341,7 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #' For individual target group function;
 #'
 #' @param x a vector which contains haemoglobin value in grams per litre (g/L)
-#'    unit format. The following table provide the specific commend based on the
+#'    unit format. The following table provide the specific command based on the
 #'    respective individual sample group.
 #'
 #'    | **Population** | **Commend** |
@@ -357,31 +355,33 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'
 #' For overall population function;
 #'
-#' @param df Survey dataset (as an R data.frame) with the present of haemoglobin
-#'    value variable.
-#' @param hb Sample observation's haemoglobin level from the dataset. The Hb
-#'    values should record in the grams per liter (g/L) units.
-#' @param group This is the vector of the specific population target group you
-#'    want to include in identifying anaemia in the overall population function.
-#'    In this `name_anameia` package, the function can determine the anaemia
-#'    status of the following groups, and you need to mention them in vector
+#' @param df A data.frame of survey dataset with information on haemoglobin
+#'   value and information on population group to which the sample comes from.
+#' @param hb A characater value specifying the variable name in `df` containing
+#'   the sample observation's haemoglobin level. Note that the haemoglobin
+#'   values should be recorded in grams per liter (g/L) units.
+#' @param group A vector of the specific population target groups to be included
+#'   in identifying anaemia. The function can determine the anaemia status for
+#'   the following groups:
+#'
+#'   | **Population** | **Function recognized short-form** |
+#'   | :--- | :--- |
+#'   | Children 6-59 months of age |	"u5" |
+#'   | Children 5-11 years of age |	"c5to11" |
+#'   | Children 12-14 years of age	| "u11to14" |
+#'   | Non-pregnant women (15 years and above) | "nonpreg_women" |
+#'   | Pregnant women	| "pregnant" |
+#'   | Men - 15 years and above |	"men" |
+#'
+#'   The short-form indicates you need to mention them in vector
 #'    format depend on which sample groups of population include in your
 #'    dataset. Please use the following short-form of each target name in
 #'    construction your vector. If not, the commend will not recognize
 #'    the function.
 #'
-#'    | **Population** | **Function recognized Short-form** |
-#'    | :--- | :--- |
-#'    | Children 6-59 months of age |	"u5" |
-#'    | Children 5-11 years of age |	"c5to11" |
-#'    | Children 12-14 years of age	| "u11to14" |
-#'    | Non-pregnant women (15 years and above) | "nonpreg_women" |
-#'    | Pregnant women	| "pregnant" |
-#'    | Men (15 years and above) |	"men" |
-#'
 #'    if the dataset did not include this variable yet, please create one before
 #'    using this function. Sample r code for generating this variable is
-#'    mentioned below using the sample dataset `hbData`.
+#'    mentioned below using the sample dataset `haemoglobin`.
 #' @param add This parameter's default option is TRUE and will add new
 #'    generated variables `anaemia_all` to your existing dataset applied in
 #'    this function. This newly developed categorical variable comprises three
@@ -401,10 +401,10 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'    | 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #'
-#' @return A data frame with the same structure as `df` is named
-#'    `anaemia`. In this new data.frame, the new variable `anaemia_all` can be
-#'    observed, containing the information which observation was affected by
-#'    what type of anaemia: mild, moderate, or severe.
+#' @return A data frame with the same structure as `df`. In this new data.frame,
+#'   the new variable `anaemia_all` can be observed, containing the information
+#'   which observation was affected by what type of anaemia: mild, moderate, or
+#'   severe.
 #'
 #' @examples
 #'  # Create testing data
@@ -433,7 +433,6 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'
 #' @export
 #' @rdname find_anaemia
-#'
 #'
 #
 ################################################################################
