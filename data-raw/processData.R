@@ -32,7 +32,7 @@ ferritin$agp <- round(
   ), 1
 )
 
-ferritin$agp[ferritin$agp > 9 & ferritin$agp < 11] <- "NA"
+ferritin$agp[ferritin$agp > 9 & ferritin$agp < 11] <- NA
 ferritin$age_group <- factor(
   ifelse(
     !is.na(ferritin$m.age),
