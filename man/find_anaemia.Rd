@@ -123,9 +123,7 @@ For individual target group function;
 
  # For overall population function;
   find_anaemia(df = df,
-               hb = hb,
-               group = c("u5", "5to11", "12to14", "nonpreg_women",
-                       "pregnant", "men"),
+               hb = "hb",
                add = TRUE)
 
 }

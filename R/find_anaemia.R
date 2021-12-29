@@ -420,9 +420,7 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'
 #'  # For overall population function;
 #'   find_anaemia(df = df,
-#'                hb = hb,
-#'                group = c("u5", "5to11", "12to14", "nonpreg_women",
-#'                        "pregnant", "men"),
+#'                hb = "hb",
 #'                add = TRUE)
 #'
 #' @export
@@ -436,67 +434,88 @@ find_anaemia <- function(df,
                                    "np_women", "pregnant", "men"),
                          hb = NULL,
                          add = TRUE) {
-  ## Create concatenating data.frame
-  anaemia <- data.frame(matrix(nrow = nrow(df), ncol = length(group)))
-  names(anaemia) <- paste("anaemia", group, sep = "_")
-
   ## Determine haemoglobin variable if hb = NULL
-  #if (is.null(hb)) {
-  #  hb <- grep(
-  #    pattern = "hb|HB|Hb|hem|Hemoglobin|HEMOGLOBIN|haemoglobin|Haemoglobin|HAEMOGLOBIN",
-  #    x = names(df),
-  #    value = TRUE)
+  if (is.null(hb)) {
+    hb <- grep(
+      pattern = "hb|HB|Hb|hem|
+                 Hemoglobin|HEMOGLOBIN|
+                 haemoglobin|Haemoglobin|HAEMOGLOBIN",
+      x = names(df),
+      value = TRUE)
 
-  #  if (length(hb) == 0) {
-  #
-#
-  #  }
-  #}
+    if (length(hb) == 0) {
+      stop("Variable for haemoglobin values not found. Please specify hb.")
+    }
+
+    if (length(hb) > 1) {
+      hb <- hb[1]
+      warning("More than one variable for haemoglobin values found. Will use
+              the first one found")
+    }
+  } else {
+    hb <- grep(pattern = hb, x = names(df), fixed = TRUE, value = TRUE)
+    if (length(hb) == 0) {
+      stop("Variable name provided for haemoglobin values cannot be found.
+           Please check and try again.")
+    }
+  }
+
+  ## Check that hb are numeric values
+  if (class(df[[hb]]) != "numeric") {
+    stop("Haemoglobin values must be numeric.")
+  }
+
+  ## Get group
+  group <- match.arg(group)
 
   # U5 children
-  if ("u5" %in% group) {
-    anaemia$anaemia_u5 <- find_anaemia_u5(df$hb)
+  if (group == "u5") {
+    anaemia_status <- find_anaemia_u5(df[[hb]])
   }
 
   # Children 5 - 11 years
-  if ("5to11" %in% group) {
-    anaemia$anaemia_5to11 <- find_anaemia_5to11(df$hb)
+  if (group == "5to11") {
+    anaemia_status <- find_anaemia_5to11(df[[hb]])
 
   }
 
   # Children 12 - 14 years
-  if ("12to14" %in% group) {
-    anaemia$anaemia_12to14 <- find_anaemia_12to14(df$hb)
+  if (group == "12to14") {
+    anaemia_status <- find_anaemia_12to14(df[[hb]])
   }
 
   # Non-pregnant Women
-  if ("np_women" %in% group) {
-    anaemia$anaemia_np_women <- find_anaemia_np_women(df$hb)
+  if (group == "np_women") {
+    anaemia_status <- find_anaemia_np_women(df[[hb]])
   }
 
   # Pregnant Women
-  if ("pregnant" %in% group) {
-    anaemia$anaemia_pregnant <- find_anaemia_pregnant(df$hb)
+  if (group == "pregnant") {
+    anaemia_status <- find_anaemia_pregnant(df[[hb]])
   }
 
   # Men
-  if ("men" %in% group) {
-    anaemia$anaemia_men <- find_anaemia_men(df$hb)
+  if (group == "men") {
+    anaemia_status <- find_anaemia_men(df[[hb]])
   }
 
-  ##
-  if(add) {
-    anaemia <- data.frame(df, anaemia)
+  ## Add anaemia to df?
+  if (add) {
+    anaemia <- data.frame(df, anaemia_status)
   }
 
+  ## Return
   return(anaemia)
 }
 
 
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_u5 <- function(x) {
   anaemia_cat_u5 <- cut(
     x, breaks = c(-Inf, 70, 100, 110, Inf),
@@ -509,10 +528,14 @@ find_anaemia_u5 <- function(x) {
   anaemia_cat_u5
 }
 
+
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_5to11 <- function(x) {
   anaemia_cat_5to11 <- cut(
     x, breaks = c(-Inf, 80, 110, 115, Inf),
@@ -525,10 +548,14 @@ find_anaemia_5to11 <- function(x) {
   anaemia_cat_5to11
 }
 
+
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_12to14 <- function(x) {
   anaemia_cat_12to14 <- cut(
     x, breaks = c(-Inf, 80, 110, 120, Inf),
@@ -541,10 +568,14 @@ find_anaemia_12to14 <- function(x) {
   anaemia_cat_12to14
 }
 
+
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_np_women <- function(x) {
   anaemia_cat_np_women <- cut(
     x, breaks = c(-Inf, 80, 110, 120, Inf),
@@ -557,10 +588,14 @@ find_anaemia_np_women <- function(x) {
   anaemia_cat_np_women
 }
 
+
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_pregnant <- function(x) {
   anaemia_cat_pregnant <- cut(
     x, breaks = c(-Inf, 70, 100, 110, Inf),
@@ -573,10 +608,14 @@ find_anaemia_pregnant <- function(x) {
   anaemia_cat_pregnant
 }
 
+
+################################################################################
 #
 #' @export
 #' @rdname find_anaemia
 #
+################################################################################
+
 find_anaemia_men <- function(x) {
   anaemia_cat_men <- cut(
     x, breaks = c(-Inf, 80, 110, 130, Inf),

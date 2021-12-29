@@ -48,9 +48,7 @@ test_that("The output vector has same non - `NA` value", {
 
 # data.frame
 anaemia <-  find_anaemia(df = df,
-                         hb = hb,
-                         group = c("u5", "5to11", "12to14", "np_women",
-                                   "pregnant", "men"),
+                         hb = "hb",
                          add = TRUE)
 
 
@@ -60,37 +58,41 @@ test_that("The output result is a `data.frame`", {
 
 
 test_that("The output data.frame has correct column's names", {
-  expect_named(anaemia, c("gender",
-                          "hb",
-                          "anaemia_u5",
-                          "anaemia_5to11",
-                          "anaemia_12to14",
-                          "anaemia_np_women",
-                          "anaemia_pregnant",
-                          "anaemia_men"))
+  expect_named(anaemia, c("gender", "hb", "anaemia_status"))
 })
 
 
-test_that("The output data.frame additional columns has correct variable type", {
-
-  expect_s3_class(anaemia$anaemia_u5, "factor")
-  expect_s3_class(anaemia$anaemia_5to11, "factor")
-  expect_s3_class(anaemia$anaemia_12to14, "factor")
-  expect_s3_class(anaemia$anaemia_np_women, "factor")
-  expect_s3_class(anaemia$anaemia_pregnant, "factor")
-  expect_s3_class(anaemia$anaemia_men, "factor")
-
+test_that("Additional columns has correct variable type", {
+  expect_s3_class(anaemia$anaemia_status, "factor")
 })
 
 
 test_that("The output `data.frame` varaibles has same `NA` value", {
+  expect_equal(sum(!is.na(anaemia$anaemia_status)), sum(!is.na(df$hb)))
+})
 
-  expect_equal(sum(!is.na(anaemia$anaemia_u5)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_5to11)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_12to14)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_np_women)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_pregnant)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_men)), sum(!is.na(df$hb)))
+## Test errors and warnings
+
+# sample data.frame
+hb <- runif(50, min = 60, max = 130)
+gender <- rep(c("male", "female"), each = 25)
+
+df <- data.frame(gender, hb)
+
+test_that("Errors and warnings are working", {
+  expect_error(find_anaemia(df = df, hb = "Hb", add = TRUE))
+})
+
+df <- data.frame(gender, Hb = hb, hb = hb)
+
+test_that("Errors and warnings are working", {
+  expect_warning(find_anaemia(df = df, add = TRUE))
+})
+
+df <- data.frame(gender, v1 = hb)
+
+test_that("Errors and warnings are working", {
+  expect_error(find_anaemia(df = df, add = TRUE))
 })
 
 
