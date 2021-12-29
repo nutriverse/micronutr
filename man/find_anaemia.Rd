@@ -8,7 +8,7 @@
 \alias{find_anaemia_np_women}
 \alias{find_anaemia_pregnant}
 \alias{find_anaemia_men}
-\title{Anaemia Diagnosis}
+\title{Determine anaemia status for various population groups}
 \usage{
 find_anaemia(
   df,
@@ -33,35 +33,32 @@ find_anaemia_men(x)
 \item{df}{A data.frame of survey dataset with information on haemoglobin
 value and information on population group to which the sample comes from.}
 
-\item{group}{A vector of the specific population target groups to be included
+\item{group}{A vector of the specific population target group to be included
 in identifying anaemia. The function can determine the anaemia status for
 the following groups:\tabular{ll}{
    \strong{Population} \tab \strong{Function recognized short-form} \cr
    Children 6-59 months of age \tab "u5" \cr
    Children 5-11 years of age \tab "5to11" \cr
    Children 12-14 years of age \tab "11to14" \cr
-   Non-pregnant women (15 years and above) \tab "np_women" \cr
+   Non-pregnant women - 15 years and above \tab "np_women" \cr
    Pregnant women \tab "pregnant" \cr
    Men - 15 years and above \tab "men" \cr
 }
 
 
-The short-form indicates you need to mention them in vector
-format depend on which sample groups of population include in your
-dataset. Please use the following short-form of each target name in
-construction your vector. If not, the commend will not recognize
-the function.
-
-if the dataset did not include this variable yet, please create one before
-using this function. Sample r code for generating this variable is
-mentioned below using the sample dataset \code{haemoglobin}.}
+The short-form is used in the function to indicate which population group
+to find anaemia from.}
 
 \item{hb}{A characater value specifying the variable name in \code{df} containing
 the sample observation's haemoglobin level. Note that the haemoglobin
-values should be recorded in grams per liter (g/L) units.}
+values should be recorded in grams per liter (g/L) units.
+If NULL (default), will attempt to find variable in \code{df} that is
+likely to hold the haemoglobin levels information by searching for most
+common variable names used for haemoglobin. If none can be found, will
+issue an error that appropriate haemoglobin values cannot be found.}
 
 \item{add}{This parameter's default option is TRUE and will add new
-generated variables \code{anaemia_all} to your existing dataset applied in
+generated variable \code{anaemia_all} to your existing dataset applied in
 this function. This newly developed categorical variable comprises three
 types of flag categories resulting from data checking results; no anaemia,
 mild anaemia, moderate anaemia, and severe anaemia. The following table
@@ -77,20 +74,20 @@ explains the cut-off points applied in this diagnostic function.\tabular{llll}{
    15 years and above \tab 110 - 129 \tab 80 - 109 \tab < 80 \cr
 }}
 
-\item{x}{a vector which contains haemoglobin value in grams per litre (g/L)
-unit format for a specific population group. The following table provides
-the specific command based on the respective population group.\tabular{ll}{
+\item{x}{A numeric vector containing haemoglobin values in grams per litre
+(g/L) unit format for a specific population group. The following table
+provides the specific command based on the respective population group.\tabular{ll}{
    \strong{Population} \tab \strong{Command} \cr
    Children 6-59 months of age \tab find_anaemia_u5 \cr
    Children 5-11 years of age \tab find_anaemia_5to11 \cr
    Children 12-14 years of age \tab find_anaemia_11to14 \cr
-   Non-pregnant women (15 years and above) \tab find_anaemia_np_women \cr
+   Non-pregnant women - 15 years and above \tab find_anaemia_np_women \cr
    Pregnant women \tab find_anaemia_pregnant \cr
-   Men (15 years and above) \tab find_anaemia_men \cr
+   Men - 15 years and above \tab find_anaemia_men \cr
 }
 
 
-For overall population function;}
+For overall population function:}
 }
 \value{
 A data frame with the same structure as \code{df}. In this new data.frame,
@@ -99,14 +96,11 @@ which observation was affected by what type of anaemia: mild, moderate, or
 severe.
 }
 \description{
-Perform anaemia diagnosis based on specific target sample groups (age, sex
-and pregnancy status)
+This set of functions identifies anaemia in both individual-specific target
+groups and the overall population, which includes all target groups'
+functions.
 }
 \details{
-This package was designed to provide the functions for identifying anaemia
-in both individual-specific target groups and the overall population, which
-includes all target groups' functions.
-
 For individual target group function;
 }
 \examples{

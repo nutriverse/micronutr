@@ -329,38 +329,39 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 
 ################################################################################
 #
-#' Anaemia Diagnosis
+#' Determine anaemia status for various population groups
 #'
-#' Perform anaemia diagnosis based on specific target sample groups (age, sex
-#' and pregnancy status)
-#'
-#' This package was designed to provide the functions for identifying anaemia
-#' in both individual-specific target groups and the overall population, which
-#' includes all target groups' functions.
+#' This set of functions identifies anaemia in both individual-specific target
+#' groups and the overall population, which includes all target groups'
+#' functions.
 #'
 #' For individual target group function;
 #'
-#' @param x a vector which contains haemoglobin value in grams per litre (g/L)
-#'    unit format for a specific population group. The following table provides
-#'    the specific command based on the respective population group.
+#' @param x A numeric vector containing haemoglobin values in grams per litre
+#'   (g/L) unit format for a specific population group. The following table
+#'   provides the specific command based on the respective population group.
 #'
-#'    | **Population** | **Command** |
-#'    | :--- | :--- |
-#'    | Children 6-59 months of age |	find_anaemia_u5 |
-#'    | Children 5-11 years of age |	find_anaemia_5to11 |
-#'    | Children 12-14 years of age	| find_anaemia_11to14 |
-#'    | Non-pregnant women (15 years and above) | find_anaemia_np_women |
-#'    | Pregnant women	| find_anaemia_pregnant |
-#'    | Men (15 years and above) |	find_anaemia_men |
+#'   | **Population** | **Command** |
+#'   | :--- | :--- |
+#'   | Children 6-59 months of age | find_anaemia_u5 |
+#'   | Children 5-11 years of age | find_anaemia_5to11 |
+#'   | Children 12-14 years of age | find_anaemia_11to14 |
+#'   | Non-pregnant women - 15 years and above | find_anaemia_np_women |
+#'   | Pregnant women	| find_anaemia_pregnant |
+#'   | Men - 15 years and above |	find_anaemia_men |
 #'
-#' For overall population function;
+#' For overall population function:
 #'
 #' @param df A data.frame of survey dataset with information on haemoglobin
 #'   value and information on population group to which the sample comes from.
 #' @param hb A characater value specifying the variable name in `df` containing
 #'   the sample observation's haemoglobin level. Note that the haemoglobin
 #'   values should be recorded in grams per liter (g/L) units.
-#' @param group A vector of the specific population target groups to be included
+#'   If NULL (default), will attempt to find variable in `df` that is
+#'   likely to hold the haemoglobin levels information by searching for most
+#'   common variable names used for haemoglobin. If none can be found, will
+#'   issue an error that appropriate haemoglobin values cannot be found.
+#' @param group A vector of the specific population target group to be included
 #'   in identifying anaemia. The function can determine the anaemia status for
 #'   the following groups:
 #'
@@ -369,37 +370,30 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   | Children 6-59 months of age |	"u5" |
 #'   | Children 5-11 years of age |	"5to11" |
 #'   | Children 12-14 years of age	| "11to14" |
-#'   | Non-pregnant women (15 years and above) | "np_women" |
+#'   | Non-pregnant women - 15 years and above | "np_women" |
 #'   | Pregnant women	| "pregnant" |
 #'   | Men - 15 years and above |	"men" |
 #'
-#'   The short-form indicates you need to mention them in vector
-#'    format depend on which sample groups of population include in your
-#'    dataset. Please use the following short-form of each target name in
-#'    construction your vector. If not, the commend will not recognize
-#'    the function.
+#'   The short-form is used in the function to indicate which population group
+#'   to find anaemia from.
 #'
-#'    if the dataset did not include this variable yet, please create one before
-#'    using this function. Sample r code for generating this variable is
-#'    mentioned below using the sample dataset `haemoglobin`.
 #' @param add This parameter's default option is TRUE and will add new
-#'    generated variables `anaemia_all` to your existing dataset applied in
-#'    this function. This newly developed categorical variable comprises three
-#'    types of flag categories resulting from data checking results; no anaemia,
-#'     mild anaemia, moderate anaemia, and severe anaemia. The following table
-#'     explains the cut-off points applied in this diagnostic function.
+#'   generated variable `anaemia_all` to your existing dataset applied in
+#'   this function. This newly developed categorical variable comprises three
+#'   types of flag categories resulting from data checking results; no anaemia,
+#'   mild anaemia, moderate anaemia, and severe anaemia. The following table
+#'   explains the cut-off points applied in this diagnostic function.
 #'
-#'    | **Population** | **Mild** |	**Moderate** | **Severe** |
-#'    | :--- | :--- | :--- | :--- |
-#'    | Children 6-59 months of age |	100 - 109 |	70 - 99 |	< 70 |
-#'    | Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
-#'    | Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
-#'    | Non-pregnant women |  |  |  |
-#'    | 15 years and above | 110 - 119	| 80 - 109 | < 80 |
-#'    | Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
-#'    |Men |  |  |  |
-#'    | 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
-#'
+#'   | **Population** | **Mild** |	**Moderate** | **Severe** |
+#'   | :--- | :--- | :--- | :--- |
+#'   | Children 6-59 months of age |	100 - 109 |	70 - 99 |	< 70 |
+#'   | Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
+#'   | Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
+#'   | Non-pregnant women |  |  |  |
+#'   | 15 years and above | 110 - 119	| 80 - 109 | < 80 |
+#'   | Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
+#'   |Men |  |  |  |
+#'   | 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
 #'
 #' @return A data frame with the same structure as `df`. In this new data.frame,
 #'   the new variable `anaemia_all` can be observed, containing the information
@@ -442,8 +436,22 @@ find_anaemia <- function(df,
                                    "np_women", "pregnant", "men"),
                          hb = NULL,
                          add = TRUE) {
+  ## Create concatenating data.frame
   anaemia <- data.frame(matrix(nrow = nrow(df), ncol = length(group)))
   names(anaemia) <- paste("anaemia", group, sep = "_")
+
+  ## Determine haemoglobin variable if hb = NULL
+  #if (is.null(hb)) {
+  #  hb <- grep(
+  #    pattern = "hb|HB|Hb|hem|Hemoglobin|HEMOGLOBIN|haemoglobin|Haemoglobin|HAEMOGLOBIN",
+  #    x = names(df),
+  #    value = TRUE)
+
+  #  if (length(hb) == 0) {
+  #
+#
+  #  }
+  #}
 
   # U5 children
   if ("u5" %in% group) {
