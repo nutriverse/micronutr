@@ -296,20 +296,35 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
     anaemia_all <- ifelse(pop_group == 1 | pop_group == 5,
                           cut(df$hb,
                               breaks = c(-Inf, 70, 99, 109, Inf),
-                              labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                              labels = c("severe anaemia",
+                                         "moderate anaemia",
+                                         "mild anaemia",
+                                         "no anaemia")),
                           ifelse(pop_group == 3 | pop_group == 4,
                                  cut(df$hb,
                                      breaks = c(-Inf, 80, 109, 119, Inf),
-                                     labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                                     labels = c("severe anaemia",
+                                                "moderate anaemia",
+                                                "mild anaemia",
+                                                "no anaemia")),
                                  ifelse(pop_group == 2,
                                         cut(df$hb,
                                             breaks = c(-Inf, 80, 109, 114, Inf),
-                                            labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
+                                            labels = c("severe anaemia",
+                                                       "moderate anaemia",
+                                                       "mild anaemia",
+                                                       "no anaemia")),
                                         ifelse(pop_group == 6,
                                                cut(df$hb,
                                                    breaks = c(-Inf, 80, 109, 129, Inf),
-                                                   labels = c("severe anaemia", "moderate anaemia", "mild anaemia", "no anaemia")),
-                                               NA))))
+                                                   labels = c("severe anaemia",
+                                                              "moderate anaemia",
+                                                              "mild anaemia",
+                                                              "no anaemia")),
+                                               NA)
+                                        )
+                                 )
+                          )
   }
 
   ##
@@ -335,8 +350,6 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #' groups and the overall population, which includes all target groups'
 #' functions.
 #'
-#' For individual target group function;
-#'
 #' @param x A numeric vector containing haemoglobin values in grams per litre
 #'   (g/L) unit format for a specific population group. The following table
 #'   provides the specific command based on the respective population group.
@@ -350,8 +363,6 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   | Pregnant women	| find_anaemia_pregnant |
 #'   | Men - 15 years and above |	find_anaemia_men |
 #'
-#' For overall population function:
-#'
 #' @param df A data.frame of survey dataset with information on haemoglobin
 #'   value and information on population group to which the sample comes from.
 #' @param hb A characater value specifying the variable name in `df` containing
@@ -361,11 +372,11 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   likely to hold the haemoglobin levels information by searching for most
 #'   common variable names used for haemoglobin. If none can be found, will
 #'   issue an error that appropriate haemoglobin values cannot be found.
-#' @param group A vector of the specific population target group to be included
-#'   in identifying anaemia. The function can determine the anaemia status for
+#' @param group A character value specifying the population target group to
+#'   identify anaemia from. The function can determine the anaemia status for
 #'   the following groups:
 #'
-#'   | **Population** | **Function recognized short-form** |
+#'   | **Population** | **Short-form** |
 #'   | :--- | :--- |
 #'   | Children 6-59 months of age |	"u5" |
 #'   | Children 5-11 years of age |	"5to11" |
@@ -377,12 +388,15 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   The short-form is used in the function to indicate which population group
 #'   to find anaemia from.
 #'
-#' @param add This parameter's default option is TRUE and will add new
-#'   generated variable `anaemia_all` to your existing dataset applied in
-#'   this function. This newly developed categorical variable comprises three
-#'   types of flag categories resulting from data checking results; no anaemia,
-#'   mild anaemia, moderate anaemia, and severe anaemia. The following table
-#'   explains the cut-off points applied in this diagnostic function.
+#' @param add Logical. Should anaemia classification results be added to `df`?
+#'   Default to TRUE which will add a variable named `anaemia_status` to `df`.
+#'
+#' @return If `add` is TRUE, a data frame with the same structure as `df` and
+#'   with a new variable `anaemia_status` otherise a vector of class factor.
+#'   The new variable or the resulting vector provides anaemia categories
+#'   to each observation: *no anaemia*, *mild anaemia*, *moderate anaemia*, and
+#'   *severe anaemia*. The following table explains the cut-off points to
+#'   classify each observation accordingly:
 #'
 #'   | **Population** | **Mild** |	**Moderate** | **Severe** |
 #'   | :--- | :--- | :--- | :--- |
@@ -394,11 +408,6 @@ flag_anaemia_2 <- function(df, pop_group = NULL, hb = NULL, add = TRUE) {
 #'   | Pregnant women	| 100 - 109	| 70 - 99	| < 70 |
 #'   |Men |  |  |  |
 #'   | 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
-#'
-#' @return A data frame with the same structure as `df`. In this new data.frame,
-#'   the new variable `anaemia_all` can be observed, containing the information
-#'   which observation was affected by what type of anaemia: mild, moderate, or
-#'   severe.
 #'
 #' @examples
 #'  # Create testing data
@@ -468,36 +477,10 @@ find_anaemia <- function(df,
   ## Get group
   group <- match.arg(group)
 
-  # U5 children
-  if (group == "u5") {
-    anaemia_status <- find_anaemia_u5(df[[hb]])
-  }
-
-  # Children 5 - 11 years
-  if (group == "5to11") {
-    anaemia_status <- find_anaemia_5to11(df[[hb]])
-
-  }
-
-  # Children 12 - 14 years
-  if (group == "12to14") {
-    anaemia_status <- find_anaemia_12to14(df[[hb]])
-  }
-
-  # Non-pregnant Women
-  if (group == "np_women") {
-    anaemia_status <- find_anaemia_np_women(df[[hb]])
-  }
-
-  # Pregnant Women
-  if (group == "pregnant") {
-    anaemia_status <- find_anaemia_pregnant(df[[hb]])
-  }
-
-  # Men
-  if (group == "men") {
-    anaemia_status <- find_anaemia_men(df[[hb]])
-  }
+  ## Determine anaemia status
+  anaemia_status <- eval(
+    expr = parse(text = paste0("find_anaemia_", group, "(df[[hb]])"))
+  )
 
   ## Add anaemia to df?
   if (add) {

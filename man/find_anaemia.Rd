@@ -33,10 +33,10 @@ find_anaemia_men(x)
 \item{df}{A data.frame of survey dataset with information on haemoglobin
 value and information on population group to which the sample comes from.}
 
-\item{group}{A vector of the specific population target group to be included
-in identifying anaemia. The function can determine the anaemia status for
+\item{group}{A character value specifying the population target group to
+identify anaemia from. The function can determine the anaemia status for
 the following groups:\tabular{ll}{
-   \strong{Population} \tab \strong{Function recognized short-form} \cr
+   \strong{Population} \tab \strong{Short-form} \cr
    Children 6-59 months of age \tab "u5" \cr
    Children 5-11 years of age \tab "5to11" \cr
    Children 12-14 years of age \tab "11to14" \cr
@@ -57,22 +57,8 @@ likely to hold the haemoglobin levels information by searching for most
 common variable names used for haemoglobin. If none can be found, will
 issue an error that appropriate haemoglobin values cannot be found.}
 
-\item{add}{This parameter's default option is TRUE and will add new
-generated variable \code{anaemia_all} to your existing dataset applied in
-this function. This newly developed categorical variable comprises three
-types of flag categories resulting from data checking results; no anaemia,
-mild anaemia, moderate anaemia, and severe anaemia. The following table
-explains the cut-off points applied in this diagnostic function.\tabular{llll}{
-   \strong{Population} \tab \strong{Mild} \tab \strong{Moderate} \tab \strong{Severe} \cr
-   Children 6-59 months of age \tab 100 - 109 \tab 70 - 99 \tab < 70 \cr
-   Children 5-11 years of age \tab 110 - 114 \tab 80 - 109 \tab < 80 \cr
-   Children 12-14 years of age \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
-   Non-pregnant women \tab  \tab  \tab  \cr
-   15 years and above \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
-   Pregnant women \tab 100 - 109 \tab 70 - 99 \tab < 70 \cr
-   Men \tab  \tab  \tab  \cr
-   15 years and above \tab 110 - 129 \tab 80 - 109 \tab < 80 \cr
-}}
+\item{add}{Logical. Should anaemia classification results be added to \code{df}?
+Default to TRUE which will add a variable named \code{anaemia_status} to \code{df}.}
 
 \item{x}{A numeric vector containing haemoglobin values in grams per litre
 (g/L) unit format for a specific population group. The following table
@@ -84,24 +70,30 @@ provides the specific command based on the respective population group.\tabular{
    Non-pregnant women - 15 years and above \tab find_anaemia_np_women \cr
    Pregnant women \tab find_anaemia_pregnant \cr
    Men - 15 years and above \tab find_anaemia_men \cr
-}
-
-
-For overall population function:}
+}}
 }
 \value{
-A data frame with the same structure as \code{df}. In this new data.frame,
-the new variable \code{anaemia_all} can be observed, containing the information
-which observation was affected by what type of anaemia: mild, moderate, or
-severe.
+If \code{add} is TRUE, a data frame with the same structure as \code{df} and
+with a new variable \code{anaemia_status} otherise a vector of class factor.
+The new variable or the resulting vector provides anaemia categories
+to each observation: \emph{no anaemia}, \emph{mild anaemia}, \emph{moderate anaemia}, and
+\emph{severe anaemia}. The following table explains the cut-off points to
+classify each observation accordingly:\tabular{llll}{
+   \strong{Population} \tab \strong{Mild} \tab \strong{Moderate} \tab \strong{Severe} \cr
+   Children 6-59 months of age \tab 100 - 109 \tab 70 - 99 \tab < 70 \cr
+   Children 5-11 years of age \tab 110 - 114 \tab 80 - 109 \tab < 80 \cr
+   Children 12-14 years of age \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
+   Non-pregnant women \tab  \tab  \tab  \cr
+   15 years and above \tab 110 - 119 \tab 80 - 109 \tab < 80 \cr
+   Pregnant women \tab 100 - 109 \tab 70 - 99 \tab < 70 \cr
+   Men \tab  \tab  \tab  \cr
+   15 years and above \tab 110 - 129 \tab 80 - 109 \tab < 80 \cr
+}
 }
 \description{
 This set of functions identifies anaemia in both individual-specific target
 groups and the overall population, which includes all target groups'
 functions.
-}
-\details{
-For individual target group function;
 }
 \examples{
  # Create testing data
