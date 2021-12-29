@@ -6,10 +6,11 @@ if (grep(pattern = "hbData.csv", x = list.files("data-raw"), value = TRUE) != "h
   )
 }
 
-
 ################################################################################
 
 haemoglobin <- read.csv("data-raw/hbData.csv")
+haemoglobin$ch.age <- as.integer(floor(haemoglobin$ch.age))
+haemoglobin$hb <- round(as.numeric(haemoglobin$hb), digits = 1)
 usethis::use_data(haemoglobin, overwrite = TRUE, compress = "xz")
 
 ################################################################################

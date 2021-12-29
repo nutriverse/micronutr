@@ -3,60 +3,62 @@
 \name{find_anaemia}
 \alias{find_anaemia}
 \alias{find_anaemia_u5}
-\alias{find_anaemia_c5to11}
-\alias{find_anaemia_c12to14}
-\alias{find_anaemia_nonpreg_women}
+\alias{find_anaemia_5to11}
+\alias{find_anaemia_12to14}
+\alias{find_anaemia_np_women}
 \alias{find_anaemia_pregnant}
 \alias{find_anaemia_men}
 \title{Anaemia Diagnosis}
 \usage{
 find_anaemia(
   df,
-  group = c("u5", "c5to11", "c12to14", "nonpreg_women", "pregnant", "men"),
+  group = c("u5", "5to11", "12to14", "np_women", "pregnant", "men"),
   hb = NULL,
   add = TRUE
 )
 
 find_anaemia_u5(x)
 
-find_anaemia_c5to11(x)
+find_anaemia_5to11(x)
 
-find_anaemia_c12to14(x)
+find_anaemia_12to14(x)
 
-find_anaemia_nonpreg_women(x)
+find_anaemia_np_women(x)
 
 find_anaemia_pregnant(x)
 
 find_anaemia_men(x)
 }
 \arguments{
-\item{df}{Survey dataset (as an R data.frame) with the present of haemoglobin
-value variable.}
+\item{df}{A data.frame of survey dataset with information on haemoglobin
+value and information on population group to which the sample comes from.}
 
-\item{group}{This is the vector of the specific population target group you
-want to include in identifying anaemia in the overall population function.
-In this \code{name_anameia} package, the function can determine the anaemia
-status of the following groups, and you need to mention them in vector
-format depend on which sample groups of population include in your
-dataset. Please use the following short-form of each target name in
-construction your vector. If not, the commend will not recognize
-the function.\tabular{ll}{
-   \strong{Population} \tab \strong{Function recognized Short-form} \cr
+\item{group}{A vector of the specific population target groups to be included
+in identifying anaemia. The function can determine the anaemia status for
+the following groups:\tabular{ll}{
+   \strong{Population} \tab \strong{Function recognized short-form} \cr
    Children 6-59 months of age \tab "u5" \cr
-   Children 5-11 years of age \tab "c5to11" \cr
-   Children 12-14 years of age \tab "u11to14" \cr
-   Non-pregnant women (15 years and above) \tab "nonpreg_women" \cr
+   Children 5-11 years of age \tab "5to11" \cr
+   Children 12-14 years of age \tab "11to14" \cr
+   Non-pregnant women (15 years and above) \tab "np_women" \cr
    Pregnant women \tab "pregnant" \cr
-   Men (15 years and above) \tab "men" \cr
+   Men - 15 years and above \tab "men" \cr
 }
 
 
+The short-form indicates you need to mention them in vector
+format depend on which sample groups of population include in your
+dataset. Please use the following short-form of each target name in
+construction your vector. If not, the commend will not recognize
+the function.
+
 if the dataset did not include this variable yet, please create one before
 using this function. Sample r code for generating this variable is
-mentioned below using the sample dataset \code{hbData}.}
+mentioned below using the sample dataset \code{haemoglobin}.}
 
-\item{hb}{Sample observation's haemoglobin level from the dataset. The Hb
-values should record in the grams per liter (g/L) units.}
+\item{hb}{A characater value specifying the variable name in \code{df} containing
+the sample observation's haemoglobin level. Note that the haemoglobin
+values should be recorded in grams per liter (g/L) units.}
 
 \item{add}{This parameter's default option is TRUE and will add new
 generated variables \code{anaemia_all} to your existing dataset applied in
@@ -76,25 +78,25 @@ explains the cut-off points applied in this diagnostic function.\tabular{llll}{
 }}
 
 \item{x}{a vector which contains haemoglobin value in grams per litre (g/L)
-unit format. The following table provide the specific commend based on the
-respective individual sample group.\tabular{ll}{
-   \strong{Population} \tab \strong{Commend} \cr
-   Children 6-59 months of age \tab name_anaemia_u5 \cr
-   Children 5-11 years of age \tab name_anaemia_c5to11 \cr
-   Children 12-14 years of age \tab name_anaemia_u11to14 \cr
-   Non-pregnant women (15 years and above) \tab name_anaemia_nonpreg_women \cr
-   Pregnant women \tab name_anaemia_pregnant \cr
-   Men (15 years and above) \tab name_anaemia_men \cr
+unit format for a specific population group. The following table provides
+the specific command based on the respective population group.\tabular{ll}{
+   \strong{Population} \tab \strong{Command} \cr
+   Children 6-59 months of age \tab find_anaemia_u5 \cr
+   Children 5-11 years of age \tab find_anaemia_5to11 \cr
+   Children 12-14 years of age \tab find_anaemia_11to14 \cr
+   Non-pregnant women (15 years and above) \tab find_anaemia_np_women \cr
+   Pregnant women \tab find_anaemia_pregnant \cr
+   Men (15 years and above) \tab find_anaemia_men \cr
 }
 
 
 For overall population function;}
 }
 \value{
-A data frame with the same structure as \code{df} is named
-\code{anaemia}. In this new data.frame, the new variable \code{anaemia_all} can be
-observed, containing the information which observation was affected by
-what type of anaemia: mild, moderate, or severe.
+A data frame with the same structure as \code{df}. In this new data.frame,
+the new variable \code{anaemia_all} can be observed, containing the information
+which observation was affected by what type of anaemia: mild, moderate, or
+severe.
 }
 \description{
 Perform anaemia diagnosis based on specific target sample groups (age, sex
@@ -117,18 +119,18 @@ For individual target group function;
  df <- data.frame(gender, hb)
 
  # For individual target group function;
-  find_anaemia_u5(x) # U5 Children
-  find_anaemia_c5to11(x) # Children 5 - 11 years
-  find_anaemia_c12to14(x) # Children 12 - 14 years
-  find_anaemia_nonpreg_women(x) # Non-pregnant Women
-  find_anaemia_pregnant(x) # Pregnant Women
-  find_anaemia_men(x) # Men
+  find_anaemia_u5(x)          # U5 Children
+  find_anaemia_5to11(x)       # Children 5 - 11 years
+  find_anaemia_12to14(x)      # Children 12 - 14 years
+  find_anaemia_np_women(x)    # Non-pregnant Women
+  find_anaemia_pregnant(x)    # Pregnant Women
+  find_anaemia_men(x)         # Men
 
 
  # For overall population function;
   find_anaemia(df = df,
                hb = hb,
-               group = c("u5", "c5to11", "c12to14", "nonpreg_women",
+               group = c("u5", "5to11", "12to14", "nonpreg_women",
                        "pregnant", "men"),
                add = TRUE)
 
