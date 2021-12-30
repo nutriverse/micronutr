@@ -18,8 +18,10 @@ Imports:
     tidyr,
     nipnTK
 Suggests: 
+    knitr,
     covr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rmarkdown
 Encoding: UTF-8
 LazyData: true
 Language: en-GB
@@ -28,3 +30,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://nutriverse/nutricheckr/, https://github.com/nutriverse/nutricheckr
 BugReports: https://github.com/nutriverse/nutricheckr/issues
 Config/testthat/edition: 3
+VignetteBuilder: knitr

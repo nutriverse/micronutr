@@ -1,0 +1,127 @@
+---
+title: "Determining micronutrient status"
+author: Nicholus Tint Zaw
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nutricheckr)
+```
+
+
+## Determining iron storage status
+
+Iron storage status can be determined using serum ferritin concentration. This package includes a set of functions used in determining iron storage status:
+
+1. Functions that identify inflammation status based on the levels of acute-phase proteins;
+
+2. Functions taht correct serum ferritin concentration values based on the inflammation status; and,
+
+3. Functions that categorise iron storage status based on the corrected serum ferritin concentration for a specific target group (either under 5 years old or 5 years and over).
+
+These functions were designed and developed based on iron deficiency status determination described in:
+
+Namaste, S. M., Rohner, F., Huang, J., Bhushan, N. L., Flores-Ayala, R., Kupka, R., Mei, Z., Rawat, R., Williams, A. M., Raiten, D. J., Northrop-Clewes, C. A., & Suchdev, P. S. (2017). Adjusting ferritin concentrations for inflammation: Biomarkers Reflecting Inflammation and Nutritional Determinants of Anemia (BRINDA) project. *The American journal of clinical nutrition*, 106(Suppl 1), 359S–371S. https://doi.org/10.3945/ajcn.116.141762
+
+### Inflammation status
+
+Inflammation, and its different stages, can be identified based on the availability of acute-phase proteins - one of either c-reactive protein (CRP) or α1-acid-glycoprotein (AGP), or both. The detailed classification of inflammation status based on combination of both CRP and AGP apply the following cut-off values:
+
+| **Inflammation Categories** | **Cut-off Points** |
+| :--- | :--- |
+| Incubation | CRP > 5 mg/L & AGP <= 1 g/L |
+| Early convalescence | CRP > 5 mg/L & AGP > 1 g/L |
+| Late convalescence | CRP <= 5 mg/L & AGP > 1 g/L |
+
+If only either CRP or AGP is available, the cut-off values for determining inflammation are shown below:
+
+| **Type of Protein** | **Cut-off Points (inflammation)** |
+| :--- | :--- |
+| CRP | CRP > 5 mg/L |
+| AGP | AGP > 1 g/L |
+
+These conventions are used in the set of functions to determine levels of inflammation. For example, to determine inflammation status of an individual with a CRP value of 6 mg/L but with no AGP information available, we use:
+
+```{r mn1, eval = FALSE, echo = TRUE}
+detect_inflammation_crp(6)
+```
+
+which gives:
+
+```{r mn1a, eval = TRUE, echo = FALSE}
+detect_inflammation_crp(6)
+```
+
+ Then, in the second stage, based on the inflammation status result from step
+ one, there is a specific commend for ferritin value correction and each
+ command will provide the new vector called `ferritin_corrected` with the
+ fixed ferritin value.
+  `correct_ferritin`: use this command if the first stage of identification of
+  inflammation was performed based on both acute-phase proteins (CRP and AGP)
+  `correct_ferritin_crp`: If the inflammation status of your data was
+  identified by CRP protein alone, use this command for correction of ferritin
+  value. This command will correct each observation ferritin value respective
+  to their inflammation status.
+  `correct_ferritin_agp`: If the identification of inflammation status was
+  performed by the AGP protein alone, use this command. This command will
+  correct the ferritin value based on the respective observation inflammation
+  status.
+  `correct_ferritin`: If your data observation inflammation status was
+  four-category outputs as both CRP and AGP protein identified those, use
+  this one. Based on each observation inflammation status, each observation
+  ferritin values were corrected.
+
+  If the inflammation status was identified based on combination of both CRP
+  and AGP proteins, the ferritin correction values are performed as multiply
+  with the correction values provided in the below table.
+
+    | **inflammation Categories** | **Correction Values** |
+    | :--- | :--- |
+    | Incubation | 0.77 |
+    | Early convalescence | 0.53 |
+    | Late convalescence | 0.75 |
+
+  If only either CRP or AGP proteins is applied, the different correction
+  value are applied based on type of protein as mentioned in the below table.
+
+    | **Type of Protein** | **Correction Values** |
+    | :--- | :--- |
+    | CRP | 0.65 |
+    | AGP | 0.72 |
+
+
+ In the final stage, based on the corrected ferritin value and specific target
+ age group, there were particular commends to perform iron storage status
+ diagnosis for individual observation.
+  `detect_iron`: If your data had already corrected ferritin value based on
+  either acute-phase protein or both, use this command. Based on the age group
+  of the individual observation and its inflammation status, this will
+  generate the new vector called `iron_storage` and which contains the binary
+  outcome of iron storage status ("deficiency" and "no deficiency"). This
+  command works for both under 5 and over 5 years old.
+  `detect_iron_quali`: If the inflammation status was identified based on the
+  qualitative report (such as self-reporting from the survey), use this
+  commend for iron status identification. This will also generate the new
+  vector called `iron_storage` and which contains the binary outcome of
+  iron storage status ("deficiency" and "no deficiency"). But, this can only
+  apply to the under 5 years old children population.
+
+  The cut-off points value for identification of iron storage category is
+  mentioned in the below table.
+
+    | **Population** | **No Deficiency** |	**Deficiency** |
+    | :--- | :--- | :--- | :--- |
+    | < 5 year old (both sex) |	Ferritin < 12 |	Ferritin >= 12 |
+    | >= 5 years old (Male) |	Ferritin < 15	|  15 >= Ferritin >= 200 |
+    | >= 5 years old (Female)	| Ferritin < 15	| 15 >= Ferritin >= 150 |
+
+  If the inflammation status was identified based on qualitative inforomation,
+  the cut-off point is applied to original ferritin value as < 30 micrograms
+  per liter (µg/l) unit is consider as `deficiency` status.
+
