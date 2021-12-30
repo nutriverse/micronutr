@@ -96,67 +96,6 @@
 #
 ################################################################################
 
-find_anaemia <- function(df,
-                         group = c("u5", "5to11", "12to14",
-                                   "np_women", "pregnant", "men"),
-                         hb = NULL,
-                         add = TRUE) {
-  ## Determine haemoglobin variable if hb = NULL
-  if (is.null(hb)) {
-    hb <- grep(
-      pattern = "hb|HB|Hb|hem|
-                 Hemoglobin|HEMOGLOBIN|
-                 haemoglobin|Haemoglobin|HAEMOGLOBIN",
-      x = names(df),
-      value = TRUE)
-
-    if (length(hb) == 0) {
-      stop("Variable for haemoglobin values not found. Please specify hb.")
-    }
-
-    if (length(hb) > 1) {
-      hb <- hb[1]
-      warning("More than one variable for haemoglobin values found. Will use
-              the first one found")
-    }
-  } else {
-    hb <- grep(pattern = hb, x = names(df), fixed = TRUE, value = TRUE)
-    if (length(hb) == 0) {
-      stop("Variable name provided for haemoglobin values cannot be found.
-           Please check and try again.")
-    }
-  }
-
-  ## Check that hb are numeric values
-  if (class(df[[hb]]) != "numeric") {
-    stop("Haemoglobin values must be numeric.")
-  }
-
-  ## Get group
-  group <- match.arg(group)
-
-  ## Determine anaemia status
-  anaemia_status <- eval(
-    expr = parse(text = paste0("find_anaemia_", group, "(df[[hb]])"))
-  )
-
-  ## Add anaemia to df?
-  if (add) {
-    anaemia <- data.frame(df, anaemia_status)
-  }
-
-  ## Return
-  anaemia
-}
-
-
-################################################################################
-#
-#' @export
-#' @rdname find_anaemia
-#
-################################################################################
-
 find_anaemia_u5 <- function(x) {
   anaemia_cat_u5 <- cut(
     x, breaks = c(-Inf, 70, 100, 110, Inf),
@@ -270,3 +209,62 @@ find_anaemia_men <- function(x) {
 }
 
 
+################################################################################
+#
+#' @export
+#' @rdname find_anaemia
+#
+################################################################################
+
+find_anaemia <- function(df,
+                         group = c("u5", "5to11", "12to14",
+                                   "np_women", "pregnant", "men"),
+                         hb = NULL,
+                         add = TRUE) {
+  ## Determine haemoglobin variable if hb = NULL
+  if (is.null(hb)) {
+    hb <- grep(
+      pattern = "hb|HB|Hb|hem|
+                 Hemoglobin|HEMOGLOBIN|
+                 haemoglobin|Haemoglobin|HAEMOGLOBIN",
+      x = names(df),
+      value = TRUE)
+
+    if (length(hb) == 0) {
+      stop("Variable for haemoglobin values not found. Please specify hb.")
+    }
+
+    if (length(hb) > 1) {
+      hb <- hb[1]
+      warning("More than one variable for haemoglobin values found. Will use
+              the first one found")
+    }
+  } else {
+    hb <- grep(pattern = hb, x = names(df), fixed = TRUE, value = TRUE)
+    if (length(hb) == 0) {
+      stop("Variable name provided for haemoglobin values cannot be found.
+           Please check and try again.")
+    }
+  }
+
+  ## Check that hb are numeric values
+  if (class(df[[hb]]) != "numeric") {
+    stop("Haemoglobin values must be numeric.")
+  }
+
+  ## Get group
+  group <- match.arg(group)
+
+  ## Determine anaemia status
+  anaemia_status <- eval(
+    expr = parse(text = paste0("find_anaemia_", group, "(df[[hb]])"))
+  )
+
+  ## Add anaemia to df?
+  if (add) {
+    anaemia <- data.frame(df, anaemia_status)
+  }
+
+  ## Return
+  anaemia
+}
