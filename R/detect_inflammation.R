@@ -42,26 +42,6 @@
 #
 ################################################################################
 
-# detect_inflammation <- function(crp = NULL, agp = NULL) {
-#   ## Vectorise detect_inflammation_both
-#   inflammation <- mapply(
-#     FUN = detect_inflammation_,
-#     crp = crp,
-#     agp = agp,
-#     SIMPLIFY = TRUE
-#   )
-#
-#   ## Return
-#   inflammation
-# }
-
-
-################################################################################
-#
-# Function to vectorise over - not for export
-#
-################################################################################
-
 detect_inflammation <- function(crp = NULL, agp = NULL) {
   if (is.null(crp) & is.null(agp)) {
     stop("Either crp or agp is required to assess inflammation.")

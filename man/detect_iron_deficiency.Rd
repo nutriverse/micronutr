@@ -52,4 +52,12 @@ Given serum ferritin values, determine iron storage status.
  )
  detect_iron_deficiency(ferritin_corrected)
 
+ # Iron storage status - qualitative
+ detect_iron_deficiency_qualitative(
+   ferritin = 3, inflammation = TRUE
+ )
+ detect_iron_deficiency_qualitative(
+   ferritin = c(2, 3, 5), inflammation = c(TRUE, FALSE, TRUE)
+ )
+
 }
