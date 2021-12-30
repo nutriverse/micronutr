@@ -35,6 +35,7 @@
 #' detect_inflammation(crp = 2, agp = 2)
 #' detect_inflammation(crp = ferritin$crp, agp = ferritin$agp)
 #'
+#' @author Nicholus Tint Zaw
 #'
 #' @export
 #' @rdname detect_inflammation

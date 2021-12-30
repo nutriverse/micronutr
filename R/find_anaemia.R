@@ -88,6 +88,8 @@
 #'                hb = "hb",
 #'                add = TRUE)
 #'
+#' @author Nicholus Tint Zaw
+#'
 #' @export
 #' @rdname find_anaemia
 #'
@@ -144,7 +146,7 @@ find_anaemia <- function(df,
   }
 
   ## Return
-  return(anaemia)
+  anaemia
 }
 
 

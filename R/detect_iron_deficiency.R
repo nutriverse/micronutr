@@ -27,6 +27,8 @@
 #'   crp = ferritin$crp, agp = ferritin$agp, ferritin = ferritin$ferritin
 #' )
 #'
+#' @author Nicholus Tint Zaw
+#'
 #' @export
 #'
 #
@@ -119,6 +121,8 @@ correct_ferritin <- function(crp = NULL, agp = NULL, ferritin = NULL) {
 #'  detect_iron_deficiency_qualitative(
 #'    ferritin = c(2, 3, 5), inflammation = c(TRUE, FALSE, TRUE)
 #'  )
+#'
+#' @author Nicholus Tint Zaw
 #'
 #' @export
 #' @rdname detect_iron_deficiency
