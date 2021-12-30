@@ -63,7 +63,7 @@ correct_ferritin <- function(crp = NULL, agp = NULL, ferritin = NULL) {
   ## Correct ferritin based on crp and agp
   if (!is.null(crp) & !is.null(agp)) {
     ferritin_corrected <- ifelse(inflammation == "incubation", ferritin * 0.77,
-      ifelse(inflammation == "late cnvalescence", ferritin * 0.53,
+      ifelse(inflammation == "late convalescence", ferritin * 0.53,
         ifelse(inflammation == "early convalescence", ferritin * 0.75, ferritin)
       )
     )
@@ -238,10 +238,17 @@ detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
     stop("Serum ferritin should be numeric. Please try again.")
   }
 
+  ##
+  if (!is.logical(inflammation)) {
+    stop("Inflammation status should be logical. Please try again.")
+  }
+
   if (inflammation) {
-    iron_status <- ifelse(ferritin < 30, "iron deficiency", "no irondeficiency")
+    iron_status <- ifelse(
+      ferritin < 30, "iron deficiency", "no iron deficiency"
+    )
   } else {
-    iron_status <- NA
+    iron_status <- NA_character_
   }
 
   ## Return
