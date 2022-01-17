@@ -41,13 +41,12 @@ ferritin$age_group <- factor(
   )
 )
 
-ferritin$infection <- round(
-  runif(
-    nrow(ferritin),
-    min = 0,
-    max = 1
-  )
-)
+ferritin$infection <- sample(c(TRUE, FALSE), nrow(ferritin),
+                             replace = TRUE, prob=c(.7, .3))
+
+ferritin[1:3, 12] <- NA
+ferritin[4:6, 11] <- NA
+
 
 usethis::use_data(ferritin, overwrite = TRUE, compress = "xz")
 

@@ -114,12 +114,20 @@ correct_ferritin <- function(crp = NULL, agp = NULL, ferritin = NULL) {
 #'  )
 #'  detect_iron_deficiency(ferritin_corrected)
 #'
+#'  # for mix-population
+#'  flag_iron_deficiency(ferritin$ferritin, ferritin$age_group)
+#'
 #'  # Iron storage status - qualitative
 #'  detect_iron_deficiency_qualitative(
 #'    ferritin = 3, inflammation = TRUE
 #'  )
 #'  detect_iron_deficiency_qualitative(
 #'    ferritin = c(2, 3, 5), inflammation = c(TRUE, FALSE, TRUE)
+#'  )
+#'
+#'  detect_iron_deficiency_qualitative(
+#'    ferritin = ferritin$ferritin,
+#'    inflammation = ferritin$infection
 #'  )
 #'
 #' @author Nicholus Tint Zaw
@@ -209,6 +217,38 @@ detect_iron_deficiency <- function(ferritin = NULL, group = c("u5", "5over")) {
 #
 ################################################################################
 
+# for mix pop
+flag_iron_deficiency <- function(ferritin = NULL, group = NULL) {
+  ## Check if ferritin is NULL
+  if (is.null(ferritin)) {
+    stop("Serum ferritin required. Please try again.")
+  }
+
+  if(group == "under 5 years"){
+    iron_status <- detect_iron_deficiency_u5(ferritin)
+  }
+
+  if(group == "5 years and older"){
+    iron_status <- detect_iron_deficiency_5over(ferritin)
+  }
+
+  else{
+    iron_status <- NA_character_
+  }
+
+  ## Return
+  iron_status
+}
+
+
+
+################################################################################
+#
+#' @export
+#' @rdname detect_iron_deficiency
+#
+################################################################################
+
 detect_iron_deficiency_qualitative <- function(ferritin = NULL,
                                                inflammation = NULL) {
   ## Vectorise detect_iron_deficiency_qualitative
@@ -247,7 +287,7 @@ detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
     stop("Inflammation status should be logical. Please try again.")
   }
 
-  if (inflammation) {
+  if (!is.na(inflammation)) {
     iron_status <- ifelse(
       ferritin < 30, "iron deficiency", "no iron deficiency"
     )

@@ -196,7 +196,7 @@ test_that(
   )
   expect_equal(
     detect_iron_deficiency_qualitative(ferritin = 30, inflammation = FALSE),
-    NA_character_
+    "no iron deficiency"
   )
   expect_equal(
     detect_iron_deficiency_qualitative(ferritin = 29, inflammation = TRUE),
@@ -204,7 +204,7 @@ test_that(
   )
   expect_equal(
     detect_iron_deficiency_qualitative(ferritin = 29, inflammation = FALSE),
-    NA_character_
+    "iron deficiency"
   )
   # expect_equal(is.na(detect_iron_quali(29, NA)), TRUE)
   # expect_equal(is.na(detect_iron_quali(30, NA)), TRUE)
