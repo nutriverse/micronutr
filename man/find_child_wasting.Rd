@@ -18,14 +18,15 @@ find_child_wasting(
 \verb{weight-for-height}}
 
 \item{index}{A character vector of anthropometric measurements to use to
-determine acute wasting. Default is for both \verb{weight-for-height z-score}
-and \code{muac}}
+determine acute wasting. Default is for both \code{whz} and \code{muac}.}
 
-\item{zscore}{A character value for variable name for \verb{weight-for-height z-score}
-in \code{df}. Default is \code{whz}}
+\item{zscore}{A character value for variable name for
+\verb{weight-for-height z-score} in \code{df}. Default is \code{whz}. Ignored if \code{index}
+is set to \code{muac} only.}
 
 \item{muac}{A character value for variable name for mid-upper arm
-circumference (MUAC) in \code{df}}
+circumference (MUAC) in \code{df}. Default is \code{muac}. Ignored if \code{index} is set
+to \code{whz} only}
 
 \item{flag}{A character value for variable name of coded flags applied to
 \verb{weight-for-height z-score} values in \code{df}. Default is NULL indicating
@@ -45,5 +46,7 @@ Find children with acute wasting from an anthropometric dataset
 
 find_child_wasting(df = zscorer::anthro1, zscore = "whz", muac = "muac",
                    flag = NULL, add = TRUE)
+
+find_child_wasting(df = zscorer::anthro1, muac = "muac")
 
 }

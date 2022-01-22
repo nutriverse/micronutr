@@ -1,7 +1,7 @@
 comment: false
 
-codecov:
-  token: b5ef375b-9a42-4c72-bad5-464be13dcc11
+ignore:
+  - "R/utils.R"
 
 coverage:
   status:

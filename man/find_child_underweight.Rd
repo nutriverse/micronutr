@@ -10,8 +10,8 @@ find_child_underweight(df, zscore = "waz", flag = NULL, add = TRUE)
 \item{df}{A data.frame containing anthropometric z-score indices for
 \verb{weight-for-age}}
 
-\item{zscore}{A character value for variable name for \verb{weight-for-age z-score}
-in \code{df}. Default is \code{waz}}
+\item{zscore}{A character value for variable name for
+\verb{weight-for-age z-score} in \code{df}. Default is \code{waz}}
 
 \item{flag}{A character value for variable name of coded flags applied to
 \verb{weight-for-age z-score} values in \code{df}. Default is NULL indicating
@@ -29,6 +29,9 @@ Find children who are underweight from an anthropometric dataset
 }
 \examples{
 
-find_child_underweight(df = zscorer::anthro1, zscore = "waz", flag = NULL, add = TRUE)
+find_child_underweight(df = zscorer::anthro1,
+                       zscore = "waz",
+                       flag = NULL,
+                       add = TRUE)
 
 }

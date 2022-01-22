@@ -8,10 +8,7 @@
 #' @keywords internal
 #' @importFrom utils read.table
 #' @importFrom tidyr gather
-#'
-#'
-#'
-#'
+#' @importFrom stats median
 #'
 #
 ################################################################################

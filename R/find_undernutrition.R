@@ -6,12 +6,13 @@
 #' @param df A data.frame containing anthropometric z-score indices for
 #'   `weight-for-height`
 #' @param index A character vector of anthropometric measurements to use to
-#'   determine acute wasting. Default is for both `weight-for-height z-score`
-#'   and `muac`
-#' @param zscore A character value for variable name for `weight-for-height z-score`
-#'   in `df`. Default is `whz`
+#'   determine acute wasting. Default is for both `whz` and `muac`.
+#' @param zscore A character value for variable name for
+#'   `weight-for-height z-score` in `df`. Default is `whz`. Ignored if `index`
+#'   is set to `muac` only.
 #' @param muac A character value for variable name for mid-upper arm
-#'   circumference (MUAC) in `df`
+#'   circumference (MUAC) in `df`. Default is `muac`. Ignored if `index` is set
+#'   to `whz` only
 #' @param flag A character value for variable name of coded flags applied to
 #'   `weight-for-height z-score` values in `df`. Default is NULL indicating
 #'   that flags have already been applied and flagged values have been censored.
@@ -95,8 +96,8 @@ find_child_wasting <- function(df, index = c("whz", "muac"),
 #'
 #' @param df A data.frame containing anthropometric z-score indices for
 #'   `weight-for-age`
-#' @param zscore A character value for variable name for `weight-for-age z-score`
-#'   in `df`. Default is `waz`
+#' @param zscore A character value for variable name for
+#'   `weight-for-age z-score` in `df`. Default is `waz`
 #' @param flag A character value for variable name of coded flags applied to
 #'   `weight-for-age z-score` values in `df`. Default is NULL indicating
 #'   that flags have already been applied and flagged values have been censored.
@@ -108,7 +109,10 @@ find_child_wasting <- function(df, index = c("whz", "muac"),
 #'
 #' @examples
 #'
-#' find_child_underweight(df = zscorer::anthro1, zscore = "waz", flag = NULL, add = TRUE)
+#' find_child_underweight(df = zscorer::anthro1,
+#'                        zscore = "waz",
+#'                        flag = NULL,
+#'                        add = TRUE)
 #'
 #' @export
 #'
@@ -156,8 +160,8 @@ find_child_underweight <- function(df, zscore = "waz",
 #'
 #' @param df A data.frame containing anthropometric z-score indices for
 #'   `height-for-age`
-#' @param zscore A character value for variable name for `height-for-age z-score`
-#'   in `df`. Default is `haz`
+#' @param zscore A character value for variable name for
+#'   `height-for-age z-score` in `df`. Default is `haz`
 #' @param flag A character value for variable name of coded flags applied to
 #'   `height-for-age z-score` values in `df`. Default is NULL indicating
 #'   that flags have already been applied and flagged values have been censored.
@@ -169,7 +173,9 @@ find_child_underweight <- function(df, zscore = "waz",
 #'
 #' @examples
 #'
-#' find_child_stunting(df = zscorer::anthro1, zscore = "haz", flag = NULL, add = TRUE)
+#' find_child_stunting(df = zscorer::anthro1,
+#'                     zscore = "haz",
+#'                     flag = NULL, add = TRUE)
 #'
 #' @export
 #'
@@ -208,3 +214,4 @@ find_child_stunting <- function(df, zscore = "haz",
   ##
   return(anthroDF)
 }
+

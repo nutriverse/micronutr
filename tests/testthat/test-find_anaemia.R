@@ -13,23 +13,23 @@ hb <- runif(50, min = 60, max = 130)
 gender <- rep(c("male", "female"), each = 25)
 df <- data.frame(gender, hb)
 
-anaemia_u5 <- name_anaemia_u5(u5)
-anaemia_c5to11 <- name_anaemia_c5to11(c5to11)
-anaemia_c12to14 <- name_anaemia_c12to14(c12to14)
-anaemia_nonpreg_women <- name_anaemia_nonpreg_women(nonpreg_women)
-anaemia_pregnant <- name_anaemia_pregnant(pregnant)
-anaemia_men <- name_anaemia_men(men)
+anaemia_u5       <- find_anaemia_u5(u5)
+anaemia_5to11    <- find_anaemia_5to11(c5to11)
+anaemia_12to14   <- find_anaemia_12to14(c12to14)
+anaemia_np_women <- find_anaemia_np_women(nonpreg_women)
+anaemia_pregnant <- find_anaemia_pregnant(pregnant)
+anaemia_men      <- find_anaemia_men(men)
 
-test_that("Individual `name_anaemia` function define anaema category correctly", {
+test_that("Individual `name_anaemia` function define anaemia category correctly", {
 
   results <- c("severe anaemia", "severe anaemia", "moderate anaemia",
                "moderate anaemia", "moderate anaemia", "mild anaemia",
                "mild anaemia", "no anaemia")
 
   expect_equal(as.character(anaemia_u5), results)
-  expect_equal(as.character(anaemia_c5to11), results)
-  expect_equal(as.character(anaemia_c12to14), results)
-  expect_equal(as.character(anaemia_nonpreg_women), results)
+  expect_equal(as.character(anaemia_5to11), results)
+  expect_equal(as.character(anaemia_12to14), results)
+  expect_equal(as.character(anaemia_np_women), results)
   expect_equal(as.character(anaemia_pregnant), results)
   expect_equal(as.character(anaemia_men), results)
 
@@ -37,21 +37,18 @@ test_that("Individual `name_anaemia` function define anaema category correctly",
 
 
 test_that("The output vector has same non - `NA` value", {
-
   expect_equal(sum(!is.na(anaemia_u5)), sum(!is.na(u5)))
-  expect_equal(sum(!is.na(anaemia_c5to11)), sum(!is.na(c5to11)))
-  expect_equal(sum(!is.na(anaemia_c12to14)), sum(!is.na(c12to14)))
-  expect_equal(sum(!is.na(anaemia_nonpreg_women)), sum(!is.na(nonpreg_women)))
+  expect_equal(sum(!is.na(anaemia_5to11)), sum(!is.na(c5to11)))
+  expect_equal(sum(!is.na(anaemia_12to14)), sum(!is.na(c12to14)))
+  expect_equal(sum(!is.na(anaemia_np_women)), sum(!is.na(nonpreg_women)))
   expect_equal(sum(!is.na(anaemia_pregnant)), sum(!is.na(pregnant)))
   expect_equal(sum(!is.na(anaemia_men)), sum(!is.na(men)))
 })
 
 
 # data.frame
-anaemia <-  name_anaemia(df = df,
-                         hb = hb,
-                         group = c("u5", "c5to11", "c12to14", "nonpreg_women",
-                                   "pregnant", "men"),
+anaemia <-  find_anaemia(df = df,
+                         hb = "hb",
                          add = TRUE)
 
 
@@ -61,37 +58,43 @@ test_that("The output result is a `data.frame`", {
 
 
 test_that("The output data.frame has correct column's names", {
-  expect_named(anaemia, c("gender",
-                          "hb",
-                          "anaemia_u5",
-                          "anaemia_c5to11",
-                          "anaemia_c12to14",
-                          "anaemia_nonpreg_women",
-                          "anaemia_pregnant",
-                          "anaemia_men"))
+  expect_named(anaemia, c("gender", "hb", "anaemia_status"))
 })
 
 
-test_that("The output data.frame additional columns has correct variable type", {
-
-  expect_s3_class(anaemia$anaemia_u5, "factor")
-  expect_s3_class(anaemia$anaemia_c5to11, "factor")
-  expect_s3_class(anaemia$anaemia_c12to14, "factor")
-  expect_s3_class(anaemia$anaemia_nonpreg_women, "factor")
-  expect_s3_class(anaemia$anaemia_pregnant, "factor")
-  expect_s3_class(anaemia$anaemia_men, "factor")
-
+test_that("Additional columns has correct variable type", {
+  expect_s3_class(anaemia$anaemia_status, "factor")
 })
 
 
 test_that("The output `data.frame` varaibles has same `NA` value", {
-
-  expect_equal(sum(!is.na(anaemia$anaemia_u5)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_c5to11)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_c12to14)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_nonpreg_women)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_pregnant)), sum(!is.na(df$hb)))
-  expect_equal(sum(!is.na(anaemia$anaemia_men)), sum(!is.na(df$hb)))
+  expect_equal(sum(!is.na(anaemia$anaemia_status)), sum(!is.na(df$hb)))
 })
 
+## Test errors and warnings
+
+# sample data.frame
+hb <- runif(50, min = 60, max = 130)
+gender <- rep(c("male", "female"), each = 25)
+
+df <- data.frame(gender, hb)
+
+test_that("Errors and warnings are working", {
+  expect_error(find_anaemia(df = df, hb = "Hb", add = TRUE))
+})
+
+df <- data.frame(gender, Hb = hb, hb = hb)
+
+test_that("Errors and warnings are working", {
+  expect_warning(find_anaemia(df = df, add = TRUE))
+})
+
+df <- data.frame(gender, v1 = hb)
+
+test_that("Errors and warnings are working", {
+  expect_error(find_anaemia(df = df, add = TRUE))
+})
+
+
+## Use haemoglobin full dataset to test overall function
 
