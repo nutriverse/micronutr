@@ -99,11 +99,8 @@ flag_who <- function(df, hlaz = NULL, waz = NULL, whlz = NULL,
     )
   }
 
-  ## Concatenate flags
-  flags <- c(flag1, flag2, flag4)
-
   ## Sum flag codes and create flag_description
-  flag <- sum(flags, na.rm = TRUE)
+  flag <- flag1 + flag2 + flag4
   flag_description <- vector(mode = "character", length = length(flag))
   flag_description[flag == 0] <- "No flagged measurements"
   flag_description[flag == 1] <- "Check height and age measurements"
@@ -198,17 +195,23 @@ flag_zscore <- function(x = NULL, z = c("hlaz", "whlz", "waz")) {
 
   ## if z == "hlaz"
   if (z == "hlaz") {
-    flag <- ifelse(x < -6 | x > 6, flag + 1, flag)
+    flag <- ifelse(x < -6 | x > 6, flag + 1,
+      ifelse(is.na(x), 0, flag)
+    )
   }
 
   ## if z == "whlz"
   if (z == "whlz") {
-    flag <- ifelse(x < -5 | x > 5, flag + 2, flag)
+    flag <- ifelse(x < -5 | x > 5, flag + 2,
+      ifelse(is.na(x), 0, flag)
+    )
   }
 
   ## if z == "waz"
   if (z == "waz") {
-    flag <- ifelse(x < -6 | x > 5, flag + 4, flag)
+    flag <- ifelse(x < -6 | x > 5, flag + 4,
+      ifelse(is.na(x), 0, flag)
+    )
   }
 
   ## Return flag
