@@ -1,0 +1,71 @@
+title: nutricheckr
+
+url: https://nutriverse.io/nutricheckr
+
+template:
+  params:
+    bootswatch: yeti
+    ganalytics: 305950800
+
+# navbar:
+#   type: inverse
+#   structure:
+#     left: [home, intro, reference, articles, news]
+#     right: [twitter, linkedin, github]
+#
+#   components:
+#     articles:
+#       text: Articles
+#       menu:
+#     twitter:
+#       icon: "fab fa-twitter fa-lg"
+#       href: https://twitter.com/katilingban
+#     linkedin:
+#       icon: "fab fa-linkedin fa-lg"
+#       href: https://www.linkedin.com/company/katilingban/
+
+# home:
+#   links:
+#   - text: Read more about the WHO Growth Standards
+#     href: https://www.who.int/childgrowth/en/
+#
+#   - text: Read more about MUAC-for-age z-scores development
+#     href: https://doi.org/10.1136/bmj.j3423
+#
+#   - text: Read more about the CDC Growth Standards
+#     href: https://www.cdc.gov/growthcharts/background.htm
+
+# reference:
+# - title: Description
+#   contents:
+#   - nutricheckr
+#
+# - title: Calculate anthropometric z-scores using WHO Growth Standards
+#   contents:
+#   - getWGSR
+#   - addWGSR
+#
+# - title: Legacy functions to calculate z-scores using WHO Growth Standards
+#   contents:
+#   - zscorer-deprecated
+#   - getWGS
+#   - getCohortWGS
+#   - getAllWGS
+#
+# - title: Calculate anthropometric z-scores using CDC Growth Standards
+#   contents:
+#   - getCDC
+#   - addCDC
+#
+# - title: Running Shiny app
+#   contents:
+#   - run_zscorer
+#
+# - title: Datasets
+#   contents:
+#   - anthro1
+#   - anthro2
+#   - anthro3
+#   - anthro4
+#   - nhanes
+#   - wgsData

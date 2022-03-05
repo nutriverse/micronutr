@@ -6,12 +6,14 @@
 \alias{nutricheckr-package}
 \title{Tools for Nutrition Assessment and Analysis}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Nutrition assessment involves various methods and techniques. This package provides tools to support the implementation of these methods and techniques.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://nutriverse/nutricheckr/}
+  \item \url{https://nutriverse.io/nutricheckr/}
   \item \url{https://github.com/nutriverse/nutricheckr}
   \item Report bugs at \url{https://github.com/nutriverse/nutricheckr/issues}
 }
