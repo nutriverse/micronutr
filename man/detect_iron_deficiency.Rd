@@ -4,6 +4,7 @@
 \alias{detect_iron_deficiency_u5}
 \alias{detect_iron_deficiency_5over}
 \alias{detect_iron_deficiency}
+\alias{flag_iron_deficiency}
 \alias{detect_iron_deficiency_qualitative}
 \title{Determine iron storage status}
 \usage{
@@ -12,6 +13,8 @@ detect_iron_deficiency_u5(ferritin = NULL)
 detect_iron_deficiency_5over(ferritin = NULL)
 
 detect_iron_deficiency(ferritin = NULL, group = c("u5", "5over"))
+
+flag_iron_deficiency(ferritin = NULL, group = NULL)
 
 detect_iron_deficiency_qualitative(ferritin = NULL, inflammation = NULL)
 }
@@ -52,12 +55,20 @@ Given serum ferritin values, determine iron storage status.
  )
  detect_iron_deficiency(ferritin_corrected)
 
+ # for mix-population
+ flag_iron_deficiency(ferritin$ferritin, ferritin$age_group)
+
  # Iron storage status - qualitative
  detect_iron_deficiency_qualitative(
    ferritin = 3, inflammation = TRUE
  )
  detect_iron_deficiency_qualitative(
    ferritin = c(2, 3, 5), inflammation = c(TRUE, FALSE, TRUE)
+ )
+
+ detect_iron_deficiency_qualitative(
+   ferritin = ferritin$ferritin,
+   inflammation = ferritin$infection
  )
 
 }

@@ -8,6 +8,7 @@
 \alias{find_anaemia_pregnant}
 \alias{find_anaemia_men}
 \alias{find_anaemia}
+\alias{flag_anaemia}
 \title{Determine anaemia status for various population groups}
 \usage{
 find_anaemia_u5(x)
@@ -26,6 +27,15 @@ find_anaemia(
   df,
   group = c("u5", "5to11", "12to14", "np_women", "pregnant", "men"),
   hb = NULL,
+  add = TRUE
+)
+
+flag_anaemia(
+  df,
+  age = NULL,
+  hb = NULL,
+  sex = NULL,
+  pregnant = NULL,
   add = TRUE
 )
 }
@@ -97,12 +107,17 @@ functions.
 }
 \examples{
  # Create testing data
- x <- runif(20, min = 60, max = 130)
+ x <- runif(50, min = 60, max = 130)
 
  hb <- runif(50, min = 60, max = 130)
  gender <- rep(c("male", "female"), each = 25)
 
- df <- data.frame(gender, hb)
+ age <- c("u5", "5to11", "11to14", "np_women", "pregnant", "men")
+ age_group <- factor(sample.int(6, 50, replace = TRUE),
+                     levels = 1:6,labels = age)
+
+
+ df <- data.frame(gender, hb, age_group)
 
  # For individual target group function;
   find_anaemia_u5(x)          # U5 Children
@@ -116,6 +131,20 @@ functions.
  # For overall population function;
   find_anaemia(df = df,
                hb = "hb",
+               add = TRUE)
+
+ # For mix-population function;
+  flag_anaemia(df = df,
+               pop_grp = age_group,
+               hb = hb,
+               add = TRUE)
+
+ # if we add NA case in age group;
+
+  df[1:3, 3] <- NA
+  flag_anaemia(df = df,
+               pop_grp = age_group,
+               hb = hb,
                add = TRUE)
 
 }

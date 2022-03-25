@@ -6,7 +6,9 @@
 \alias{nutricheckr-package}
 \title{Tools for Nutrition Assessment and Analysis}
 \description{
-Nutrition assessment involves various methods and techniques. This package provides tools to support the implementation of these methods and techniques.
+Nutrition assessment involves various methods and techniques. This
+    package provides tools to support the implementation of these methods and
+    techniques.
 }
 \seealso{
 Useful links:
