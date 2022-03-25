@@ -252,12 +252,14 @@ flag_iron_deficiency <- function(ferritin = NULL, group = NULL) {
 detect_iron_deficiency_qualitative <- function(ferritin = NULL,
                                                inflammation = NULL) {
   ## Vectorise detect_iron_deficiency_qualitative
-  iron_status <- mapply(
-    FUN = detect_iron_deficiency_qualitative_,
+  iron_status <- Map(
+    f = detect_iron_deficiency_qualitative_,
     ferritin = ferritin,
-    inflammation = inflammation,
-    SIMPLIFY = TRUE
+    inflammation = inflammation
   )
+
+  ##
+  iron_status <- unlist(iron_status)
 
   ## Return
   iron_status
