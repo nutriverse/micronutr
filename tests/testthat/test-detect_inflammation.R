@@ -1,37 +1,37 @@
+## Test that output is of correct type -----------------------------------------
 
-
-
-testthat::test_that("output is character", {
+testthat::test_that("output is of correct type", {
   expect_type(detect_inflammation_agp(2), "character")
-})
-
-testthat::test_that("output is character", {
   expect_type(detect_inflammation_agp(2, label = FALSE), "double")
 })
 
-
-testthat::test_that("output is character", {
+testthat::test_that("output is of correct type", {
   expect_type(detect_inflammation_crp(2), "character")
   expect_type(detect_inflammation_crp(mnData$crp), "character")
 })
 
-testthat::test_that("output is character", {
+testthat::test_that("output is of correct type", {
   expect_type(detect_inflammation_crp(2, label = FALSE), "double")
   expect_type(detect_inflammation_crp(mnData$crp, label = FALSE), "double")
 })
 
-#'
-#'
-#' ## Detect inflammation by CRP
-#' detect_inflammation_crp(2)
-#' detect_inflammation(crp = mnData$crp)
-#' detect_inflammation(crp = mnData$crp, label = FALSE)
-#'
-#' ## Detect inflammation by AGP and CRP
-#' detect_inflammation(crp = 2, agp = 2)
-#' detect_inflammation(crp = 2, agp = 2, label = FALSE)
+testthat::test_that("output is of correct type", {
+  expect_type(detect_inflammation(crp = 2, agp = 2), "character")
+  expect_type(detect_inflammation(agp = 2), "character")
+  expect_type(detect_inflammation(crp = 2), "character")
+  expect_type(detect_inflammation(crp = 2, agp = 2, label = FALSE), "double")
+  expect_type(detect_inflammation(agp = 2, label = FALSE), "double")
+  expect_type(detect_inflammation(crp = 2, label = FALSE), "double")
+})
 
 
+## Test that error message shows
+
+testthat::test_that("error message shows", {
+  expect_error(detect_inflammation_crp())
+  expect_error(detect_inflammation_agp())
+  expect_error(detect_inflammation())
+})
 
 
 
