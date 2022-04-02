@@ -1,0 +1,33 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations
+
+<!-- badges: start -->
+
+[![Project Status:
+WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- badges: end -->
+
+Vitamin and mineral deficiencies continue to be a significant public
+health problem. This is particularly critical in developing countries
+where deficiencies to vitamin A, iron, iodine, and other micronutrients
+lead to adverse health consequences. Cross-sectional surveys are helpful
+in answering questions related to the magnitude and distribution of
+deficiencies of selected vitamins and minerals. This package provides
+tools for calculating and determining select vitamin and mineral
+deficiencies using R.
+
+## Installation
+
+You can install the development version of `micronutr` from
+[GitHub](https://github.com/nutriverse/micronutr) with:
+
+``` r
+if(!require(remotes)) install.packages("remotes")
+remotes::install_github("nutriverse/micronutr")
+```
+
+## Usage

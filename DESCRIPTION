@@ -1,0 +1,29 @@
+Package: micronutr
+Type: Package
+Title: Utilities for Calculating Indicators of Vitamin and Mineral Status of
+    Populations
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
+           email = "ernest@guevarra.io", role = c("aut", "cre")),
+    person("Nicholus", "Tint Zaw", email = "nicholustintzaw@gmail.com",
+           role = "aut"))
+Description: Vitamin and mineral deficiencies continue to be a significant 
+    public health problem. This is particularly critical in developing countries
+    where deficiencies to vitamin A, iron, iodine, and other micronutrients
+    lead to adverse health consequences. Cross-sectional surveys are helpful in
+    answering questions related to the magnitude and distribution of
+    deficiencies of selected vitamins and minerals. This package provides tools
+    for calculating and determining select vitamin and mineral deficiencies
+    using R.
+License: GPL (>= 3)
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Encoding: UTF-8
+Language: en-GB
+LazyData: true
+RoxygenNote: 7.1.2
+Config/testthat/edition: 3
