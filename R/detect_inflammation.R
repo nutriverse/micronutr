@@ -56,33 +56,47 @@
 detect_inflammation <- function(crp = NULL, agp = NULL, label = TRUE) {
   ## Check whether both CRP and AGP are NULL
   if (is.null(crp) & is.null(agp)) {
-    stop("Either crp or agp is required to assess inflammation.")
+    stop("Either serum CRP or serum AGP is required to assess inflammation.")
   }
 
   ## Check if only CRP value available/provided
   if (!is.null(crp) & is.null(agp)) {
-    inflammation <- detect_inflammation_crp(crp = crp, label = label)
+    ## Check if CRP is numeric
+    if (is.numeric(crp)) {
+      inflammation <- detect_inflammation_crp(crp = crp, label = label)
+    } else {
+      stop("Serum CRP should be numeric. Please try again.")
+    }
   }
 
   ## Check if only AGP value available/provided
   if (is.null(crp) & !is.null(agp)) {
-    inflammation <- detect_inflammation_agp(agp = agp, label = label)
+    ## Check if AGP is numeric
+    if (is.numeric(agp)) {
+      inflammation <- detect_inflammation_agp(agp = agp, label = label)
+    } else {
+      stop("Serum AGP should be numeric. Please try again.")
+    }
   }
 
   ## Check if both CRP and AGP are available/provided
   if (!is.null(crp) & !is.null(agp)) {
-    if (label) {
-      inflammation <- ifelse(crp > 5 & agp <= 1, "incubation",
-        ifelse(crp <= 5 & agp > 1, "late convalescence",
-          ifelse(crp > 5 & agp > 1, "early convalescence", "no inflammation")
+    if (is.numeric(crp) & is.numeric(agp)) {
+      if (label) {
+        inflammation <- ifelse(crp > 5 & agp <= 1, "incubation",
+          ifelse(crp <= 5 & agp > 1, "late convalescence",
+            ifelse(crp > 5 & agp > 1, "early convalescence", "no inflammation")
+          )
         )
-      )
+      } else {
+        inflammation <- ifelse(crp > 5 & agp <= 1, 1,
+          ifelse(crp <= 5 & agp > 1, 3,
+            ifelse(crp > 5 & agp > 1, 2, 0)
+          )
+        )
+      }
     } else {
-      inflammation <- ifelse(crp > 5 & agp <= 1, 1,
-        ifelse(crp <= 5 & agp > 1, 3,
-          ifelse(crp > 5 & agp > 1, 2, 0)
-        )
-      )
+      stop("Serum CRP and/or serum AGP should be numeric. Please try again")
     }
   }
 
@@ -102,13 +116,17 @@ detect_inflammation <- function(crp = NULL, agp = NULL, label = TRUE) {
 detect_inflammation_crp <- function(crp = NULL, label = TRUE) {
   ## Check if CRP value is NULL
   if (is.null(crp)) {
-    stop("CRP value is required to assess inflammation.")
+    stop("Serum CRP is required to assess inflammation. Please try again.")
   }
 
-  if (label) {
-    inflammation <- ifelse(crp > 5, "inflammation", "no inflammation")
+  if (is.numeric(crp)) {
+    if (label) {
+      inflammation <- ifelse(crp > 5, "inflammation", "no inflammation")
+    } else {
+      inflammation <- ifelse(crp > 5, 1, 0)
+    }
   } else {
-    inflammation <- ifelse(crp > 5, 1, 0)
+    stop("Serum CRP should be numeric. Please try again.")
   }
 
   ## Return
@@ -127,13 +145,17 @@ detect_inflammation_crp <- function(crp = NULL, label = TRUE) {
 detect_inflammation_agp <- function(agp = NULL, label = TRUE) {
   ## Check if AGP is NULL
   if (is.null(agp)) {
-    stop("AGP value is required to assess inflammation.")
+    stop("Serum AGP is required to assess inflammation. Please try again.")
   }
 
-  if (label) {
-    inflammation <- ifelse(agp > 1, "inflammation", "no inflammation")
+  if (is.numeric(agp)) {
+    if (label) {
+      inflammation <- ifelse(agp > 1, "inflammation", "no inflammation")
+    } else {
+      inflammation <- ifelse(agp > 1, 1, 0)
+    }
   } else {
-    inflammation <- ifelse(agp > 1, 1, 0)
+    stop("Serum AGP should be numeric. Please try again.")
   }
 
   ## Return
