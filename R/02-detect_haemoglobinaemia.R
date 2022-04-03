@@ -58,6 +58,7 @@ detect_anaemia_u5 <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_u5 <- as.character(anaemia_cat_u5)
   } else {
     anaemia_cat_u5 <- cut(
       x = hb,
@@ -97,6 +98,7 @@ detect_anaemia_5to11 <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_5to11 <- as.character(anaemia_cat_5to11)
   } else {
     anaemia_cat_5to11 <- cut(
       x = hb,
@@ -136,6 +138,7 @@ detect_anaemia_12to14 <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_12to14 <- as.character(anaemia_cat_12to14)
   } else {
     anaemia_cat_12to14 <- cut(
       x = hb,
@@ -175,6 +178,7 @@ detect_anaemia_np_women <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_np_women <- as.character(anaemia_cat_np_women)
   } else {
     anaemia_cat_np_women <- cut(
       x = hb,
@@ -214,6 +218,7 @@ detect_anaemia_pregnant <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_pregnant <- as.character(anaemia_cat_pregnant)
   } else {
     anaemia_cat_pregnant <- cut(
       x = hb,
@@ -253,6 +258,7 @@ detect_anaemia_men <- function(hb = NULL, label = TRUE) {
                  "mild anaemia", "no anaemia"),
       right = FALSE
     )
+    anaemia_cat_men <- as.character(anaemia_cat_men)
   } else {
     anaemia_cat_men <- cut(
       x = hb,
