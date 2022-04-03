@@ -18,9 +18,9 @@
 #'   "iron deficiency". If FALSE, simple integer codes are returned: 0 for
 #'   no iron deficiency and 1 for iron deficiency.
 #'
-#' @return If [label] is TRUE, a character value or character vector of
+#' @return If `label` is TRUE, a character value or character vector of
 #'   haemoglobinaemia status classification (can be either "severe anaemia" or
-#'   "moderate anaemia", "mild anaemia", or "no anaemia"). If [label] is FALSE,
+#'   "moderate anaemia", "mild anaemia", or "no anaemia"). If `label` is FALSE,
 #'   an integer value or integer vector of haemoglobinaemia status
 #'   classification (0 = no anaemia; 1 = mild anaemia; 2 = moderate anaemia;
 #'   3 = severe anaemia)

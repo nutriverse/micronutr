@@ -13,7 +13,7 @@ day; 2 = 1 up to less than 2 packets a day; 3 = 2 or more packets a day.}
 }
 \value{
 A numeric value or numeric vector of correction factor/s for
-  haemoglobin based on smoking status
+haemoglobin based on smoking status
 }
 \description{
 Determine smoking status correction factor for haemoglobin

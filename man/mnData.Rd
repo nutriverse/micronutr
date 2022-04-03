@@ -5,20 +5,19 @@
 \alias{mnData}
 \title{Micronutrient survey data}
 \format{
-A tibble with 9 columns and 19449 rows.
-
-**Variables** | **Description**
-:--- | :---
-*psu* | Primary sampling unit identifier
-*sex* | Sex (1 = Male; 2 = Female)
-*age* | Age (in years)
-*group* | Group classification
-*hb* | Haemoglobin values (g/L)
-*calcium* | Serum calcium values ()
-*crp* | Serum c-reactive protein (µg/l)
-*ferritin* | Serum ferritin ()
-*iodine* | Urine iodine ()
-*altitude* | Altitude of sampling location above sea level (metres)
+A tibble with 9 columns and 19449 rows.\tabular{ll}{
+   \strong{Variables} \tab \strong{Description} \cr
+   \emph{psu} \tab Primary sampling unit identifier \cr
+   \emph{sex} \tab Sex (1 = Male; 2 = Female) \cr
+   \emph{age} \tab Age (in years) \cr
+   \emph{group} \tab Group classification \cr
+   \emph{hb} \tab Haemoglobin values (g/L) \cr
+   \emph{calcium} \tab Serum calcium values () \cr
+   \emph{crp} \tab Serum c-reactive protein (µg/l) \cr
+   \emph{ferritin} \tab Serum ferritin () \cr
+   \emph{iodine} \tab Urine iodine () \cr
+   \emph{altitude} \tab Altitude of sampling location above sea level (metres) \cr
+}
 }
 \source{
 From a micronutrient survey in a country in East Africa

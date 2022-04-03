@@ -18,7 +18,7 @@ micrograms per litre (µg/l).}
 }
 \value{
 A numeric value or numeric vector for corrected serum ferritin in
-  micrograms per litre (µg/l).
+micrograms per litre (µg/l).
 }
 \description{
 Based on inflammation status, correct serum ferritin values as described in

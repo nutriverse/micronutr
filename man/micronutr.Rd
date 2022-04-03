@@ -15,6 +15,15 @@ questions related to the magnitude and distribution of deficiencies of
 selected vitamins and minerals. This package provides tools for
 calculating and determining select vitamin and mineral deficiencies using R.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://nutriverse.io/micronutr/}
+  \item \url{https://github.com/nutriverse/micronutr}
+  \item Report bugs at \url{https://github.com/nutriverse/micronutr/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID})
 

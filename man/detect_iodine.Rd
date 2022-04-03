@@ -24,8 +24,8 @@ detect_iodine_lactating(iodine = NULL, label = TRUE)
 concentration (μg/L) of the population or populations of interest.}
 
 \item{group}{The population group of interest. Either school age children
-(**general**), pregnant women (**pregnant**), or lactating women with
-children under 2 years old (**lactating**)}
+(\strong{general}), pregnant women (\strong{pregnant}), or lactating women with
+children under 2 years old (\strong{lactating})}
 
 \item{label}{Logical. Should labels be used to classify iodine intake
 status? If TRUE (default), status is classified descriptively as
@@ -33,15 +33,15 @@ insufficient, adequate, excessive, or the like. If FALSE, simple integer
 codes are returned.}
 }
 \value{
-If [label] is TRUE, a character value or character vector of iodine
-  intake status. If [label] is FALSE, an integer value or integer vector of
-  iodine intake status.
+If \code{label} is TRUE, a character value or character vector of iodine
+intake status. If \code{label} is FALSE, an integer value or integer vector of
+iodine intake status.
 }
 \description{
 Determining population level iodine intake status using mean urinary iodine
-concentration for school age children (**general**), pregnant women
-(**pregnant**), or lactating women with children under 2 years old
-(**lactating**).
+concentration for school age children (\strong{general}), pregnant women
+(\strong{pregnant}), or lactating women with children under 2 years old
+(\strong{lactating}).
 }
 \examples{
 detect_iodine(iodine = 10)

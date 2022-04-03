@@ -18,7 +18,7 @@ day; 2 = 1 up to less than 2 packets a day; 3 = 2 or more packets a day.}
 }
 \value{
 A numeric value or numeric vector of corrected serum haemoglobin
-  concentration/s in grams per litre (g/l)
+concentration/s in grams per litre (g/l)
 }
 \description{
 Correct haemoglobin based on altitude and/or smoking status

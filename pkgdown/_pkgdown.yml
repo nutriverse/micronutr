@@ -1,0 +1,59 @@
+title: micronutr
+
+url: https://nutriverse.io/micronutr/
+
+template:
+  bootstrap: 5
+  bootswatch: lumen
+  theme: haddock
+  ganalytics: #
+
+navbar:
+  bg: primary
+  type: light
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [twitter, linkedin, github]
+
+  components:
+    #articles:
+    #  text: Articles
+    #  menu:
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/katilingban
+    linkedin:
+      icon: "fab fa-linkedin fa-lg"
+      href: https://www.linkedin.com/company/katilingban
+
+home:
+  links:
+  - text: Read more about haemoglobin concentrations for the diagnosis of anaemia and assessment of severity
+    href: https://www.who.int/vmnis/indicators/haemoglobin.pdf
+
+reference:
+  - title: Description
+    contents:
+    - micronutr
+
+  - title: Haemoglobinaemia
+    contents:
+    - get_altitude_correction
+    - get_smoking_correction
+    - correct_hb
+    - detect_anaemia
+
+  - title: Iron deficiency
+    contents:
+    - detect_inflammation
+    - correct_ferritin
+    - detect_iron_deficiency
+
+  - title: Iodine intake
+    contents:
+    - detect_iodine
+
+  - title: Datasets
+    contents:
+    - mnData
+

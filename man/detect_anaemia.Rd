@@ -38,23 +38,23 @@ If TRUE (default), status is classified as "no iron deficiency" or
 no iron deficiency and 1 for iron deficiency.}
 
 \item{group}{A character value specifying the population target group to
-identify haemoglobinaemia from. Can be either one of **u5**, **5to11**,
-**11to14**, **np_women**, **pregnant**, or **men**. Default is **u5**.}
+identify haemoglobinaemia from. Can be either one of \strong{u5}, \strong{5to11},
+\strong{11to14}, \strong{np_women}, \strong{pregnant}, or \strong{men}. Default is \strong{u5}.}
 }
 \value{
-If [label] is TRUE, a character value or character vector of
-  haemoglobinaemia status classification (can be either "severe anaemia" or
-  "moderate anaemia", "mild anaemia", or "no anaemia"). If [label] is FALSE,
-  an integer value or integer vector of haemoglobinaemia status
-  classification (0 = no anaemia; 1 = mild anaemia; 2 = moderate anaemia;
-  3 = severe anaemia)
+If \code{label} is TRUE, a character value or character vector of
+haemoglobinaemia status classification (can be either "severe anaemia" or
+"moderate anaemia", "mild anaemia", or "no anaemia"). If \code{label} is FALSE,
+an integer value or integer vector of haemoglobinaemia status
+classification (0 = no anaemia; 1 = mild anaemia; 2 = moderate anaemia;
+3 = severe anaemia)
 }
 \description{
 This set of functions identifies haemoglobinaemia in specific target groups
-such as children under 5 years (**u5**), children 5-11 years of age
-(**5to11**), children 12-14 years of age (**12to14**), non-pregnant women 15
-years and above (**np_women**), pregnant women (**pregnant**), and men
-(**men**).
+such as children under 5 years (\strong{u5}), children 5-11 years of age
+(\strong{5to11}), children 12-14 years of age (\strong{12to14}), non-pregnant women 15
+years and above (\strong{np_women}), pregnant women (\strong{pregnant}), and men
+(\strong{men}).
 }
 \examples{
 x <- subset(mnData, age < 5)

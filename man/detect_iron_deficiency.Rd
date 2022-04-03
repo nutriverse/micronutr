@@ -36,10 +36,10 @@ determine iron status from. Can be either for under 5 year old ("u5") or
 not?}
 }
 \value{
-If [label] is TRUE, a character value or character vector of iron
-  status classification (can be either "iron deficiency" or "no iron
-  deficiency"). If [label] is FALSE, an integer value or integer vector of
-  iron status classification (0 = no iron deficiency; 1 = iron deficiency)
+If \code{label} is TRUE, a character value or character vector of iron
+status classification (can be either "iron deficiency" or "no iron
+deficiency"). If \code{label} is FALSE, an integer value or integer vector of
+iron status classification (0 = no iron deficiency; 1 = iron deficiency)
 }
 \description{
 Given serum ferritin values, determine iron storage status.

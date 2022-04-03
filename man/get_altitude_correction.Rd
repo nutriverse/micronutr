@@ -11,7 +11,7 @@ get_altitude_correction(alt = NULL)
 }
 \value{
 A numeric value or numeric vector of correction factor/s for
-  haemoglobin based on altitude
+haemoglobin based on altitude
 }
 \description{
 Determine altitude correction factor for haemoglobin
