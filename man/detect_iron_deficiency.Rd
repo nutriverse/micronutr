@@ -13,7 +13,11 @@ detect_iron_deficiency_5over(ferritin = NULL, label = TRUE)
 
 detect_iron_deficiency(ferritin = NULL, group = c("u5", "5over"), label = TRUE)
 
-detect_iron_deficiency_qualitative(ferritin = NULL, inflammation = NULL)
+detect_iron_deficiency_qualitative(
+  ferritin = NULL,
+  inflammation = NULL,
+  label = TRUE
+)
 }
 \arguments{
 \item{ferritin}{A numeric value or numeric vector of serum ferritin level in

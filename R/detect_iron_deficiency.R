@@ -238,12 +238,14 @@ detect_iron_deficiency <- function(ferritin = NULL,
 ################################################################################
 
 detect_iron_deficiency_qualitative <- function(ferritin = NULL,
-                                               inflammation = NULL) {
+                                               inflammation = NULL,
+                                               label = TRUE) {
   ## Vectorise detect_iron_deficiency_qualitative
   iron_status <- Map(
     f = detect_iron_deficiency_qualitative_,
     ferritin = ferritin,
-    inflammation = inflammation
+    inflammation = inflammation,
+    label = label
   )
 
   ##
@@ -262,6 +264,7 @@ detect_iron_deficiency_qualitative <- function(ferritin = NULL,
 
 detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
                                                 inflammation = NULL,
+                                                group = c("u5", "5over"),
                                                 label = TRUE) {
   ## Check if ferritin is NULL
   if (is.null(ferritin)) {
@@ -274,23 +277,33 @@ detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
   }
 
   ##
-  if (!is.logical(inflammation)) {
+  if (!is.logical(inflammation) & !is.null(inflammation)) {
     stop("Inflammation status should be logical. Please try again.")
   }
 
-  if (inflammation) {
-    if (label) {
-      iron_status <- ifelse(
-        ferritin < 30, "iron deficiency", "no iron deficiency"
-      )
-    } else {
-      iron_status <- ifelse(ferritin < 30, 1, 0)
-    }
-  } else {
+  ## Get group
+  group <- match.arg(group)
+
+  ## Check if inflammation is NULL
+  if (is.null(inflammation)) {
     if (label) {
       iron_status <- NA_character_
     } else {
       iron_status <- NA_integer_
+    }
+  } else {
+    if (inflammation) {
+      if (label) {
+        iron_status <- ifelse(
+          ferritin < 30, "iron deficiency", "no iron deficiency"
+        )
+      } else {
+        iron_status <- ifelse(ferritin < 30, 1, 0)
+      }
+    } else {
+      iron_status <- detect_iron_deficiency(
+        ferritin = ferritin, group = group, label = label
+      )
     }
   }
 

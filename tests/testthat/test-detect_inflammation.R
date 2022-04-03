@@ -29,8 +29,13 @@ testthat::test_that("output is of correct type", {
 
 testthat::test_that("error message shows", {
   expect_error(detect_inflammation_crp())
+  expect_error(detect_inflammation_crp(crp = "a"))
   expect_error(detect_inflammation_agp())
+  expect_error(detect_inflammation_agp(agp = "a"))
   expect_error(detect_inflammation())
+  expect_error(detect_inflammation(crp = "a", agp = "b"))
+  expect_error(detect_inflammation(crp = "a"))
+  expect_error(detect_inflammation(agp = "b"))
 })
 
 
