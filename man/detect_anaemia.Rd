@@ -33,9 +33,10 @@ detect_anaemia(
 grams per litre (g/L).}
 
 \item{label}{Logical. Should labels be used to classify haemoglobinaemia?
-If TRUE (default), status is classified as "no iron deficiency" or
-"iron deficiency". If FALSE, simple integer codes are returned: 0 for
-no iron deficiency and 1 for iron deficiency.}
+If TRUE (default), status is classified as "no anaemia", "mild anaemia",
+"moderate anaemia", or "severe anaemia". If FALSE, simple integer codes
+are returned: 0 for no anaemia; 1 for mild anaemia; 2 for moderate anaemia;
+3 for severe anaemia.}
 
 \item{group}{A character value specifying the population target group to
 identify haemoglobinaemia from. Can be either one of \strong{u5}, \strong{5to11},
@@ -62,7 +63,6 @@ detect_anaemia_u5(hb = x$hb * 10)
 detect_anaemia_u5(hb = x$hb * 10, label = FALSE)
 detect_anaemia(hb = x$hb * 10)
 detect_anaemia(hb = x$hb * 10, label = FALSE)
-
 
 }
 \author{

@@ -14,9 +14,10 @@
 #'   identify haemoglobinaemia from. Can be either one of **u5**, **5to11**,
 #'   **11to14**, **np_women**, **pregnant**, or **men**. Default is **u5**.
 #' @param label Logical. Should labels be used to classify haemoglobinaemia?
-#'   If TRUE (default), status is classified as "no iron deficiency" or
-#'   "iron deficiency". If FALSE, simple integer codes are returned: 0 for
-#'   no iron deficiency and 1 for iron deficiency.
+#'   If TRUE (default), status is classified as "no anaemia", "mild anaemia",
+#'   "moderate anaemia", or "severe anaemia". If FALSE, simple integer codes
+#'   are returned: 0 for no anaemia; 1 for mild anaemia; 2 for moderate anaemia;
+#'   3 for severe anaemia.
 #'
 #' @return If `label` is TRUE, a character value or character vector of
 #'   haemoglobinaemia status classification (can be either "severe anaemia" or
@@ -31,7 +32,6 @@
 #' detect_anaemia_u5(hb = x$hb * 10, label = FALSE)
 #' detect_anaemia(hb = x$hb * 10)
 #' detect_anaemia(hb = x$hb * 10, label = FALSE)
-#'
 #'
 #' @author Nicholus Tint Zaw and Ernest Guevarra
 #'

@@ -90,9 +90,7 @@ concentration/s in grams per litre (g/l)</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">correct_hb</span><span class="op">(</span>hb <span class="op">=</span> <span class="va">mnData</span><span class="op">$</span><span class="va">hb</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, alt <span class="op">=</span> <span class="va">mnData</span><span class="op">$</span><span class="va">alt</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, smoke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `alt`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Altitude not provided. Returning haemoglobin corrected for smoking status only.</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">correct_hb</span><span class="op">(</span>hb <span class="op">=</span> <span class="va">mnData</span><span class="op">$</span><span class="va">hb</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, alt <span class="op">=</span> <span class="va">mnData</span><span class="op">$</span><span class="va">altitude</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, smoke <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10.2</span>
 <span class="r-in"></span>
 </code></pre></div>

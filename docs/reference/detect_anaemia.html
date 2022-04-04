@@ -101,9 +101,10 @@ years and above (<strong>np_women</strong>), pregnant women (<strong>pregnant</s
 grams per litre (g/L).</p></dd>
 <dt>label</dt>
 <dd><p>Logical. Should labels be used to classify haemoglobinaemia?
-If TRUE (default), status is classified as "no iron deficiency" or
-"iron deficiency". If FALSE, simple integer codes are returned: 0 for
-no iron deficiency and 1 for iron deficiency.</p></dd>
+If TRUE (default), status is classified as "no anaemia", "mild anaemia",
+"moderate anaemia", or "severe anaemia". If FALSE, simple integer codes
+are returned: 0 for no anaemia; 1 for mild anaemia; 2 for moderate anaemia;
+3 for severe anaemia.</p></dd>
 <dt>group</dt>
 <dd><p>A character value specifying the population target group to
 identify haemoglobinaemia from. Can be either one of <strong>u5</strong>, <strong>5to11</strong>,
@@ -7516,7 +7517,6 @@ classification (0 = no anaemia; 1 = mild anaemia; 2 = moderate anaemia;
 <span class="r-out co"><span class="r-pr">#&gt;</span> [9793]  0 NA  0  1  0 NA  1  1  2  2  0  1  0  2  0  1  1  0  0  0  2  1  3  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [9817]  0  2 NA  0  0  0  2  0  2  0  2  0  0  1  0  2  1  0  1  0  0  0  0  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [9841]  2  0  0  0  0  0</span>
-<span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

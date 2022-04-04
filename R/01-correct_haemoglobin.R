@@ -30,7 +30,8 @@ get_altitude_correction <- function(alt = NULL) {
   alt_factor <- cut(
     alt,
     breaks = c(-Inf, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, Inf),
-    labels = c(0, -2, -5, -8, -13, -19, -27, -35, -45)
+    labels = c(0, -2, -5, -8, -13, -19, -27, -35, -45),
+    right = FALSE
   )
   alt_factor <- as.numeric(as.character(alt_factor))
 
@@ -75,7 +76,8 @@ get_smoking_correction <- function(smoke = NULL) {
   smoke_factor <- cut(
     smoke,
     breaks = c(-Inf, 0, 1, 2, 3),
-    labels = c(0, -0.3, -0.5, -0.7)
+    labels = c(0, -0.3, -0.5, -0.7),
+    right = TRUE
   )
   smoke_factor <- as.numeric(as.character(smoke_factor))
 
@@ -100,7 +102,7 @@ get_smoking_correction <- function(smoke = NULL) {
 #'   concentration/s in grams per litre (g/l)
 #'
 #' @examples
-#' correct_hb(hb = mnData$hb[1], alt = mnData$alt[1], smoke = 1)
+#' correct_hb(hb = mnData$hb[1], alt = mnData$altitude[1], smoke = 1)
 #'
 #' @author Ernest Guevarra
 #'
@@ -157,3 +159,4 @@ correct_hb <- function(hb = NULL, alt = NULL, smoke = NULL) {
   ## Return
   corrected_hb
 }
+

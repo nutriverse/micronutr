@@ -24,7 +24,7 @@ concentration/s in grams per litre (g/l)
 Correct haemoglobin based on altitude and/or smoking status
 }
 \examples{
-correct_hb(hb = mnData$hb[1], alt = mnData$alt[1], smoke = 1)
+correct_hb(hb = mnData$hb[1], alt = mnData$altitude[1], smoke = 1)
 
 }
 \author{
