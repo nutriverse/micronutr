@@ -12,13 +12,15 @@ navbar:
   bg: primary
   type: light
   structure:
-    left:  [intro, reference, articles, news]
+    left:  [home, reference, articles, news]
     right: [twitter, linkedin, github]
 
   components:
-    #articles:
-    #  text: Articles
-    #  menu:
+    articles:
+      text: Articles
+      menu:
+      - text: "Introduction to micronutr"
+        href: articles/micronutr.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/katilingban

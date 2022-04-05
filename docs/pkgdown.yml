@@ -1,8 +1,9 @@
 pandoc: 2.17.1.1
 pkgdown: 2.0.2
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-04-05T04:24Z
+articles:
+  micronutr: micronutr.html
+last_built: 2022-04-05T08:11Z
 urls:
   reference: https://nutriverse.io/micronutr/reference
   article: https://nutriverse.io/micronutr/articles
