@@ -21,9 +21,25 @@ health problem. This is particularly critical in developing countries
 where deficiencies to vitamin A, iron, iodine, and other micronutrients
 lead to adverse health consequences. Cross-sectional surveys are helpful
 in answering questions related to the magnitude and distribution of
-deficiencies of selected vitamins and minerals. This package provides
-tools for calculating and determining select vitamin and mineral
-deficiencies using R.
+deficiencies of selected vitamins and minerals.
+
+## What does `micronutr` do?
+
+The `micronutr` package provides tools for calculating and determining
+select vitamin and mineral deficiencies using R. Currently, `micronutr`
+has functions for:
+
+-   detecting **haemoglobinaemia** or anaemia based on an individual’s
+    *serum haemoglobin* level;
+
+-   detecting **inflammation** status based on *c-reactive protein
+    (CRP)* and *alpha(1)-acid-glycoprotein (AGP)*;
+
+-   detecting **iron deficiency** status based on an individual’s *serum
+    ferritin* level;
+
+-   detecting **iodine deficiency** status based on a population’s mean
+    urinary iodine concentration.
 
 ## Installation
 
@@ -36,6 +52,251 @@ remotes::install_github("nutriverse/micronutr")
 ```
 
 ## Usage
+
+### Detecting haemoglobinaemia
+
+Given an individual’s serum haemoglobin level, anaemia status can be
+classified as either *not present*, *mild*, *moderate*, or *severe*. The
+serum haemoglobin cut-offs for classification of anaemia status are
+different for specific population groups as shown in the table below.
+
+| **Population**                        | **Mild**  | **Moderate** | **Severe** |
+|:--------------------------------------|:----------|:-------------|:-----------|
+| Children under 5 years of age         | 100 - 109 | 70 - 99      | \< 70      |
+| Children 5-11 years of age            | 110 - 114 | 80 - 109     | \< 80      |
+| Children 12-14 years of age           | 110 - 119 | 80 - 109     | \< 80      |
+| Non-pregnant women 15 years and above | 110 - 119 | 80 - 109     | \< 80      |
+| Pregnant women                        | 100 - 109 | 70 - 99      | \< 70      |
+| Men 15 years and above                | 110 - 129 | 80 - 109     | \< 80      |
+
+The functions in the `detect_anaemia` function set use these serum
+haemoglobin cut-offs to classify individuals from specific population
+groups as either having **no anaemia**, **mild anaemia**, **moderate
+anaemia**, or **severe anaemia**. For example, a three year old child
+with a serum haemoglobin level of 105 g/L can be classified as follows:
+
+``` r
+detect_anaemia_u5(hb = 105)
+#> [1] "mild anaemia"
+```
+
+In this example, we use the `detect_anaemia_u5()` function which is
+specific for the under 5 years of age population group. Other functions
+for specific population groups are:
+
+-   `detect_anaemia_5to11()` - for children 5 to 11 years of age;
+
+-   `detect_anaemia_12to14()` - for children 12 to 14 years of age;
+
+-   `detect_anaemia_np_women()` - for women 15 years and older who are
+    not pregnant;
+
+-   `detect_anaemia_pregnant()` - for pregnant women; and,
+
+-   `detect_anaemia_men()` - for men 15 years and older.
+
+The more general `detect_anaemia()` function can also be used in this
+case:
+
+``` r
+detect_anaemia(hb = 105, group = "u5")
+#> [1] "mild anaemia"
+```
+
+In this case, we just need to specify the population group that the case
+corresponds to, which in this example is the under 5 years of age group
+(specified as “u5”). The different population age group can be specified
+as “5to11” for children 5 to 11 years of age, “12to14” for children 12
+to 14 years of age, “np_women” for women 15 years and older who are not
+pregnant, “pregnant” for pregnant women, or “men” for men 15 years and
+older.
+
+### Correcting serum haemoglobin
+
+Serum haemoglobin levels are affected by the altitude of where an
+individual lives and by an individual’s smoking status. Altitudes of
+1000 metres or more increase serum haemoglobin levels. A smoker would
+have elevated serum haemoglobin levels and the greater the number of
+packs of cigarette an individual smokes in a day further increases serum
+haemoglobin levels.
+
+It is recommended that serum haemoglobin be adjusted accordingly
+depending on the altitude of where an individuals lives and/or by an
+individual’s smoking status.
+
+The recommended adjustment of serum haemoglobin based on altitude is
+shown in the table below:
+
+| **Altitude (metres above sea level)** | **Measured haemoglobin adjustment (g/L)** |
+|:-------------------------------------:|:-----------------------------------------:|
+|                \< 1000                |                     0                     |
+|                 1000                  |                    -2                     |
+|                 1500                  |                    -5                     |
+|                 2000                  |                    -8                     |
+|                 2500                  |                    -13                    |
+|                 3000                  |                    -19                    |
+|                 3500                  |                    -27                    |
+|                 4000                  |                    -35                    |
+|                 4500                  |                    -45                    |
+
+The function `get_altitude_correction()` provides the appropriate
+haemoglobin correction factor given altitude in metres. For example, the
+haemoglobin correction factor for a person who lives in a place at 1400
+metres above sea level is determined as follows:
+
+``` r
+get_altitude_correction(alt = 1400)
+#> [1] -2
+```
+
+An adjustment of -2 g/L to measured haemoglobin at 1400 metres above sea
+level will be needed.
+
+The recommended adjustment of serum haemoglobin based on smoking status
+is shown in the table below:
+
+| **Smoking status** | **Measured haemoglobin adjustment (g/L)** |
+|:-------------------|:-----------------------------------------:|
+| Non-smoker         |                     0                     |
+| Smoker (all)       |                   -0.3                    |
+| ½ -1 packet/day    |                   -0.3                    |
+| 1-2 packets/day    |                   -0.5                    |
+| ≥ 2 packets/day    |                   -0.7                    |
+
+The function `get_smoking_correction()` provides the appropriate
+haemoglobin correction factor given smoking status. For example, the
+haemoglobin correction factor for a person who smokes 1.5 packs a day is
+determined as follows:
+
+``` r
+get_smoking_correction(smoke = 1.5)
+#> [1] -0.5
+```
+
+An adjustment of -0.5 g/L to measured haemoglobin of an individual who
+smokes 1.5 packs of cigarette per day will be needed.
+
+The function `correct_hb()` provides adjusted haemoglobin values given
+altitude above sea level and smoking status. For example, an individual
+with a haemoglobin of 105 g/L who is a smoker at 1.5 packs a day and
+lives 1400 metres above sea level will have an adjusted haemoglobin of:
+
+``` r
+correct_hb(hb = 105, alt = 1400, smoke = 1.5)
+#> [1] 102.5
+```
+
+This individual will have a corrected haemoglobin of 102.5 g/L.
+
+## Detecting inflammation
+
+Inflammation, and its different stages, can be assessed based on the the
+levels of acute-phase proteins - one of either *c-reactive protein
+(CRP)* or *α1-acid-glycoprotein (AGP)*, or both.
+
+### Classifying inflammation based on CRP or AGP only
+
+The classification of inflammation status based on either CRP or AGP
+only is shown in the table below.
+
+| **Acute-phase Protein** | **Cut-off Points** |
+|:------------------------|:-------------------|
+| CRP                     | \> 5 µ/L           |
+| AGP                     | \> 1 g/L           |
+
+The function `detect_inflammation_crp()` classifies *c-reactive protein*
+levels based on the cut-off point shown above to detect inflammation.
+For example, if CRP is at 2 µg/L,
+
+``` r
+detect_inflammation_crp(crp = 2)
+#> [1] "no inflammation"
+```
+
+the individual is classified as not having inflammation.
+
+We can also set the function to provide simple integer codes to classify
+inflammation by setting the `label` argument to FALSE.
+
+``` r
+detect_inflammation_crp(crp = 2, label = FALSE)
+#> [1] 0
+```
+
+In this case, an integer code of 0 is provided to indicate a no
+inflammation status. This would be useful in workflows that
+require/prefer integer codes for binary classification.
+
+The function `detect_inflammation_agp()` classifies
+*α1-acid-glycoprotein (AGP)* levels based on the cut-off point shown
+above to detect inflammation. For example, if AGP is at 1.5 g/L,
+
+``` r
+detect_inflammation_agp(agp = 1.5)
+#> [1] "inflammation"
+```
+
+the individual is classified as having inflammation.
+
+We can also set the function to provide simple integer codes to classify
+inflammation by setting the `label` argument to FALSE.
+
+``` r
+detect_inflammation_agp(agp = 1.5, label = FALSE)
+#> [1] 1
+```
+
+In this case, an integer code of 1 is provided to indicate inflammation
+status. This would be useful in workflows that require/prefer integer
+codes for binary classification.
+
+These functions are useful for classifying inflammation when data for
+only one of active-phase proteins is available.
+
+### Classifying inflammation based on both CRP and AGP
+
+The detailed classification of inflammation status based on the
+combination of CRP and AGP is shown in the table below.
+
+| **Inflammation Status** | **Cut-off Points**              |
+|:------------------------|:--------------------------------|
+| Incubation              | CRP \> 5 µg/L and AGP \<= 1 g/L |
+| Early convalescence     | CRP \> 5 µg/L and AGP \> 1 g/L  |
+| Late convalescence      | CRP \<= 5 µg/L and AGP \> 1 g/L |
+
+The function `detect_inflammation()` accepts values for both CRP and AGP
+to classify inflammation status. For example, an individual with CRP of
+2 µg/L and AGP of 1.5 g/L,
+
+``` r
+detect_inflammation(crp = 2, agp = 1.5)
+#> [1] "late convalescence"
+```
+
+the individual is classified as being in late convalescence.
+
+We can also set the function to provide simple integer codes to classify
+inflammation by setting the `label` argument to FALSE.
+
+``` r
+detect_inflammation(crp = 2, agp = 1.5, label = FALSE)
+#> [1] 3
+```
+
+In this case, an integer code of 3 is provided to indicate late
+convalescence status. This would be useful in workflows that
+require/prefer integer codes for classification.
+
+The `detect_inflammation()` function can also be used for assessing
+inflammation status using only one of the active-phase proteins. Using
+the earlier example of an individual with a CRP of 2 µg/L,
+
+``` r
+detect_inflammation(crp = 2)
+#> [1] "no inflammation"
+```
+
+we get the same result as using the `detect_inflammation_crp()`.
 
 ## Citation
 

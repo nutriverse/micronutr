@@ -109,9 +109,25 @@ health problem. This is particularly critical in developing countries
 where deficiencies to vitamin A, iron, iodine, and other micronutrients
 lead to adverse health consequences. Cross-sectional surveys are helpful
 in answering questions related to the magnitude and distribution of
-deficiencies of selected vitamins and minerals. This package provides
-tools for calculating and determining select vitamin and mineral
-deficiencies using R.</p>
+deficiencies of selected vitamins and minerals.</p>
+<div class="section level2">
+<h2 id="what-does-micronutr-do">What does <code>micronutr</code> do?<a class="anchor" aria-label="anchor" href="#what-does-micronutr-do"></a>
+</h2>
+<p>The <code>micronutr</code> package provides tools for calculating and
+determining select vitamin and mineral deficiencies using R. Currently,
+<code>micronutr</code> has functions for:</p>
+<ul>
+<li><p>detecting <strong>haemoglobinaemia</strong> or anaemia based on
+an individual’s <em>serum haemoglobin</em> level;</p></li>
+<li><p>detecting <strong>inflammation</strong> status based on
+<em>c-reactive protein (CRP)</em> and <em>alpha(1)-acid-glycoprotein
+(AGP)</em>;</p></li>
+<li><p>detecting <strong>iron deficiency</strong> status based on an
+individual’s <em>serum ferritin</em> level;</p></li>
+<li><p>detecting <strong>iodine deficiency</strong> status based on a
+population’s mean urinary iodine concentration.</p></li>
+</ul>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -125,6 +141,342 @@ with:</p>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
+<div class="section level3">
+<h3 id="detecting-haemoglobinaemia">Detecting haemoglobinaemia<a class="anchor" aria-label="anchor" href="#detecting-haemoglobinaemia"></a>
+</h3>
+<p>Given an individual’s serum haemoglobin level, anaemia status can be
+classified as either <em>not present</em>, <em>mild</em>,
+<em>moderate</em>, or <em>severe</em>. The serum haemoglobin cut-offs
+for classification of anaemia status are different for specific
+population groups as shown in the table below.</p>
+<table class="table">
+<colgroup>
+<col width="51%">
+<col width="14%">
+<col width="18%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"><strong>Population</strong></th>
+<th align="left"><strong>Mild</strong></th>
+<th align="left"><strong>Moderate</strong></th>
+<th align="left"><strong>Severe</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Children under 5 years of age</td>
+<td align="left">100 - 109</td>
+<td align="left">70 - 99</td>
+<td align="left">&lt; 70</td>
+</tr>
+<tr class="even">
+<td align="left">Children 5-11 years of age</td>
+<td align="left">110 - 114</td>
+<td align="left">80 - 109</td>
+<td align="left">&lt; 80</td>
+</tr>
+<tr class="odd">
+<td align="left">Children 12-14 years of age</td>
+<td align="left">110 - 119</td>
+<td align="left">80 - 109</td>
+<td align="left">&lt; 80</td>
+</tr>
+<tr class="even">
+<td align="left">Non-pregnant women 15 years and above</td>
+<td align="left">110 - 119</td>
+<td align="left">80 - 109</td>
+<td align="left">&lt; 80</td>
+</tr>
+<tr class="odd">
+<td align="left">Pregnant women</td>
+<td align="left">100 - 109</td>
+<td align="left">70 - 99</td>
+<td align="left">&lt; 70</td>
+</tr>
+<tr class="even">
+<td align="left">Men 15 years and above</td>
+<td align="left">110 - 129</td>
+<td align="left">80 - 109</td>
+<td align="left">&lt; 80</td>
+</tr>
+</tbody>
+</table>
+<p>The functions in the <code>detect_anaemia</code> function set use
+these serum haemoglobin cut-offs to classify individuals from specific
+population groups as either having <strong>no anaemia</strong>,
+<strong>mild anaemia</strong>, <strong>moderate anaemia</strong>, or
+<strong>severe anaemia</strong>. For example, a three year old child
+with a serum haemoglobin level of 105 g/L can be classified as
+follows:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_anaemia.html">detect_anaemia_u5</a></span><span class="op">(</span>hb <span class="op">=</span> <span class="fl">105</span><span class="op">)</span>
+<span class="co">#&gt; [1] "mild anaemia"</span></code></pre></div>
+<p>In this example, we use the <code><a href="reference/detect_anaemia.html">detect_anaemia_u5()</a></code> function
+which is specific for the under 5 years of age population group. Other
+functions for specific population groups are:</p>
+<ul>
+<li><p><code><a href="reference/detect_anaemia.html">detect_anaemia_5to11()</a></code> - for children 5 to 11 years
+of age;</p></li>
+<li><p><code><a href="reference/detect_anaemia.html">detect_anaemia_12to14()</a></code> - for children 12 to 14
+years of age;</p></li>
+<li><p><code><a href="reference/detect_anaemia.html">detect_anaemia_np_women()</a></code> - for women 15 years and
+older who are not pregnant;</p></li>
+<li><p><code><a href="reference/detect_anaemia.html">detect_anaemia_pregnant()</a></code> - for pregnant women;
+and,</p></li>
+<li><p><code><a href="reference/detect_anaemia.html">detect_anaemia_men()</a></code> - for men 15 years and
+older.</p></li>
+</ul>
+<p>The more general <code><a href="reference/detect_anaemia.html">detect_anaemia()</a></code> function can also be
+used in this case:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_anaemia.html">detect_anaemia</a></span><span class="op">(</span>hb <span class="op">=</span> <span class="fl">105</span>, group <span class="op">=</span> <span class="st">"u5"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "mild anaemia"</span></code></pre></div>
+<p>In this case, we just need to specify the population group that the
+case corresponds to, which in this example is the under 5 years of age
+group (specified as “u5”). The different population age group can be
+specified as “5to11” for children 5 to 11 years of age, “12to14” for
+children 12 to 14 years of age, “np_women” for women 15 years and older
+who are not pregnant, “pregnant” for pregnant women, or “men” for men 15
+years and older.</p>
+</div>
+<div class="section level3">
+<h3 id="correcting-serum-haemoglobin">Correcting serum haemoglobin<a class="anchor" aria-label="anchor" href="#correcting-serum-haemoglobin"></a>
+</h3>
+<p>Serum haemoglobin levels are affected by the altitude of where an
+individual lives and by an individual’s smoking status. Altitudes of
+1000 metres or more increase serum haemoglobin levels. A smoker would
+have elevated serum haemoglobin levels and the greater the number of
+packs of cigarette an individual smokes in a day further increases serum
+haemoglobin levels.</p>
+<p>It is recommended that serum haemoglobin be adjusted accordingly
+depending on the altitude of where an individuals lives and/or by an
+individual’s smoking status.</p>
+<p>The recommended adjustment of serum haemoglobin based on altitude is
+shown in the table below:</p>
+<table class="table">
+<colgroup>
+<col width="47%">
+<col width="52%">
+</colgroup>
+<thead><tr class="header">
+<th align="center"><strong>Altitude (metres above sea
+level)</strong></th>
+<th align="center"><strong>Measured haemoglobin adjustment
+(g/L)</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">&lt; 1000</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1000</td>
+<td align="center">-2</td>
+</tr>
+<tr class="odd">
+<td align="center">1500</td>
+<td align="center">-5</td>
+</tr>
+<tr class="even">
+<td align="center">2000</td>
+<td align="center">-8</td>
+</tr>
+<tr class="odd">
+<td align="center">2500</td>
+<td align="center">-13</td>
+</tr>
+<tr class="even">
+<td align="center">3000</td>
+<td align="center">-19</td>
+</tr>
+<tr class="odd">
+<td align="center">3500</td>
+<td align="center">-27</td>
+</tr>
+<tr class="even">
+<td align="center">4000</td>
+<td align="center">-35</td>
+</tr>
+<tr class="odd">
+<td align="center">4500</td>
+<td align="center">-45</td>
+</tr>
+</tbody>
+</table>
+<p>The function <code><a href="reference/get_altitude_correction.html">get_altitude_correction()</a></code> provides the
+appropriate haemoglobin correction factor given altitude in metres. For
+example, the haemoglobin correction factor for a person who lives in a
+place at 1400 metres above sea level is determined as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/get_altitude_correction.html">get_altitude_correction</a></span><span class="op">(</span>alt <span class="op">=</span> <span class="fl">1400</span><span class="op">)</span>
+<span class="co">#&gt; [1] -2</span></code></pre></div>
+<p>An adjustment of -2 g/L to measured haemoglobin at 1400 metres above
+sea level will be needed.</p>
+<p>The recommended adjustment of serum haemoglobin based on smoking
+status is shown in the table below:</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Smoking status</strong></th>
+<th align="center"><strong>Measured haemoglobin adjustment
+(g/L)</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Non-smoker</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Smoker (all)</td>
+<td align="center">-0.3</td>
+</tr>
+<tr class="odd">
+<td align="left">½ -1 packet/day</td>
+<td align="center">-0.3</td>
+</tr>
+<tr class="even">
+<td align="left">1-2 packets/day</td>
+<td align="center">-0.5</td>
+</tr>
+<tr class="odd">
+<td align="left">≥ 2 packets/day</td>
+<td align="center">-0.7</td>
+</tr>
+</tbody>
+</table>
+<p>The function <code><a href="reference/get_smoking_correction.html">get_smoking_correction()</a></code> provides the
+appropriate haemoglobin correction factor given smoking status. For
+example, the haemoglobin correction factor for a person who smokes 1.5
+packs a day is determined as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/get_smoking_correction.html">get_smoking_correction</a></span><span class="op">(</span>smoke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="co">#&gt; [1] -0.5</span></code></pre></div>
+<p>An adjustment of -0.5 g/L to measured haemoglobin of an individual
+who smokes 1.5 packs of cigarette per day will be needed.</p>
+<p>The function <code><a href="reference/correct_hb.html">correct_hb()</a></code> provides adjusted haemoglobin
+values given altitude above sea level and smoking status. For example,
+an individual with a haemoglobin of 105 g/L who is a smoker at 1.5 packs
+a day and lives 1400 metres above sea level will have an adjusted
+haemoglobin of:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/correct_hb.html">correct_hb</a></span><span class="op">(</span>hb <span class="op">=</span> <span class="fl">105</span>, alt <span class="op">=</span> <span class="fl">1400</span>, smoke <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="co">#&gt; [1] 102.5</span></code></pre></div>
+<p>This individual will have a corrected haemoglobin of 102.5 g/L.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="detecting-inflammation">Detecting inflammation<a class="anchor" aria-label="anchor" href="#detecting-inflammation"></a>
+</h2>
+<p>Inflammation, and its different stages, can be assessed based on the
+the levels of acute-phase proteins - one of either <em>c-reactive
+protein (CRP)</em> or <em>α1-acid-glycoprotein (AGP)</em>, or both.</p>
+<div class="section level3">
+<h3 id="classifying-inflammation-based-on-crp-or-agp-only">Classifying inflammation based on CRP or AGP only<a class="anchor" aria-label="anchor" href="#classifying-inflammation-based-on-crp-or-agp-only"></a>
+</h3>
+<p>The classification of inflammation status based on either CRP or AGP
+only is shown in the table below.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Acute-phase Protein</strong></th>
+<th align="left"><strong>Cut-off Points</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">CRP</td>
+<td align="left">&gt; 5 µ/L</td>
+</tr>
+<tr class="even">
+<td align="left">AGP</td>
+<td align="left">&gt; 1 g/L</td>
+</tr>
+</tbody>
+</table>
+<p>The function <code><a href="reference/detect_inflammation.html">detect_inflammation_crp()</a></code> classifies
+<em>c-reactive protein</em> levels based on the cut-off point shown
+above to detect inflammation. For example, if CRP is at 2 µg/L,</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation_crp</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; [1] "no inflammation"</span></code></pre></div>
+<p>the individual is classified as not having inflammation.</p>
+<p>We can also set the function to provide simple integer codes to
+classify inflammation by setting the <code>label</code> argument to
+FALSE.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation_crp</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0</span></code></pre></div>
+<p>In this case, an integer code of 0 is provided to indicate a no
+inflammation status. This would be useful in workflows that
+require/prefer integer codes for binary classification.</p>
+<p>The function <code><a href="reference/detect_inflammation.html">detect_inflammation_agp()</a></code> classifies
+<em>α1-acid-glycoprotein (AGP)</em> levels based on the cut-off point
+shown above to detect inflammation. For example, if AGP is at 1.5
+g/L,</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation_agp</a></span><span class="op">(</span>agp <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="co">#&gt; [1] "inflammation"</span></code></pre></div>
+<p>the individual is classified as having inflammation.</p>
+<p>We can also set the function to provide simple integer codes to
+classify inflammation by setting the <code>label</code> argument to
+FALSE.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation_agp</a></span><span class="op">(</span>agp <span class="op">=</span> <span class="fl">1.5</span>, label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; [1] 1</span></code></pre></div>
+<p>In this case, an integer code of 1 is provided to indicate
+inflammation status. This would be useful in workflows that
+require/prefer integer codes for binary classification.</p>
+<p>These functions are useful for classifying inflammation when data for
+only one of active-phase proteins is available.</p>
+</div>
+<div class="section level3">
+<h3 id="classifying-inflammation-based-on-both-crp-and-agp">Classifying inflammation based on both CRP and AGP<a class="anchor" aria-label="anchor" href="#classifying-inflammation-based-on-both-crp-and-agp"></a>
+</h3>
+<p>The detailed classification of inflammation status based on the
+combination of CRP and AGP is shown in the table below.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left"><strong>Inflammation Status</strong></th>
+<th align="left"><strong>Cut-off Points</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Incubation</td>
+<td align="left">CRP &gt; 5 µg/L and AGP &lt;= 1 g/L</td>
+</tr>
+<tr class="even">
+<td align="left">Early convalescence</td>
+<td align="left">CRP &gt; 5 µg/L and AGP &gt; 1 g/L</td>
+</tr>
+<tr class="odd">
+<td align="left">Late convalescence</td>
+<td align="left">CRP &lt;= 5 µg/L and AGP &gt; 1 g/L</td>
+</tr>
+</tbody>
+</table>
+<p>The function <code><a href="reference/detect_inflammation.html">detect_inflammation()</a></code> accepts values for
+both CRP and AGP to classify inflammation status. For example, an
+individual with CRP of 2 µg/L and AGP of 1.5 g/L,</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span>, agp <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span>
+<span class="co">#&gt; [1] "late convalescence"</span></code></pre></div>
+<p>the individual is classified as being in late convalescence.</p>
+<p>We can also set the function to provide simple integer codes to
+classify inflammation by setting the <code>label</code> argument to
+FALSE.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span>, agp <span class="op">=</span> <span class="fl">1.5</span>, label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; [1] 3</span></code></pre></div>
+<p>In this case, an integer code of 3 is provided to indicate late
+convalescence status. This would be useful in workflows that
+require/prefer integer codes for classification.</p>
+<p>The <code><a href="reference/detect_inflammation.html">detect_inflammation()</a></code> function can also be used for
+assessing inflammation status using only one of the active-phase
+proteins. Using the earlier example of an individual with a CRP of 2
+µg/L,</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/detect_inflammation.html">detect_inflammation</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; [1] "no inflammation"</span></code></pre></div>
+<p>we get the same result as using the
+<code><a href="reference/detect_inflammation.html">detect_inflammation_crp()</a></code>.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
@@ -132,7 +484,7 @@ with:</p>
 <p>If you find the <code>micronutr</code> package useful, please cite
 using the suggested citation provided by a call to the
 <code>citation</code> function as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"micronutr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
