@@ -19,8 +19,14 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: "Introduction to micronutr"
-        href: articles/micronutr.html
+      - text: "Detecting haemoglobinaemia"
+        href: articles/haemoglobinaemia.html
+      - text: "Detecting inflammation"
+        href: articles/inflammation.html
+      - text: "Detecting iron deficiency"
+        href: articles/iron-deficiency.html
+      - text: "Detecting iodine deficiency"
+        href: articles/iodine-deficiency.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/katilingban
@@ -29,9 +35,9 @@ navbar:
       href: https://www.linkedin.com/company/katilingban
 
 home:
-  links:
-  - text: Read more about haemoglobin concentrations for the diagnosis of anaemia and assessment of severity
-    href: https://www.who.int/vmnis/indicators/haemoglobin.pdf
+  #links:
+  #- text: Read more about haemoglobin concentrations for the diagnosis of anaemia and assessment of severity
+  #  href: https://www.who.int/vmnis/indicators/haemoglobin.pdf
 
 reference:
   - title: Description

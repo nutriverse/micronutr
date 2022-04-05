@@ -1,8 +1,8 @@
 ---
-title: "Introduction to micronutr"
+title: "Detecting haemoglobinaemia"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to micronutr}
+  %\VignetteIndexEntry{Detecting haemoglobinaemia}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,20 +17,6 @@ knitr::opts_chunk$set(
 ```{r setup, echo = FALSE}
 library(micronutr)
 ```
-
-Vitamin and mineral deficiencies continue to be a significant public health problem. This is particularly critical in developing countries where deficiencies to vitamin A, iron, iodine, and other micronutrients lead to adverse health consequences. Cross-sectional surveys are helpful in answering questions related to the magnitude and distribution of deficiencies of selected vitamins and minerals.
-
-The `micronutr` package provides tools for determining select vitamin and mineral deficiencies using R. Currently, `micronutr` has functions for:
-
-* detecting **haemoglobinaemia** or anaemia based on an individual's *serum haemoglobin* level;
-
-* detecting **inflammation** status based on *c-reactive protein (CRP)* and *alpha(1)-acid-glycoprotein (AGP)*;
-
-* detecting **iron deficiency** status based on an individual's *serum ferritin* level;
-
-* detecting **iodine deficiency** status based on a population's mean urinary iodine concentration.
-
-## Detecting haemoglobinaemia
 
 Given an individual's serum haemoglobin level, anaemia status can be classified as either *not present*, *mild*, *moderate*, or *severe*. The serum haemoglobin cut-offs for classification of anaemia status are different for specific population groups as shown in the table below.
 
@@ -122,85 +108,4 @@ correct_hb(hb = 105, alt = 1400, smoke = 1.5)
 ```
 
 This individual will have a corrected haemoglobin of 102.5 g/L.
-
-## Detecting inflammation
-
-Inflammation, and its different stages, can be assessed based on the the levels of acute-phase proteins - one of either *c-reactive protein (CRP)* or *α1-acid-glycoprotein (AGP)*, or both. 
-
-### Classifying inflammation based on CRP or AGP only
-
-The classification of inflammation status based on either CRP or AGP only is shown in the table below.
-
-**Acute-phase Protein** | **Cut-off Points**
-:--- | :---
-CRP | > 5 µ/L
-AGP | > 1 g/L
-
-The function `detect_inflammation_crp()` classifies *c-reactive protein* levels based on the cut-off point shown above to detect inflammation. For example, if CRP is at 2 µg/L,
-
-```{r micronutr5, echo = TRUE}
-detect_inflammation_crp(crp = 2)
-```
-
-the individual is classified as not having inflammation.
-
-We can also set the function to provide simple integer codes to classify inflammation by setting the `label` argument to FALSE.
-
-```{r micronutr6, echo = TRUE}
-detect_inflammation_crp(crp = 2, label = FALSE)
-```
-
-In this case, an integer code of 0 is provided to indicate a no inflammation status. This would be useful in workflows that require/prefer integer codes for binary classification.
-
-The function `detect_inflammation_agp()` classifies *α1-acid-glycoprotein (AGP)* levels based on the cut-off point shown above to detect inflammation. For example, if AGP is at 1.5 g/L,
-
-```{r micronutr7, echo = TRUE}
-detect_inflammation_agp(agp = 1.5)
-```
-
-the individual is classified as having inflammation.
-
-We can also set the function to provide simple integer codes to classify inflammation by setting the `label` argument to FALSE.
-
-```{r micronutr8, echo = TRUE}
-detect_inflammation_agp(agp = 1.5, label = FALSE)
-```
-
-In this case, an integer code of 1 is provided to indicate inflammation status. This would be useful in workflows that require/prefer integer codes for binary classification.
-
-These functions are useful for classifying inflammation when data for only one of active-phase proteins is available.
-
-### Classifying inflammation based on both CRP and AGP
-
-The detailed classification of inflammation status based on the combination of CRP and AGP is shown in the table below.
-
-**Inflammation Status** | **Cut-off Points**
-:--- | :--- |
-Incubation | CRP > 5 µg/L and AGP <= 1 g/L
-Early convalescence | CRP > 5 µg/L and AGP > 1 g/L
-Late convalescence | CRP <= 5 µg/L and AGP > 1 g/L
-
-The function `detect_inflammation()` accepts values for both CRP and AGP to classify inflammation status. For example, an individual with CRP of 2 µg/L and AGP of 1.5 g/L,
-
-```{r micronutr9, echo = TRUE}
-detect_inflammation(crp = 2, agp = 1.5)
-```
-
-the individual is classified as being in late convalescence.
-
-We can also set the function to provide simple integer codes to classify inflammation by setting the `label` argument to FALSE.
-
-```{r micronutr10, echo = TRUE}
-detect_inflammation(crp = 2, agp = 1.5, label = FALSE)
-```
-
-In this case, an integer code of 3 is provided to indicate late convalescence status. This would be useful in workflows that require/prefer integer codes for classification.
-
-The `detect_inflammation()` function can also be used for assessing inflammation status using only one of the active-phase proteins. Using the earlier example of an individual with a CRP of 2 µg/L,
-
-```{r micronutr11, echo = TRUE}
-detect_inflammation(crp = 2)
-```
-
-we get the same result as using the `detect_inflammation_crp()`.
 

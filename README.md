@@ -51,6 +51,12 @@ for:
 -   detecting **iodine deficiency** status based on a population’s mean
     urinary iodine concentration.
 
+<!---
+These functions were developed based on current best practice described in the following guidelines, publications, and peer-reviewed journal articles:
+
+1. 
+--->
+
 ## Citation
 
 If you find the `micronutr` package useful, please cite using the
