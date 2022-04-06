@@ -26,6 +26,8 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/haemoglobinaemia.html">Detecting haemoglobinaemia</a>
     <a class="dropdown-item" href="../articles/inflammation.html">Detecting inflammation</a>
+    <a class="dropdown-item" href="../articles/iron-deficiency.html">Detecting iron deficiency</a>
+    <a class="dropdown-item" href="../articles/iodine-deficiency.html">Detecting iodine deficiency</a>
   </div>
 </li>
 <li class="nav-item">
@@ -79,6 +81,7 @@
 <span class="fu">detect_iron_deficiency_qualitative</span><span class="op">(</span>
   ferritin <span class="op">=</span> <span class="cn">NULL</span>,
   inflammation <span class="op">=</span> <span class="cn">NULL</span>,
+  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"u5"</span>, <span class="st">"5over"</span><span class="op">)</span>,
   label <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -87,7 +90,7 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>ferritin</dt>
 <dd><p>A numeric value or numeric vector of serum ferritin level in
-micrograms per litre (µg/l).</p></dd>
+micrograms per litre (µg/L).</p></dd>
 <dt>label</dt>
 <dd><p>Logical. Should labels be used to classify iron storage status?
 If TRUE (default), status is classified as "no iron deficiency" or

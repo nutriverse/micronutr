@@ -91,6 +91,18 @@ test_that("detect iron deficiency qualitatively output is correct", {
     ),
     NA_integer_
   )
+  expect_equal(
+    detect_iron_deficiency_qualitative_(
+      ferritin = mnData$ferritin[1], inflammation = NA
+    ),
+    NA_character_
+  )
+  expect_equal(
+    detect_iron_deficiency_qualitative_(
+      ferritin = mnData$ferritin[1], inflammation = NA, label = FALSE
+    ),
+    NA_integer_
+  )
   expect_type(
     detect_iron_deficiency_qualitative_(
       ferritin = mnData$ferritin[1], inflammation = FALSE

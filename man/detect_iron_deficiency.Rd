@@ -16,12 +16,13 @@ detect_iron_deficiency(ferritin = NULL, group = c("u5", "5over"), label = TRUE)
 detect_iron_deficiency_qualitative(
   ferritin = NULL,
   inflammation = NULL,
+  group = c("u5", "5over"),
   label = TRUE
 )
 }
 \arguments{
 \item{ferritin}{A numeric value or numeric vector of serum ferritin level in
-micrograms per litre (µg/l).}
+micrograms per litre (µg/L).}
 
 \item{label}{Logical. Should labels be used to classify iron storage status?
 If TRUE (default), status is classified as "no iron deficiency" or
