@@ -6,7 +6,7 @@
 #' Given serum ferritin values, determine iron storage status.
 #'
 #' @param ferritin A numeric value or numeric vector of serum ferritin level in
-#'   micrograms per litre (µg/l).
+#'   micrograms per litre (µg/L).
 #' @param group A character value specifying the population target group to
 #'   determine iron status from. Can be either for under 5 year old ("u5") or
 #'   5 years and over ("5over"). Default to "u5".
@@ -161,12 +161,17 @@ detect_iron_deficiency <- function(ferritin = NULL,
 
 detect_iron_deficiency_qualitative <- function(ferritin = NULL,
                                                inflammation = NULL,
+                                               group = c("u5", "5over"),
                                                label = TRUE) {
+  ## Get group
+  group <- match.arg(group)
+
   ## Vectorise detect_iron_deficiency_qualitative
   iron_status <- Map(
     f = detect_iron_deficiency_qualitative_,
     ferritin = ferritin,
     inflammation = inflammation,
+    group = group,
     label = label
   )
 
@@ -203,9 +208,6 @@ detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
     stop("Inflammation status should be logical. Please try again.")
   }
 
-  ## Get group
-  group <- match.arg(group)
-
   ## Check if inflammation is NULL
   if (is.null(inflammation)) {
     if (label) {
@@ -214,18 +216,26 @@ detect_iron_deficiency_qualitative_ <- function(ferritin = NULL,
       iron_status <- NA_integer_
     }
   } else {
-    if (inflammation) {
+    if (is.na(inflammation)) {
       if (label) {
-        iron_status <- ifelse(
-          ferritin < 30, "iron deficiency", "no iron deficiency"
-        )
+        iron_status <- NA_character_
       } else {
-        iron_status <- ifelse(ferritin < 30, 1, 0)
+        iron_status <- NA_integer_
       }
     } else {
-      iron_status <- detect_iron_deficiency(
-        ferritin = ferritin, group = group, label = label
-      )
+      if (inflammation) {
+        if (label) {
+          iron_status <- ifelse(
+            ferritin < 30, "iron deficiency", "no iron deficiency"
+          )
+        } else {
+          iron_status <- ifelse(ferritin < 30, 1, 0)
+        }
+      } else {
+        iron_status <- detect_iron_deficiency(
+          ferritin = ferritin, group = group, label = label
+        )
+      }
     }
   }
 

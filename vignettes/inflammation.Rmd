@@ -96,3 +96,6 @@ detect_inflammation(crp = 2)
 ```
 
 we get the same result as using the `detect_inflammation_crp()`.
+
+<br/>
+<br/>
