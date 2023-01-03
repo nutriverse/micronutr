@@ -1,0 +1,113 @@
+---
+title: "Detecting haemoglobinaemia"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Detecting haemoglobinaemia}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(micronutr)
+```
+
+Given an individual's serum haemoglobin level, anaemia status can be classified as either *not present*, *mild*, *moderate*, or *severe*. The serum haemoglobin cut-offs for classification of anaemia status are different for specific population groups as shown in the table below.
+
+**Population** | **Mild** |	**Moderate** | **Severe** |
+:--- | :--- | :--- | :--- |
+Children under 5 years of age |	100 - 109 |	70 - 99 |	< 70 |
+Children 5-11 years of age |	110 - 114	| 80 - 109 |	< 80 |
+Children 12-14 years of age	| 110 - 119	| 80 - 109 |	< 80 |
+Non-pregnant women 15 years and above | 110 - 119	| 80 - 109 | < 80 |
+Pregnant women | 100 - 109	| 70 - 99	| < 70 |
+Men 15 years and above |	110 - 129 |	80 - 109 |	< 80 |
+
+The functions in the `detect_anaemia` function set use these serum haemoglobin cut-offs to classify individuals from specific population groups as either having **no anaemia**, **mild anaemia**, **moderate anaemia**, or **severe anaemia**. For example, a three year old child with a serum haemoglobin level of 105 g/L can be classified as follows:
+
+```{r micronutr1, echo = TRUE}
+detect_anaemia_u5(hb = 105)
+```
+
+In this example, we use the `detect_anaemia_u5()` function which is specific for the under 5 years of age population group. Other functions for specific population groups are:
+
+* `detect_anaemia_5to11()` - for children 5 to 11 years of age;
+
+* `detect_anaemia_12to14()` - for children 12 to 14 years of age;
+
+* `detect_anaemia_np_women()` - for women 15 years and older who are not pregnant;
+
+* `detect_anaemia_pregnant()` - for pregnant women; and,
+
+* `detect_anaemia_men()` - for men 15 years and older.
+
+The more general `detect_anaemia()` function can also be used in this case:
+
+```{r micronutr1a, echo = TRUE}
+detect_anaemia(hb = 105, group = "u5")
+```
+
+In this case, we just need to specify the population group that the case corresponds to, which in this example is the under 5 years of age group (specified as "u5"). The different population age group can be specified as "5to11" for children 5 to 11 years of age, "12to14" for children 12 to 14 years of age, "np_women" for women 15 years and older who are not pregnant, "pregnant" for pregnant women, or "men" for men 15 years and older.
+
+### Correcting serum haemoglobin
+
+Serum haemoglobin levels are affected by the altitude of where an individual lives and by an individual's smoking status. Altitudes of 1000 metres or more increase serum haemoglobin levels. A smoker would have elevated serum haemoglobin levels and the greater the number of packs of cigarette an individual smokes in a day further increases serum haemoglobin levels.
+
+It is recommended that serum haemoglobin be adjusted accordingly depending on the altitude of where an individuals lives and/or by an individual's smoking status.
+
+The recommended adjustment of serum haemoglobin based on altitude is shown in the table below:
+
+**Altitude (metres above sea level)** | **Measured haemoglobin adjustment (g/L)**
+:---: | :---:
+< 1000 | 0
+1000 | -2
+1500 | -5
+2000 | -8
+2500 | -13
+3000 | -19
+3500 | -27
+4000 | -35
+4500 | -45
+
+The function `get_altitude_correction()` provides the appropriate haemoglobin correction factor given altitude in metres. For example, the haemoglobin correction factor for a person who lives in a place at 1400 metres above sea level is determined as follows:
+
+```{r micronutr2, echo = TRUE}
+get_altitude_correction(alt = 1400)
+```
+
+An adjustment of -2 g/L to measured haemoglobin at 1400 metres above sea level will be needed.
+
+The recommended adjustment of serum haemoglobin based on smoking status is shown in the table below:
+
+**Smoking status** | **Measured haemoglobin adjustment (g/L)**
+:--- | :---:
+Non-smoker | 0
+Smoker (all) | -0.3
+½ -1 packet/day | -0.3
+1-2 packets/day | -0.5
+≥ 2 packets/day | -0.7
+
+The function `get_smoking_correction()` provides the appropriate haemoglobin correction factor given smoking status. For example, the haemoglobin correction factor for a person who smokes 1.5 packs a day is determined as follows:
+
+```{r micronutr3, echo = TRUE}
+get_smoking_correction(smoke = 1.5)
+```
+
+An adjustment of -0.5 g/L to measured haemoglobin of an individual who smokes 1.5 packs of cigarette per day will be needed.
+
+The function `correct_hb()` provides adjusted haemoglobin values given altitude above sea level and smoking status. For example, an individual with a haemoglobin of 105 g/L who is a smoker at 1.5 packs a day and lives 1400 metres above sea level will have an adjusted haemoglobin of:
+
+```{r micronutr4, echo = TRUE}
+correct_hb(hb = 105, alt = 1400, smoke = 1.5)
+```
+
+This individual will have a corrected haemoglobin of 102.5 g/L.
+
+<br/>
+<br/>

@@ -1,0 +1,23 @@
+---
+title: "Detecting iodine deficiency"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Detecting iodine deficiency}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(micronutr)
+```
+
+
+<br/>
+<br/>
