@@ -65,25 +65,21 @@ follows:
 
 ``` r
 citation("micronutr")
-#> Warning in citation("micronutr"): no date field in DESCRIPTION file of package
-#> 'micronutr'
-#> Warning in citation("micronutr"): could not determine year for 'micronutr' from
-#> package DESCRIPTION file
 #> 
-#> To cite package 'micronutr' in publications use:
+#> To cite micronutr in publications use:
 #> 
-#>   Guevarra E, Tint Zaw N (????). _micronutr: Utilities for Calculating
-#>   Indicators of Vitamin and Mineral Status of Populations_.
-#>   https://nutriverse.io/micronutr/,
-#>   https://github.com/nutriverse/micronutr.
+#>   Ernest Guevarra and Nicolus Tint Zaw (2023). micronutr: Utilities for
+#>   Calculating Indicators of Vitamin and Mineral Status of Populations R
+#>   package version 0.0.0.9000 URL https://nutriverse.io/micronutr/
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of
-#> Populations},
-#>     author = {Ernest Guevarra and Nicholus {Tint Zaw}},
-#>     note = {https://nutriverse.io/micronutr/, https://github.com/nutriverse/micronutr},
+#>     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations},
+#>     author = {{Ernest Guevarra} and {Nicholus Tint Zaw}},
+#>     year = {2023},
+#>     note = {R package version 0.0.0.9000},
+#>     url = {https://nutriverse.io/micronutr/},
 #>   }
 ```
 
