@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 library(micronutr)
 ```
 
-# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of  <img src="man/figures/logo.png" width="200px" align="right" />
+# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
 
 <!-- badges: start -->
 [![Project Status: WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)

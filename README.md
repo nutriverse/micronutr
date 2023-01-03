@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of <img src="man/figures/logo.png" width="200px" align="right" />
+# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
 
 <!-- badges: start -->
 
