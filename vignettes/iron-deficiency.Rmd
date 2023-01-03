@@ -1,0 +1,138 @@
+---
+title: "Detecting iron deficiency"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Detecting iron deficiency}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = FALSE}
+library(micronutr)
+```
+
+Given an individual's serum ferritin level (µg/L), iron deficiency status can be classified as either *present* or *not present*. The serum ferritin cut-offs for classification of iron deficiency status are different for specific population groups as shown in the table below.
+
+**Population** | **Serum ferritin (µg/L) to classify as iron deficient** 
+:--- | :--- 
+under 5 years of age |	< 12
+5 years and over | < 15
+
+The functions in the `detect_anaemia` function set use these serum ferritin cut-offs to classify individuals from specific population groups as either having **no iron deficiency** or having **iron deficiency**. For example, a three year old with a serum ferritin level of 11.3 µg/L can be classified as follows:
+
+```{r ferritin1, echo = TRUE}
+detect_iron_deficiency_u5(ferritin = 11.3)
+```
+
+In this example, we use the `detect_iron_deficiency_u5()` function which is specific for the under 5 years of age population group. The other function is for the 5 years and over population group - `detect_iron_deficiency_5over()`.
+
+By default, this function will provide a labelled result, that is, if the individual has iron deficiency based on serum ferritin the output will be **"iron deficiency"**, and if the individual has no iron deficiency based on serum ferritin the output will be **"no iron deficiency"**.
+
+There may be cases where the preferred output is simple integer codes such as 1 for iron deficiency and 0 for no iron deficiency. If this is the preferred output, the argument `label` can be specified as `FALSE` as shown below:
+
+```{r ferritin2, echo = TRUE}
+detect_iron_deficiency_u5(ferritin = 11.3, label = FALSE)
+```
+
+The resulting integer code indicates that this individual has iron deficiency.
+
+The more general `detect_iron_deficiency()` function can also be used:
+
+```{r ferritin3, echo = TRUE}
+detect_iron_deficiency(ferritin = 11.3, group = "u5")
+```
+
+In this case, we just need to specify the population group that the individual corresponds to, which in this example is the under 5 years of age group (specified as "u5"). The other population age group can be specified as "5over" for those 5 years and older.
+
+If the simple integer code output is preferred, then the `label` argument just needs to be specified as `FALSE`:
+
+```{r ferritin4, echo = TRUE}
+detect_iron_deficiency(ferritin = 11.3, group = "u5", label = FALSE)
+```
+
+### Correcting serum ferritin
+
+Serum ferritin is affected by the inflammation and/or infection status of an individual. Specifically, serum ferritin levels increase in response to inflammation and/or infection. 
+
+It is recommended that serum ferritin be adjusted accordingly depending on the inflammation or infection status of an individual. There are three ways of correcting or adjusting for inflammation or infection status when assessing iron deficiency.
+
+The first approach is by increasing the serum ferritin cut-off for detecting iron deficiency. The recommendation is that if an individual has been assessed to be in an inflammatory or infectious state, serum ferritin level of less than 30 µg/L will classify this individual as being iron deficient regardless of age group.
+
+The function `detect_iron_deficiency_qualitative()` facilitates this classification. For example, a 2 year old with a serum ferritin of 15.6 µg/L who has been assessed to have an active infection, we can assess iron deficiency status as follows:
+
+```{r ferritin5, echo = TRUE}
+detect_iron_deficiency_qualitative(ferritin = 15.6, inflammation = TRUE)
+```
+
+Syntax is similar to the earlier functions we have discussed but now we add an argument `inflammation` to specify whether inflammation is present or not. In this case, we specify `inflammation` as `TRUE`.
+
+If inflammation status is FALSE (no inflammation), then the serum ferritin is assessed based on the usual cut-offs. It is therefore important to specify the population group of the individual:
+
+```{r ferritin6, echo = TRUE}
+detect_iron_deficiency_qualitative(
+  ferritin = 15.6, inflammation = FALSE, group = "u5"
+)
+```
+
+If the simple integer code output is preferred, then specify `label` as `FALSE`:
+
+```{r ferritin7, echo = TRUE}
+detect_iron_deficiency_qualitative(
+  ferritin = 15.6, inflammation = TRUE, label = FALSE
+)
+```
+
+```{r ferritin8, echo = TRUE}
+detect_iron_deficiency_qualitative(
+  ferritin = 15.6, inflammation = FALSE, group = "u5", label = FALSE
+)
+```
+
+If no inflammation status (NULL or NA) is provided when using this function, the result is `NA`.
+
+The second approach for correcting serum ferritin is by using an arithmetic correction factor using the following correction factors based on different combination of values of acute-phase proteins - *c-reactive protein or CRP* and/or *alpha(1)-acid-glycoprotein or AGP*:
+
+**Inflammation Stages** | **CRP and AGP Cut-off Points** | **Correction Factor**
+:--- | :--- | :---
+Incubation | CRP > 5 µg/L and AGP <= 1 g/L | 0.77
+Early convalescence | CRP > 5 µg/L and AGP > 1 g/L | 0.53
+Late convalescence | CRP <= 5 µg/L and AGP > 1 g/L | 0.75
+
+CRP and AGP are biomarkers for inflammation and the values for these acute-phase proteins combined indicate the different stages of inflammation that an individual is at. Based on the inflammation stage, a corresponding correction factor can be applied to serum ferritin to adjust its value.
+
+The function `correct_ferritin()` allows for this serum ferritin adjustment to be made given values of CRP and AGP. For example, we can correct the serum ferritin of a person with a CRP of 2, an AGP of 1, and a serum ferritin of 11.3 as follows:
+
+```{r ferritin9, echo = TRUE}
+correct_ferritin(crp = 2, agp = 2, ferritin = 11.3)
+```
+
+This gives us a corrected serum ferritin value of 5.99 µg/L.
+
+In some settings, values for both CRP and AGP may not be available. Usually, only CRP or AGP are available or are measured. In these settings, we can use functions to correct ferritin using only one of these acute-phase proteins based on the following correction factors:
+
+**Acute-phase Protein** | **Cut-off Points** | **Correction Factor**
+:--- | :--- | :---
+CRP | > 5 µg/L | 0.65
+AGP | > g/L | 0.72
+
+For example, for a person with serum ferritin of 11.3 µg/L and a CRP of 2, we use the `correct_ferritin()` function as follows:
+
+```{r ferritin10, echo = TRUE}
+correct_ferritin(crp = 2, ferritin = 11.3)
+```
+
+and for a person with serum ferritin of 11.3 µg/L and an AGP of 2, we use the `correct_ferritin()` function as follows:
+
+```{r ferritin11, echo = TRUE}
+correct_ferritin(agp = 2, ferritin = 11.3)
+```
+
+<br/>
+<br/>

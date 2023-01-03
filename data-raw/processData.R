@@ -1,54 +1,70 @@
+################################################################################
+#
+#'
+#' Read and process micronutrient data
+#'
+#'
+#
+################################################################################
+
+## Load libraries
+library(readxl)
+
+
+## Read micronutrient data XLSX
+mnData <- readxl::read_xlsx(
+  path = "data-raw/mnData_master_Sudan_V12.xlsx", sheet = 1
+)
+
+## Tidy up grouping
+mnData$group <- with(
+  mnData,
+  {
+    ifelse(
+      group == "Lactating Principal carer", "lactating",
+        ifelse(
+          group == "Pregnant and lactating Principal Carer", "pregnant and lactating",
+            ifelse(
+              group == "Pregnant Not Principal Carer" | group == "Pregnant Principal carer", "pregnant",
+                ifelse(
+                  group == "Principal carer nighther pregnant nor lactating" | group == "Woman in child bearing age (pregnancy/lactation status not known)", "non-pregnant non-lactating", "child"
+                )
+            )
+        )
+    )
+  }
+)
+
+
+## Tidy up age
+mnData$age <- with(
+  mnData,
+  {
+    ifelse(is.na(m.age), floor(ch.age / 12), m.age)
+  }
+)
+
+
+## Create dataset
+#mnData <- mnData[ , c("state", "locality", "psu", "sex", "age", "group", "hb", "calcium", "crp", "ferritin", "iodine")]
+mnData <- mnData[ , c("psu", "sex", "age", "group", "hb", "calcium", "crp", "ferritin", "iodine")]
+
 ## download hb data if not available
-if (grep(pattern = "hbData.csv", x = list.files("data-raw"), value = TRUE) != "hbData.csv") {
+if (length(list.files("data-raw", pattern = "hbData.csv")) == 0) {
   download.file(
     url = "https://raw.githubusercontent.com/ernestguevarra/writing_r_functions/main/data/hbData.csv",
     destfile = "data-raw/hbData.csv"
   )
 }
 
-################################################################################
+x <- read.csv("data-raw/hbData.csv")
+x <- x[!duplicated(x$psu), ]
+x <- x[order(x$psu), c("psu", "altitude")]
 
-haemoglobin <- read.csv("data-raw/hbData.csv")
-haemoglobin$ch.age <- as.integer(floor(haemoglobin$ch.age))
-haemoglobin$hb <- round(as.numeric(haemoglobin$hb), digits = 1)
-usethis::use_data(haemoglobin, overwrite = TRUE, compress = "xz")
+mnData <- merge(mnData, x, by = "psu", all.x = TRUE)
 
-################################################################################
+mnData <- tibble::tibble(mnData)
 
-iodine <- read.csv("data-raw/iodine_sample.csv")
-names(iodine)[1] <- "psu"
-usethis::use_data(iodine, overwrite = TRUE, compress = "xz")
+## Export data
+usethis::use_data(mnData, overwrite = TRUE, compress = "xz")
 
-################################################################################
-
-ferritin <- read.csv("data-raw/ferritin_sample.csv")
-names(ferritin)[1] <- "psu"
-
-ferritin$agp <- round(
-  runif(
-    nrow(ferritin),
-    min = 0.2,
-    max = 10
-  ), 1
-)
-
-ferritin$agp[ferritin$agp > 9 & ferritin$agp < 11] <- NA
-ferritin$age_group <- factor(
-  ifelse(
-    !is.na(ferritin$m.age),
-    "under 5 years",
-    "5 years and older"
-  )
-)
-
-ferritin$infection <- round(
-  runif(
-    nrow(ferritin),
-    min = 0,
-    max = 1
-  )
-)
-
-usethis::use_data(ferritin, overwrite = TRUE, compress = "xz")
-
-################################################################################

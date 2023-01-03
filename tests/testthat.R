@@ -1,4 +1,4 @@
 library(testthat)
-library(nutricheckr)
+library(micronutr)
 
-test_check("nutricheckr")
+test_check("micronutr")
