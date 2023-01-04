@@ -2,7 +2,7 @@ Package: micronutr
 Type: Package
 Title: Utilities for Calculating Indicators of Vitamin and Mineral Status of
     Populations
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
            email = "ernest@guevarra.io", role = c("aut", "cre")),

@@ -14,6 +14,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Codecov test
 coverage](https://codecov.io/gh/nutriverse/micronutr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/micronutr?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/micronutr/badge)](https://www.codefactor.io/repository/github/nutriverse/micronutr)
+[![DOI](https://zenodo.org/badge/584725138.svg)](https://zenodo.org/badge/latestdoi/584725138)
 <!-- badges: end -->
 
 Vitamin and mineral deficiencies continue to be a significant public
@@ -70,7 +71,8 @@ citation("micronutr")
 #> 
 #>   Ernest Guevarra and Nicolus Tint Zaw (2023). micronutr: Utilities for
 #>   Calculating Indicators of Vitamin and Mineral Status of Populations R
-#>   package version 0.0.0.9000 URL https://nutriverse.io/micronutr/
+#>   package version 0.0.0.9001 URL https://nutriverse.io/micronutr/ DOI
+#>   10.5281/zenodo.7503846
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -78,8 +80,9 @@ citation("micronutr")
 #>     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations},
 #>     author = {{Ernest Guevarra} and {Nicholus Tint Zaw}},
 #>     year = {2023},
-#>     note = {R package version 0.0.0.9000},
+#>     note = {R package version 0.0.0.9001},
 #>     url = {https://nutriverse.io/micronutr/},
+#>     doi = {10.5281/zenodo.7503846},
 #>   }
 ```
 
