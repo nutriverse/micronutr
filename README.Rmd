@@ -24,6 +24,7 @@ library(micronutr)
 [![test-coverage](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/nutriverse/micronutr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/micronutr?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/micronutr/badge)](https://www.codefactor.io/repository/github/nutriverse/micronutr)
+[![DOI](https://zenodo.org/badge/584725138.svg)](https://zenodo.org/badge/latestdoi/584725138)
 <!-- badges: end -->
 
 Vitamin and mineral deficiencies continue to be a significant public health problem. This is particularly critical in developing countries where deficiencies to vitamin A, iron, iodine, and other micronutrients lead to adverse health consequences. Cross-sectional surveys are helpful in answering questions related to the magnitude and distribution of deficiencies of selected vitamins and minerals.
