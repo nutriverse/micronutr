@@ -6,7 +6,7 @@
 #' Given serum ferritin values, determine iron storage status.
 #'
 #' @param ferritin A numeric value or numeric vector of serum ferritin level in
-#'   micrograms per litre (µg/L).
+#'   micrograms per litre (microgram/L).
 #' @param group A character value specifying the population target group to
 #'   determine iron status from. Can be either for under 5 year old ("u5") or
 #'   5 years and over ("5over"). Default to "u5".

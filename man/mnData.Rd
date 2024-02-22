@@ -13,7 +13,7 @@ A tibble with 9 columns and 19449 rows.\tabular{ll}{
    \emph{group} \tab Group classification \cr
    \emph{hb} \tab Haemoglobin values (g/L) \cr
    \emph{calcium} \tab Serum calcium values () \cr
-   \emph{crp} \tab Serum c-reactive protein (µg/l) \cr
+   \emph{crp} \tab Serum c-reactive protein (microgram/l) \cr
    \emph{ferritin} \tab Serum ferritin () \cr
    \emph{iodine} \tab Urine iodine () \cr
    \emph{altitude} \tab Altitude of sampling location above sea level (metres) \cr

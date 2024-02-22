@@ -22,7 +22,7 @@ detect_iron_deficiency_qualitative(
 }
 \arguments{
 \item{ferritin}{A numeric value or numeric vector of serum ferritin level in
-micrograms per litre (µg/L).}
+micrograms per litre (microgram/L).}
 
 \item{label}{Logical. Should labels be used to classify iron storage status?
 If TRUE (default), status is classified as "no iron deficiency" or

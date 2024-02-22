@@ -14,10 +14,10 @@ detect_inflammation_agp(agp = NULL, label = TRUE)
 }
 \arguments{
 \item{crp}{A numeric value or numeric vector of c-reactive protein (crp)
-values in micrograms per litre (µg/l).}
+values in micrograms per litre (microgram/l).}
 
 \item{agp}{A numeric value or numeric vector of alpha(1)-acid-glycoprotein
-(agp) values in micrograms per litre (µg/l).}
+(agp) values in micrograms per litre (microgram/l).}
 
 \item{label}{Logical. Should labels be used to classify inflammation status?
 If TRUE (default), status is classified as "no inflammation" or

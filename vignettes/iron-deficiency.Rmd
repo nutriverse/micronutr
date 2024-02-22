@@ -18,14 +18,14 @@ knitr::opts_chunk$set(
 library(micronutr)
 ```
 
-Given an individual's serum ferritin level (µg/L), iron deficiency status can be classified as either *present* or *not present*. The serum ferritin cut-offs for classification of iron deficiency status are different for specific population groups as shown in the table below.
+Given an individual's serum ferritin level (microgram/L), iron deficiency status can be classified as either *present* or *not present*. The serum ferritin cut-offs for classification of iron deficiency status are different for specific population groups as shown in the table below.
 
-**Population** | **Serum ferritin (µg/L) to classify as iron deficient** 
+**Population** | **Serum ferritin (microgram/L) to classify as iron deficient** 
 :--- | :--- 
 under 5 years of age |	< 12
 5 years and over | < 15
 
-The functions in the `detect_anaemia` function set use these serum ferritin cut-offs to classify individuals from specific population groups as either having **no iron deficiency** or having **iron deficiency**. For example, a three year old with a serum ferritin level of 11.3 µg/L can be classified as follows:
+The functions in the `detect_anaemia` function set use these serum ferritin cut-offs to classify individuals from specific population groups as either having **no iron deficiency** or having **iron deficiency**. For example, a three year old with a serum ferritin level of 11.3 microgram/L can be classified as follows:
 
 ```{r ferritin1, echo = TRUE}
 detect_iron_deficiency_u5(ferritin = 11.3)
@@ -63,7 +63,7 @@ Serum ferritin is affected by the inflammation and/or infection status of an ind
 
 It is recommended that serum ferritin be adjusted accordingly depending on the inflammation or infection status of an individual. There are three ways of correcting or adjusting for inflammation or infection status when assessing iron deficiency.
 
-The first approach is by increasing the serum ferritin cut-off for detecting iron deficiency. The recommendation is that if an individual has been assessed to be in an inflammatory or infectious state, serum ferritin level of less than 30 µg/L will classify this individual as being iron deficient regardless of age group.
+The first approach is by increasing the serum ferritin cut-off for detecting iron deficiency. The recommendation is that if an individual has been assessed to be in an inflammatory or infectious state, serum ferritin level of less than 30 microgram/L will classify this individual as being iron deficient regardless of age group.
 
 The function `detect_iron_deficiency_qualitative()` facilitates this classification. For example, a 2 year old with a serum ferritin of 15.6 microgram/L who has been assessed to have an active infection, we can assess iron deficiency status as follows:
 
@@ -122,13 +122,13 @@ In some settings, values for both CRP and AGP may not be available. Usually, onl
 CRP | > 5 microgram/L | 0.65
 AGP | > g/L | 0.72
 
-For example, for a person with serum ferritin of 11.3 µg/L and a CRP of 2, we use the `correct_ferritin()` function as follows:
+For example, for a person with serum ferritin of 11.3 microgram/L and a CRP of 2, we use the `correct_ferritin()` function as follows:
 
 ```{r ferritin10, echo = TRUE}
 correct_ferritin(crp = 2, ferritin = 11.3)
 ```
 
-and for a person with serum ferritin of 11.3 µg/L and an AGP of 2, we use the `correct_ferritin()` function as follows:
+and for a person with serum ferritin of 11.3 microgram/L and an AGP of 2, we use the `correct_ferritin()` function as follows:
 
 ```{r ferritin11, echo = TRUE}
 correct_ferritin(agp = 2, ferritin = 11.3)
