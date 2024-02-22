@@ -8,17 +8,17 @@ correct_ferritin(crp = NULL, agp = NULL, ferritin = NULL)
 }
 \arguments{
 \item{crp}{A numeric value or numeric vector for serum c-reactive protein in
-micrograms per litre (µg/l).}
+micrograms per litre (microgram/l).}
 
 \item{agp}{A numeric value or numeric vector for serum
-alpha(1)-acid-glycoprotein in micrograms per litre (µg/l).}
+alpha(1)-acid-glycoprotein in micrograms per litre (microgram/l).}
 
 \item{ferritin}{A numeric value or numeric vector for serum ferritin in
-micrograms per litre (µg/l).}
+micrograms per litre (microgram/l).}
 }
 \value{
 A numeric value or numeric vector for corrected serum ferritin in
-micrograms per litre (µg/l).
+micrograms per litre (microgram/l).
 }
 \description{
 Based on inflammation status, correct serum ferritin values as described in

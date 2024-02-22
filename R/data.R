@@ -16,7 +16,7 @@
 #' *group* | Group classification
 #' *hb* | Haemoglobin values (g/L)
 #' *calcium* | Serum calcium values ()
-#' *crp* | Serum c-reactive protein (µg/l)
+#' *crp* | Serum c-reactive protein (microgram/l)
 #' *ferritin* | Serum ferritin ()
 #' *iodine* | Urine iodine ()
 #' *altitude* | Altitude of sampling location above sea level (metres)

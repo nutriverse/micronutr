@@ -14,9 +14,9 @@
 #' 359S–371S. https://doi.org/10.3945/ajcn.116.141762
 #'
 #' @param crp A numeric value or numeric vector of c-reactive protein (crp)
-#'   values in micrograms per litre (µg/l).
+#'   values in micrograms per litre (microgram/l).
 #' @param agp A numeric value or numeric vector of alpha(1)-acid-glycoprotein
-#'   (agp) values in micrograms per litre (µg/l).
+#'   (agp) values in micrograms per litre (microgram/l).
 #' @param label Logical. Should labels be used to classify inflammation status?
 #'   If TRUE (default), status is classified as "no inflammation" or
 #'   "inflammation" based on either CRP or AGP or status is classified as

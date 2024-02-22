@@ -13,14 +13,14 @@
 #' https://doi.org/10.3945/ajcn.116.141762
 #'
 #' @param crp A numeric value or numeric vector for serum c-reactive protein in
-#'   micrograms per litre (µg/l).
+#'   micrograms per litre (microgram/l).
 #' @param agp A numeric value or numeric vector for serum
-#'   alpha(1)-acid-glycoprotein in micrograms per litre (µg/l).
+#'   alpha(1)-acid-glycoprotein in micrograms per litre (microgram/l).
 #' @param ferritin A numeric value or numeric vector for serum ferritin in
-#'   micrograms per litre (µg/l).
+#'   micrograms per litre (microgram/l).
 #'
 #' @return A numeric value or numeric vector for corrected serum ferritin in
-#'   micrograms per litre (µg/l).
+#'   micrograms per litre (microgram/l).
 #'
 #' @examples
 #' correct_ferritin(

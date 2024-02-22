@@ -8,7 +8,7 @@
 #' (**lactating**).
 #'
 #' @param iodine A numeric value or numeric vector of median urinary iodine
-#'   concentration (μg/L) of the population or populations of interest.
+#'   concentration (microgram/L) of the population or populations of interest.
 #' @param group The population group of interest. Either school age children
 #'   (**general**), pregnant women (**pregnant**), or lactating women with
 #'   children under 2 years old (**lactating**)

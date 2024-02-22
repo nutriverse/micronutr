@@ -21,7 +21,7 @@ detect_iodine_lactating(iodine = NULL, label = TRUE)
 }
 \arguments{
 \item{iodine}{A numeric value or numeric vector of median urinary iodine
-concentration (μg/L) of the population or populations of interest.}
+concentration (microgram/L) of the population or populations of interest.}
 
 \item{group}{The population group of interest. Either school age children
 (\strong{general}), pregnant women (\strong{pregnant}), or lactating women with
