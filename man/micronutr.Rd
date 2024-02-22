@@ -18,8 +18,7 @@ calculating and determining select vitamin and mineral deficiencies using R.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://nutriverse.io/micronutr/}
-  \item \url{https://github.com/nutriverse/micronutr}
+  \item \url{https://nutriverse.io/micronutr/,https://github.com/nutriverse/micronutr}
   \item Report bugs at \url{https://github.com/nutriverse/micronutr/issues}
 }
 

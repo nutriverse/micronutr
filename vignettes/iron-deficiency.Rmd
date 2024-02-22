@@ -65,7 +65,7 @@ It is recommended that serum ferritin be adjusted accordingly depending on the i
 
 The first approach is by increasing the serum ferritin cut-off for detecting iron deficiency. The recommendation is that if an individual has been assessed to be in an inflammatory or infectious state, serum ferritin level of less than 30 µg/L will classify this individual as being iron deficient regardless of age group.
 
-The function `detect_iron_deficiency_qualitative()` facilitates this classification. For example, a 2 year old with a serum ferritin of 15.6 µg/L who has been assessed to have an active infection, we can assess iron deficiency status as follows:
+The function `detect_iron_deficiency_qualitative()` facilitates this classification. For example, a 2 year old with a serum ferritin of 15.6 microgram/L who has been assessed to have an active infection, we can assess iron deficiency status as follows:
 
 ```{r ferritin5, echo = TRUE}
 detect_iron_deficiency_qualitative(ferritin = 15.6, inflammation = TRUE)
@@ -101,9 +101,9 @@ The second approach for correcting serum ferritin is by using an arithmetic corr
 
 **Inflammation Stages** | **CRP and AGP Cut-off Points** | **Correction Factor**
 :--- | :--- | :---
-Incubation | CRP > 5 µg/L and AGP <= 1 g/L | 0.77
-Early convalescence | CRP > 5 µg/L and AGP > 1 g/L | 0.53
-Late convalescence | CRP <= 5 µg/L and AGP > 1 g/L | 0.75
+Incubation | CRP > 5 microgram/L and AGP <= 1 g/L | 0.77
+Early convalescence | CRP > 5 microgram/L and AGP > 1 g/L | 0.53
+Late convalescence | CRP <= 5 microgram/L and AGP > 1 g/L | 0.75
 
 CRP and AGP are biomarkers for inflammation and the values for these acute-phase proteins combined indicate the different stages of inflammation that an individual is at. Based on the inflammation stage, a corresponding correction factor can be applied to serum ferritin to adjust its value.
 
@@ -113,13 +113,13 @@ The function `correct_ferritin()` allows for this serum ferritin adjustment to b
 correct_ferritin(crp = 2, agp = 2, ferritin = 11.3)
 ```
 
-This gives us a corrected serum ferritin value of 5.99 µg/L.
+This gives us a corrected serum ferritin value of 5.99 microgram/L.
 
 In some settings, values for both CRP and AGP may not be available. Usually, only CRP or AGP are available or are measured. In these settings, we can use functions to correct ferritin using only one of these acute-phase proteins based on the following correction factors:
 
 **Acute-phase Protein** | **Cut-off Points** | **Correction Factor**
 :--- | :--- | :---
-CRP | > 5 µg/L | 0.65
+CRP | > 5 microgram/L | 0.65
 AGP | > g/L | 0.72
 
 For example, for a person with serum ferritin of 11.3 µg/L and a CRP of 2, we use the `correct_ferritin()` function as follows:

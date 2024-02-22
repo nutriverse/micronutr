@@ -26,10 +26,10 @@ The classification of inflammation status based on either CRP or AGP only is sho
 
 **Acute-phase Protein** | **Cut-off Points**
 :--- | :---
-CRP | > 5 µ/L
+CRP | > 5 microgram/L
 AGP | > 1 g/L
 
-The function `detect_inflammation_crp()` classifies *c-reactive protein* levels based on the cut-off point shown above to detect inflammation. For example, if CRP is at 2 µg/L,
+The function `detect_inflammation_crp()` classifies *c-reactive protein* levels based on the cut-off point shown above to detect inflammation. For example, if CRP is at 2 microgram/L,
 
 ```{r micronutr5, echo = TRUE}
 detect_inflammation_crp(crp = 2)
@@ -69,11 +69,11 @@ The detailed classification of inflammation status based on the combination of C
 
 **Inflammation Status** | **Cut-off Points**
 :--- | :--- |
-Incubation | CRP > 5 µg/L and AGP <= 1 g/L
-Early convalescence | CRP > 5 µg/L and AGP > 1 g/L
-Late convalescence | CRP <= 5 µg/L and AGP > 1 g/L
+Incubation | CRP > 5 microgram/L and AGP <= 1 g/L
+Early convalescence | CRP > 5 microgram/L and AGP > 1 g/L
+Late convalescence | CRP <= 5 microgram/L and AGP > 1 g/L
 
-The function `detect_inflammation()` accepts values for both CRP and AGP to classify inflammation status. For example, an individual with CRP of 2 µg/L and AGP of 1.5 g/L,
+The function `detect_inflammation()` accepts values for both CRP and AGP to classify inflammation status. For example, an individual with CRP of 2 microgram/L and AGP of 1.5 g/L,
 
 ```{r micronutr9, echo = TRUE}
 detect_inflammation(crp = 2, agp = 1.5)
