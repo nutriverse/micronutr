@@ -26,12 +26,16 @@ deficiencies of selected vitamins and minerals.
 
 ## Installation
 
-You can install the development version of `micronutr` from
-[GitHub](https://github.com/nutriverse/micronutr) with:
+`micronutr` is not yet available on CRAN.
+
+You can install `micronutr` from
+[r-universe](https://r-universe.dev/search/) with:
 
 ``` r
-if(!require(remotes)) install.packages("remotes")
-remotes::install_github("nutriverse/micronutr")
+install.packages(
+  "micronutr", 
+  repos = c('https://nutriverse.r-universe.dev', 'https://cloud.r-project.org')
+)
 ```
 
 ## What does `micronutr` do?
@@ -52,11 +56,10 @@ for:
 - detecting **iodine deficiency** status based on a population’s mean
   urinary iodine concentration.
 
-<!---
-These functions were developed based on current best practice described in the following guidelines, publications, and peer-reviewed journal articles:
+## Usage
 
-1. 
---->
+`micronutr` comes packaged with vignettes that show how to use the
+package for the purposes described above.
 
 ## Citation
 
@@ -66,7 +69,6 @@ follows:
 
 ``` r
 citation("micronutr")
-#> 
 #> To cite micronutr in publications use:
 #> 
 #>   Ernest Guevarra and Nicolus Tint Zaw (2023). micronutr: Utilities for
