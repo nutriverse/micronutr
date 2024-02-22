@@ -64,6 +64,12 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
+  <a class="external-link nav-link" href="https://fosstodon.org/@katilingban">
+    <span class="fab fa fab fa-mastodon fa-lg"></span>
+     
+  </a>
+</li>
+<li class="nav-item">
   <a class="external-link nav-link" href="https://www.linkedin.com/company/katilingban">
     <span class="fab fa fab fa-linkedin fa-lg"></span>
      
@@ -181,8 +187,8 @@ ferritin level of less than 30 µg/L will classify this individual as
 being iron deficient regardless of age group.</p>
 <p>The function <code><a href="../reference/detect_iron_deficiency.html">detect_iron_deficiency_qualitative()</a></code>
 facilitates this classification. For example, a 2 year old with a serum
-ferritin of 15.6 µg/L who has been assessed to have an active infection,
-we can assess iron deficiency status as follows:</p>
+ferritin of 15.6 microgram/L who has been assessed to have an active
+infection, we can assess iron deficiency status as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/detect_iron_deficiency.html">detect_iron_deficiency_qualitative</a></span><span class="op">(</span>ferritin <span class="op">=</span> <span class="fl">15.6</span>, inflammation <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "iron deficiency"</span></span></code></pre></div>
@@ -231,17 +237,17 @@ or AGP</em>:</p>
 <tbody>
 <tr class="odd">
 <td align="left">Incubation</td>
-<td align="left">CRP &gt; 5 µg/L and AGP &lt;= 1 g/L</td>
+<td align="left">CRP &gt; 5 microgram/L and AGP &lt;= 1 g/L</td>
 <td align="left">0.77</td>
 </tr>
 <tr class="even">
 <td align="left">Early convalescence</td>
-<td align="left">CRP &gt; 5 µg/L and AGP &gt; 1 g/L</td>
+<td align="left">CRP &gt; 5 microgram/L and AGP &gt; 1 g/L</td>
 <td align="left">0.53</td>
 </tr>
 <tr class="odd">
 <td align="left">Late convalescence</td>
-<td align="left">CRP &lt;= 5 µg/L and AGP &gt; 1 g/L</td>
+<td align="left">CRP &lt;= 5 microgram/L and AGP &gt; 1 g/L</td>
 <td align="left">0.75</td>
 </tr>
 </tbody>
@@ -258,7 +264,8 @@ we can correct the serum ferritin of a person with a CRP of 2, an AGP of
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/correct_ferritin.html">correct_ferritin</a></span><span class="op">(</span>crp <span class="op">=</span> <span class="fl">2</span>, agp <span class="op">=</span> <span class="fl">2</span>, ferritin <span class="op">=</span> <span class="fl">11.3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 5.989</span></span></code></pre></div>
-<p>This gives us a corrected serum ferritin value of 5.99 µg/L.</p>
+<p>This gives us a corrected serum ferritin value of 5.99
+microgram/L.</p>
 <p>In some settings, values for both CRP and AGP may not be available.
 Usually, only CRP or AGP are available or are measured. In these
 settings, we can use functions to correct ferritin using only one of
@@ -273,7 +280,7 @@ factors:</p>
 <tbody>
 <tr class="odd">
 <td align="left">CRP</td>
-<td align="left">&gt; 5 µg/L</td>
+<td align="left">&gt; 5 microgram/L</td>
 <td align="left">0.65</td>
 </tr>
 <tr class="even">
