@@ -43,6 +43,7 @@ The following table presents the median urinary iodine concentration (UIC) that 
 ## Lactating women and children under 2 years of age
 
 **Median urinary iodine concentration (microgram/L)** | **Indication of population iodine intake** | **Indication of population iodine status**
+:--- | :--- | :---
 ≥500 | Insufficient | 
 ≥100 | Adequate |
 
