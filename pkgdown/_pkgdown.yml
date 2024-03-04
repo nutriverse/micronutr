@@ -4,12 +4,12 @@ url: https://nutriverse.io/micronutr/
 
 template:
   bootstrap: 5
-  bootswatch: lumen
+  bootswatch: cosmo
   theme: haddock
   ganalytics: #
 
 navbar:
-  bg: primary
+  bg: success
   type: light
   structure:
     left:  [home, reference, articles, news]
