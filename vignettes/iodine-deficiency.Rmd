@@ -18,6 +18,36 @@ knitr::opts_chunk$set(
 library(micronutr)
 ```
 
+The following table presents the median urinary iodine concentration (UIC) that indicates iodine status among different population groups. 
+
+## School age children
+
+**Median urinary iodine concentration (microgram/L)** | **Indication of population iodine intake** | **Indication of population iodine status**
+:--- | :--- | :---
+< 20	| Insufficient | Severe iodine deficiency
+20-49	| Insufficient | Moderate iodine deficiency
+50-99	| Insufficient | Mild iodine deficiency
+100-199 | Adequate | Adequate iodine nutrition
+200-299	| Above requirements | May pose a slight risk of more than adequate iodine intake in these populations
+≥ 300 | Excessive | Risk of adverse health consequences (iodine-induced hyperthyroidism, autoimmune thyroid disease)
+
+## Pregnant women
+
+**Median urinary iodine concentration (microgram/L)** | **Indication of population iodine intake** | **Indication of population iodine status**
+:--- | :--- | :---
+<150 | Insufficient |
+150-249 | Adequate |
+250-499	| Above requirements |
+≥500 | Excessive |
+
+## Lactating women and children under 2 years of age
+
+**Median urinary iodine concentration (microgram/L)** | **Indication of population iodine intake** | **Indication of population iodine status**
+≥500 | Insufficient | 
+≥100 | Adequate |
+
+It is important to note that only population-level assessments of iodine status are possible from the survey methodology of casual, spot urine sample collection. Iodine status estimates based on the methodology of casual spot urine sample collection cannot be used to classify individual status and should not be presented as a prevalence of deficiency or adequacy. The information provided in the table above is frequently misinterpreted to reflect the situation of individuals. The correct interpretation is that populations with a median urinary iodine <20 microgram/L have **“severe”** iodine deficiency, populations with a median urinary iodine 20-49 microgram/L have **“moderate”** iodine deficiency, and populations with a median urinary iodine 50-99 microgram/L have **“mild”** iodine deficiency.
+
 
 <br/>
 <br/>
