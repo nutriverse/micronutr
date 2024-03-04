@@ -2,8 +2,8 @@
 % Please edit documentation in R/micronutr.R
 \docType{package}
 \name{micronutr}
-\alias{micronutr}
 \alias{micronutr-package}
+\alias{micronutr}
 \title{Utilities for Calculating Indicators of Vitamin and Mineral Status of
 Populations}
 \description{
