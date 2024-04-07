@@ -19,7 +19,7 @@
 #' @param ferritin A numeric value or numeric vector for serum ferritin in
 #'   micrograms per litre (microgram/l).
 #'
-#' @return A numeric value or numeric vector for corrected serum ferritin in
+#' @returns A numeric value or numeric vector for corrected serum ferritin in
 #'   micrograms per litre (microgram/l).
 #'
 #' @examples

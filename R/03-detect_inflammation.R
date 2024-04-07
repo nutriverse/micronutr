@@ -26,7 +26,7 @@
 #'   either CRP or AGP; 0 for no inflammation, 1 for incubation, 2 for early
 #'   convalescence, or 3 for late convalescence.
 #'
-#' @return If `label` is TRUE, a character value or character vector of
+#' @returns If `label` is TRUE, a character value or character vector of
 #'   inflammation classification based on c-reactive protein (CRP) and/or
 #'   alpha(1)-acid-glycoprotein (AGP) values. If `label` is FALSE, an integer
 #'   value or vector of inflammation classification.

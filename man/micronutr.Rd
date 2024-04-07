@@ -24,11 +24,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID})
+\strong{Maintainer}: Ernest Guevarra \email{ernest@guevarra.io} (\href{https://orcid.org/0000-0002-4887-4415}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Nicholus Tint Zaw \email{nicholustintzaw@gmail.com}
+  \item Nicholus Tint Zaw \email{nicholustintzaw@gmail.com} [copyright holder]
 }
 
 }

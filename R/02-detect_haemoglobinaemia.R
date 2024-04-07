@@ -19,7 +19,7 @@
 #'   are returned: 0 for no anaemia; 1 for mild anaemia; 2 for moderate anaemia;
 #'   3 for severe anaemia.
 #'
-#' @return If `label` is TRUE, a character value or character vector of
+#' @returns If `label` is TRUE, a character value or character vector of
 #'   haemoglobinaemia status classification (can be either "severe anaemia" or
 #'   "moderate anaemia", "mild anaemia", or "no anaemia"). If `label` is FALSE,
 #'   an integer value or integer vector of haemoglobinaemia status

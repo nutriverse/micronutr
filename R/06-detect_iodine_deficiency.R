@@ -17,13 +17,14 @@
 #'   insufficient, adequate, excessive, or the like. If FALSE, simple integer
 #'   codes are returned.
 #'
-#' @return If `label` is TRUE, a character value or character vector of iodine
+#' @returns If `label` is TRUE, a character value or character vector of iodine
 #'   intake status. If `label` is FALSE, an integer value or integer vector of
 #'   iodine intake status.
 #'
 #' @examples
 #' detect_iodine(iodine = 10)
 #'
+#' @author Nicholus Tint Zaw and Ernest Guevarra
 #'
 #' @export
 #' @rdname detect_iodine

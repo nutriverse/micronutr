@@ -46,5 +46,7 @@ concentration for school age children (\strong{general}), pregnant women
 \examples{
 detect_iodine(iodine = 10)
 
-
+}
+\author{
+Nicholus Tint Zaw and Ernest Guevarra
 }
