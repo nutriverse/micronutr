@@ -4,7 +4,6 @@ about: Checklist of tasks for initial CRAN release
 title: Checklist of tasks for initial CRAN release
 labels: documentation
 assignees: ernestguevarra
-
 ---
 
 * [ ] usethis::use_news_md()
