@@ -49,7 +49,7 @@
     
     <a class="navbar-brand me-2" href="index.html">micronutr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,9 +115,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p><code>micronutr</code> is not yet available on CRAN.</p>
-<p>You can install <code>micronutr</code> from <a href="https://r-universe.dev/search/" class="external-link">r-universe</a> with:</p>
+<p>You can install <code>micronutr</code> from <a href="https://cran.r-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"micronutr"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development version of <code>micronutr</code> from <a href="https://nutriverse.r-universe.dev" class="external-link">nutriverse r-universe</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span></span>
 <span>  <span class="st">"micronutr"</span>, </span>
 <span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://nutriverse.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span></span>
@@ -128,37 +130,43 @@
 </h2>
 <p>The <code>micronutr</code> package provides tools for determining select vitamin and mineral deficiencies using R. Currently, <code>micronutr</code> has functions for:</p>
 <ul>
-<li><p>detecting <strong>haemoglobinaemia</strong> or anaemia based on an individual’s <em>serum haemoglobin</em> level;</p></li>
-<li><p>detecting <strong>inflammation</strong> status based on <em>c-reactive protein (CRP)</em> and <em>alpha(1)-acid-glycoprotein (AGP)</em>;</p></li>
-<li><p>detecting <strong>iron deficiency</strong> status based on an individual’s <em>serum ferritin</em> level;</p></li>
-<li><p>detecting <strong>iodine deficiency</strong> status based on a population’s mean urinary iodine concentration.</p></li>
+<li><p>Detecting <strong>haemoglobinaemia</strong> or anaemia based on an individual’s <em>serum haemoglobin</em> level;</p></li>
+<li><p>Detecting <strong>inflammation</strong> status based on <em>c-reactive protein (CRP)</em> and <em>alpha(1)-acid-glycoprotein (AGP)</em>;</p></li>
+<li><p>Detecting <strong>iron deficiency</strong> status based on an individual’s <em>serum ferritin</em> level;</p></li>
+<li><p>Detecting <strong>iodine deficiency</strong> status based on a population’s mean urinary iodine concentration.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p><code>micronutr</code> comes packaged with vignettes that show how to use the package for the purposes described above.</p>
+<ul>
+<li><p><a href="https://nutriverse.io/micronutr/articles/haemoglobinaemia.html">Detecting <strong>haemoglobinaemia</strong></a></p></li>
+<li><p><a href="https://nutriverse.io/micronutr/articles/inflammation.html">Detecting <strong>inflammation</strong></a></p></li>
+<li><p><a href="https://nutriverse.io/micronutr/articles/iron-deficiency.html">Detecting <strong>iron deficiency</strong></a></p></li>
+<li><p><a href="https://nutriverse.io/micronutr/articles/iodine-deficiency.html">Detecting <strong>iodine deficiency</strong></a></p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you find the <code>micronutr</code> package useful, please cite using the suggested citation provided by a call to the <code>citation</code> function as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"micronutr"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite micronutr in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Ernest Guevarra and Nicolus Tint Zaw (2023). micronutr: Utilities for</span></span>
-<span><span class="co">#&gt;   Calculating Indicators of Vitamin and Mineral Status of Populations R</span></span>
-<span><span class="co">#&gt;   package version 0.0.0.9001 URL https://nutriverse.io/micronutr/ DOI</span></span>
-<span><span class="co">#&gt;   10.5281/zenodo.7503846</span></span>
+<span><span class="co">#&gt;   Ernest Guevarra, Nicholus Tint Zaw (2024). _micronutr: Utilities for</span></span>
+<span><span class="co">#&gt;   Calculating Indicators of Vitamin and Mineral Status of Populations_.</span></span>
+<span><span class="co">#&gt;   doi:10.5281/zenodo.7503846 &lt;https://doi.org/10.5281/zenodo.7503846&gt;,</span></span>
+<span><span class="co">#&gt;   R package version 0.1.0, &lt;https://nutriverse.io/micronutr/&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
 <span><span class="co">#&gt;     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations},</span></span>
 <span><span class="co">#&gt;     author = {{Ernest Guevarra} and {Nicholus Tint Zaw}},</span></span>
-<span><span class="co">#&gt;     year = {2023},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.0.0.9001},</span></span>
+<span><span class="co">#&gt;     year = {2024},</span></span>
+<span><span class="co">#&gt;     note = {R package version 0.1.0},</span></span>
 <span><span class="co">#&gt;     url = {https://nutriverse.io/micronutr/},</span></span>
 <span><span class="co">#&gt;     doi = {10.5281/zenodo.7503846},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
@@ -167,7 +175,7 @@
 <h2 id="community-guidelines">Community guidelines<a class="anchor" aria-label="anchor" href="#community-guidelines"></a>
 </h2>
 <p>Feedback, bug reports, and feature requests are welcome; file issues or seek support <a href="https://github.com/nutriverse/micronutr/issues" class="external-link">here</a>. If you would like to contribute to the package, please see our <a href="https://nutriverse.io/micronutr/CONTRIBUTING.html">contributing guidelines</a>.</p>
-<p>This project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>This project is released with a <a href="https://nutriverse.io/micronutr/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -204,23 +212,12 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Ernest Guevarra <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4887-4415" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Nicholus Tint Zaw <br><small class="roles"> Author </small>  </li>
+<li>Ernest Guevarra <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-4887-4415" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Nicholus Tint Zaw <br><small class="roles"> Author, copyright holder </small>  </li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.repostatus.org/#wip" class="external-link"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Project Status: WIP"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml" class="external-link"><img src="https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml/badge.svg" alt="test-coverage"></a></li>
-<li><a href="https://app.codecov.io/gh/nutriverse/micronutr?branch=main" class="external-link"><img src="https://codecov.io/gh/nutriverse/micronutr/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.codefactor.io/repository/github/nutriverse/micronutr" class="external-link"><img src="https://www.codefactor.io/repository/github/nutriverse/micronutr/badge" alt="CodeFactor"></a></li>
-<li><a href="https://zenodo.org/badge/latestdoi/584725138" class="external-link"><img src="https://zenodo.org/badge/584725138.svg" alt="DOI"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
