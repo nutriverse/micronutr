@@ -5,7 +5,7 @@
 #'
 #' @param alt Altitude, in metres, above sea level
 #'
-#' @return A numeric value or numeric vector of correction factor/s for
+#' @returns A numeric value or numeric vector of correction factor/s for
 #'   haemoglobin based on altitude
 #'
 #' @examples
@@ -49,7 +49,7 @@ get_altitude_correction <- function(alt = NULL) {
 #'   0 = non-smoker; 1 = any smoking or half packet up to less than 1 packet a
 #'   day; 2 = 1 up to less than 2 packets a day; 3 = 2 or more packets a day.
 #'
-#' @return A numeric value or numeric vector of correction factor/s for
+#' @returns A numeric value or numeric vector of correction factor/s for
 #'   haemoglobin based on smoking status
 #'
 #' @examples
@@ -98,7 +98,7 @@ get_smoking_correction <- function(smoke = NULL) {
 #'   0 = non-smoker; 1 = any smoker or half packet up to less than 1 packet a
 #'   day; 2 = 1 up to less than 2 packets a day; 3 = 2 or more packets a day.
 #'
-#' @return A numeric value or numeric vector of corrected serum haemoglobin
+#' @returns A numeric value or numeric vector of corrected serum haemoglobin
 #'   concentration/s in grams per litre (g/l)
 #'
 #' @examples

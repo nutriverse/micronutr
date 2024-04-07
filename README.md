@@ -5,10 +5,13 @@
 
 <!-- badges: start -->
 
-[![Project Status:
-WIP](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/micronutr)](https://CRAN.R-project.org/package=micronutr)
 [![R-CMD-check](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml)
 [![Codecov test
@@ -26,10 +29,15 @@ deficiencies of selected vitamins and minerals.
 
 ## Installation
 
-`micronutr` is not yet available on CRAN.
+You can install `micronutr` from [CRAN](https://cran.r-project.org)
+with:
 
-You can install `micronutr` from
-[r-universe](https://r-universe.dev/search/) with:
+``` r
+install.packages("micronutr")
+```
+
+You can install the development version of `micronutr` from [nutriverse
+r-universe](https://nutriverse.r-universe.dev) with:
 
 ``` r
 install.packages(
@@ -44,22 +52,34 @@ The `micronutr` package provides tools for determining select vitamin
 and mineral deficiencies using R. Currently, `micronutr` has functions
 for:
 
-- detecting **haemoglobinaemia** or anaemia based on an individual’s
+- Detecting **haemoglobinaemia** or anaemia based on an individual’s
   *serum haemoglobin* level;
 
-- detecting **inflammation** status based on *c-reactive protein (CRP)*
+- Detecting **inflammation** status based on *c-reactive protein (CRP)*
   and *alpha(1)-acid-glycoprotein (AGP)*;
 
-- detecting **iron deficiency** status based on an individual’s *serum
+- Detecting **iron deficiency** status based on an individual’s *serum
   ferritin* level;
 
-- detecting **iodine deficiency** status based on a population’s mean
+- Detecting **iodine deficiency** status based on a population’s mean
   urinary iodine concentration.
 
 ## Usage
 
 `micronutr` comes packaged with vignettes that show how to use the
 package for the purposes described above.
+
+- [Detecting
+  **haemoglobinaemia**](https://nutriverse.io/micronutr/articles/haemoglobinaemia.html)
+
+- [Detecting
+  **inflammation**](https://nutriverse.io/micronutr/articles/inflammation.html)
+
+- [Detecting **iron
+  deficiency**](https://nutriverse.io/micronutr/articles/iron-deficiency.html)
+
+- [Detecting **iodine
+  deficiency**](https://nutriverse.io/micronutr/articles/iodine-deficiency.html)
 
 ## Citation
 
@@ -71,18 +91,18 @@ follows:
 citation("micronutr")
 #> To cite micronutr in publications use:
 #> 
-#>   Ernest Guevarra and Nicolus Tint Zaw (2023). micronutr: Utilities for
-#>   Calculating Indicators of Vitamin and Mineral Status of Populations R
-#>   package version 0.0.0.9001 URL https://nutriverse.io/micronutr/ DOI
-#>   10.5281/zenodo.7503846
+#>   Ernest Guevarra, Nicholus Tint Zaw (2024). _micronutr: Utilities for
+#>   Calculating Indicators of Vitamin and Mineral Status of Populations_.
+#>   doi:10.5281/zenodo.7503846 <https://doi.org/10.5281/zenodo.7503846>,
+#>   R package version 0.1.0, <https://nutriverse.io/micronutr/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations},
 #>     author = {{Ernest Guevarra} and {Nicholus Tint Zaw}},
-#>     year = {2023},
-#>     note = {R package version 0.0.0.9001},
+#>     year = {2024},
+#>     note = {R package version 0.1.0},
 #>     url = {https://nutriverse.io/micronutr/},
 #>     doi = {10.5281/zenodo.7503846},
 #>   }
@@ -97,5 +117,5 @@ you would like to contribute to the package, please see our
 guidelines](https://nutriverse.io/micronutr/CONTRIBUTING.html).
 
 This project is released with a [Contributor Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Conduct](https://nutriverse.io/micronutr/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.

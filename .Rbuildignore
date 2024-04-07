@@ -9,3 +9,4 @@
 ^vignettes/articles$
 ^pkgdown$
 ^_pkgdown\.yml$
+^cran-comments\.md$

@@ -2,12 +2,12 @@ Package: micronutr
 Type: Package
 Title: Utilities for Calculating Indicators of Vitamin and Mineral Status of
     Populations
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
-           email = "ernest@guevarra.io", role = c("aut", "cre")),
+           email = "ernest@guevarra.io", role = c("aut", "cre", "cph")),
     person("Nicholus", "Tint Zaw", email = "nicholustintzaw@gmail.com",
-           role = "aut"))
+           role = c("aut", "cph")))
 Description: Vitamin and mineral deficiencies continue to be a significant 
     public health problem. This is particularly critical in developing countries
     where deficiencies to vitamin A, iron, iodine, and other micronutrients
@@ -30,7 +30,7 @@ Language: en-GB
 LazyData: true
 RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
-URL: https://nutriverse.io/micronutr/,https://github.com/nutriverse/micronutr
+URL: https://nutriverse.io/micronutr/, https://github.com/nutriverse/micronutr
 BugReports: https://github.com/nutriverse/micronutr/issues
 Config/testthat/edition: 3
 VignetteBuilder: knitr

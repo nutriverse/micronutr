@@ -1,6 +1,11 @@
+# micronutr 0.1.0
+
+This is the first CRAN release of the `micronutr` package.
+
+
 # micronutr 0.0.0.9001
 
-This is an updated pre-release of the micronutr package.
+This is an updated pre-release of the `micronutr` package.
 
 The update corrects missing links to community guidelines on code of conduct and contributing to the project in the package website and README.
 
