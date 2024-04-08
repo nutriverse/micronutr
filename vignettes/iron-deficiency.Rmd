@@ -134,5 +134,9 @@ and for a person with serum ferritin of 11.3 microgram/L and an AGP of 2, we use
 correct_ferritin(agp = 2, ferritin = 11.3)
 ```
 
+## References
+
+Serum ferritin concentrations for the assessment of iron status in individuals and populations: technical brief. Geneva: World Health Organization; 2020. License: CC BY-NC-SA 3.0 IGO.
+
 <br/>
 <br/>

@@ -4,8 +4,7 @@
 \name{micronutr}
 \alias{micronutr-package}
 \alias{micronutr}
-\title{Utilities for Calculating Indicators of Vitamin and Mineral Status of
-Populations}
+\title{Determining Vitamin and Mineral Status of Populations}
 \description{
 Vitamin and mineral deficiencies continue to be a significant public health
 problem. This is particularly critical in developing countries where
@@ -13,7 +12,9 @@ deficiencies to Vitamin A, iron, iodine, and other micronutrients lead to
 adverse health consequences. Cross-sectional surveys are helpful in answering
 questions related to the magnitude and distribution of deficiencies of
 selected vitamins and minerals. This package provides tools for
-calculating and determining select vitamin and mineral deficiencies using R.
+calculating and determining select vitamin and mineral deficiencies based on
+World Health Organization (WHO) guidelines found at
+\url{https://www.who.int/teams/nutrition-and-food-safety/databases/vitamin-and-mineral-nutrition-information-system}.
 }
 \seealso{
 Useful links:

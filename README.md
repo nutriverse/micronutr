@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
+# micronutr: Determining Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
 
 <!-- badges: start -->
 
@@ -27,24 +27,9 @@ lead to adverse health consequences. Cross-sectional surveys are helpful
 in answering questions related to the magnitude and distribution of
 deficiencies of selected vitamins and minerals.
 
-## Installation
-
-You can install `micronutr` from [CRAN](https://cran.r-project.org)
-with:
-
-``` r
-install.packages("micronutr")
-```
-
-You can install the development version of `micronutr` from [nutriverse
-r-universe](https://nutriverse.r-universe.dev) with:
-
-``` r
-install.packages(
-  "micronutr", 
-  repos = c('https://nutriverse.r-universe.dev', 'https://cloud.r-project.org')
-)
-```
+This package provides tools for determining select vitamin and mineral
+deficiencies based on World Health Organization (WHO) guidelines found
+[here](https://www.who.int/teams/nutrition-and-food-safety/databases/vitamin-and-mineral-nutrition-information-system).
 
 ## What does `micronutr` do?
 
@@ -63,6 +48,25 @@ for:
 
 - Detecting **iodine deficiency** status based on a population’s mean
   urinary iodine concentration.
+
+## Installation
+
+You can install `micronutr` from [CRAN](https://cran.r-project.org)
+with:
+
+``` r
+install.packages("micronutr")
+```
+
+You can install the development version of `micronutr` from [nutriverse
+r-universe](https://nutriverse.r-universe.dev) with:
+
+``` r
+install.packages(
+  "micronutr", 
+  repos = c('https://nutriverse.r-universe.dev', 'https://cloud.r-project.org')
+)
+```
 
 ## Usage
 
@@ -91,18 +95,18 @@ follows:
 citation("micronutr")
 #> To cite micronutr in publications use:
 #> 
-#>   Ernest Guevarra, Nicholus Tint Zaw (2024). _micronutr: Utilities for
-#>   Calculating Indicators of Vitamin and Mineral Status of Populations_.
+#>   Ernest Guevarra, Nicholus Tint Zaw (2024). _micronutr: Determining
+#>   Vitamin and Mineral Status of Populations_.
 #>   doi:10.5281/zenodo.7503846 <https://doi.org/10.5281/zenodo.7503846>,
-#>   R package version 0.1.0, <https://nutriverse.io/micronutr/>.
+#>   R package version 0.1.1, <https://nutriverse.io/micronutr/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations},
+#>     title = {micronutr: Determining Vitamin and Mineral Status of Populations},
 #>     author = {{Ernest Guevarra} and {Nicholus Tint Zaw}},
 #>     year = {2024},
-#>     note = {R package version 0.1.0},
+#>     note = {R package version 0.1.1},
 #>     url = {https://nutriverse.io/micronutr/},
 #>     doi = {10.5281/zenodo.7503846},
 #>   }
@@ -119,3 +123,22 @@ guidelines](https://nutriverse.io/micronutr/CONTRIBUTING.html).
 This project is released with a [Contributor Code of
 Conduct](https://nutriverse.io/micronutr/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
+
+## References
+
+1.  Guideline on haemoglobin cutoffs to define anaemia in individuals
+    and populations. Geneva: World Health Organization; 2024. Licence:
+    CC BY-NC-SA 3.0 IGO.
+
+2.  Serum ferritin concentrations for the assessment of iron status in
+    individuals and populations: technical brief. Geneva: World Health
+    Organization; 2020. License: CC BY-NC-SA 3.0 IGO.
+
+3.  C-reactive protein concentrations as a marker of inflammation or
+    infection for interpreting biomarkers of micronutrient status.
+    Vitamin and Mineral Nutrition Information System. Geneva: World
+    Health Organization; 2014.
+
+4.  Urinary iodine concentrations for determining iodine status
+    deficiency in populations. Vitamin and Mineral Nutrition Information
+    System. Geneva: World Health Organization; 2013.

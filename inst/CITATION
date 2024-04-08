@@ -1,10 +1,10 @@
 bibentry(
   bibtype  = "Manual",
   header   = "To cite micronutr in publications use:",
-  title    = "micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations",
+  title    = "micronutr: Determining Vitamin and Mineral Status of Populations",
   author   = c(person("Ernest Guevarra"), person("Nicholus Tint Zaw")),
   year     = "2024",
-  note     = "R package version 0.1.0",
+  note     = "R package version 0.1.1",
   url      = "https://nutriverse.io/micronutr/",
   doi      = "10.5281/zenodo.7503846"
 )

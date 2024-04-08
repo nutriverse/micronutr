@@ -1,3 +1,11 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Shortened the package title to less than 65 characters.
+
+* Added a URL link in angle brackets in the DESCRIPTION file for the WHO
+guidelines I used as reference for the methods in this package.
+
 ## Test environments
 * local ubuntu 22.04 install, R 4.3.3
 * macos-latest (on GitHub Actions), release

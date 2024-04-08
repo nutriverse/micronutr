@@ -1,8 +1,7 @@
 Package: micronutr
 Type: Package
-Title: Utilities for Calculating Indicators of Vitamin and Mineral Status of
-    Populations
-Version: 0.1.0
+Title: Determining Vitamin and Mineral Status of Populations
+Version: 0.1.1
 Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
            email = "ernest@guevarra.io", role = c("aut", "cre", "cph")),
@@ -15,7 +14,8 @@ Description: Vitamin and mineral deficiencies continue to be a significant
     answering questions related to the magnitude and distribution of
     deficiencies of selected vitamins and minerals. This package provides tools
     for calculating and determining select vitamin and mineral deficiencies
-    using R.
+    based on World Health Organization (WHO) guidelines found at
+    <https://www.who.int/teams/nutrition-and-food-safety/databases/vitamin-and-mineral-nutrition-information-system>.
 License: GPL (>= 3)
 Depends: 
     R (>= 2.10)
