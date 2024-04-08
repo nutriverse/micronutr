@@ -109,5 +109,9 @@ correct_hb(hb = 105, alt = 1400, smoke = 1.5)
 
 This individual will have a corrected haemoglobin of 102.5 g/L.
 
+## References
+
+Guideline on haemoglobin cutoffs to define anaemia in individuals and populations. Geneva: World Health Organization; 2024. Licence: CC BY-NC-SA 3.0 IGO.
+
 <br/>
 <br/>

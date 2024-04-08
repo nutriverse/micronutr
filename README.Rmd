@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 library(micronutr)
 ```
 
-# micronutr: Utilities for Calculating Indicators of Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
+# micronutr: Determining Vitamin and Mineral Status of Populations <img src="man/figures/logo.png" width="200px" align="right" />
 
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -29,6 +29,20 @@ library(micronutr)
 <!-- badges: end -->
 
 Vitamin and mineral deficiencies continue to be a significant public health problem. This is particularly critical in developing countries where deficiencies to vitamin A, iron, iodine, and other micronutrients lead to adverse health consequences. Cross-sectional surveys are helpful in answering questions related to the magnitude and distribution of deficiencies of selected vitamins and minerals.
+
+This package provides tools for determining select vitamin and mineral deficiencies based on World Health Organization (WHO) guidelines found [here](https://www.who.int/teams/nutrition-and-food-safety/databases/vitamin-and-mineral-nutrition-information-system).
+
+## What does `micronutr` do?
+
+The `micronutr` package provides tools for determining select vitamin and mineral deficiencies using R. Currently, `micronutr` has functions for:
+
+* Detecting **haemoglobinaemia** or anaemia based on an individual's *serum haemoglobin* level;
+
+* Detecting **inflammation** status based on *c-reactive protein (CRP)* and *alpha(1)-acid-glycoprotein (AGP)*;
+
+* Detecting **iron deficiency** status based on an individual's *serum ferritin* level;
+
+* Detecting **iodine deficiency** status based on a population's mean urinary iodine concentration.
 
 ## Installation
 
@@ -46,18 +60,6 @@ install.packages(
   repos = c('https://nutriverse.r-universe.dev', 'https://cloud.r-project.org')
 )
 ```
-
-## What does `micronutr` do?
-
-The `micronutr` package provides tools for determining select vitamin and mineral deficiencies using R. Currently, `micronutr` has functions for:
-
-* Detecting **haemoglobinaemia** or anaemia based on an individual's *serum haemoglobin* level;
-
-* Detecting **inflammation** status based on *c-reactive protein (CRP)* and *alpha(1)-acid-glycoprotein (AGP)*;
-
-* Detecting **iron deficiency** status based on an individual's *serum ferritin* level;
-
-* Detecting **iodine deficiency** status based on a population's mean urinary iodine concentration.
 
 ## Usage
 
@@ -85,3 +87,14 @@ Feedback, bug reports, and feature requests are welcome; file issues or seek sup
 
 This project is released with a [Contributor Code of Conduct](https://nutriverse.io/micronutr/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
+## References
+
+1. Guideline on haemoglobin cutoffs to define anaemia in individuals and populations. Geneva: World
+Health Organization; 2024. Licence: CC BY-NC-SA 3.0 IGO.
+
+2. Serum ferritin concentrations for the assessment of iron status in individuals and populations: technical brief. Geneva: World Health Organization; 2020. License: CC BY-NC-SA 3.0 IGO.
+
+3. C-reactive protein concentrations as a marker of inflammation or infection for interpreting biomarkers of micronutrient status. Vitamin and Mineral Nutrition Information System. Geneva: World Health Organization; 2014.
+
+4. Urinary iodine concentrations for determining iodine status deficiency in populations. Vitamin and Mineral
+Nutrition Information System. Geneva: World Health Organization; 2013.

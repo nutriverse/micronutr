@@ -97,5 +97,9 @@ detect_inflammation(crp = 2)
 
 we get the same result as using the `detect_inflammation_crp()`.
 
+## References
+
+C-reactive protein concentrations as a marker of inflammation or infection for interpreting biomarkers of micronutrient status. Vitamin and Mineral Nutrition Information System. Geneva: World Health Organization; 2014.
+
 <br/>
 <br/>
