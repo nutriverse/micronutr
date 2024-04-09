@@ -12,6 +12,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/micronutr)](https://CRAN.R-project.org/package=micronutr)
+[![cran
+checks](https://badges.cranchecks.info/worst/micronutr.svg)](https://cran.r-project.org/web/checks/check_results_micronutr.html)
+[![CRAN](https://img.shields.io/cran/l/micronutr.svg)](https://CRAN.R-project.org/package=micronutr)
+[![CRAN](http://cranlogs.r-pkg.org/badges/micronutr)](https://cran.r-project.org/package=micronutr)
+[![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/micronutr)](https://cran.r-project.org/package=micronutr)
 [![R-CMD-check](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml)
 [![Codecov test
