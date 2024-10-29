@@ -1,69 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/articles/haemoglobinaemia.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/articles/inflammation.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/articles/iodine-deficiency.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/articles/iron-deficiency.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/correct_ferritin.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/correct_hb.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/detect_anaemia.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/detect_inflammation.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/detect_iodine.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/detect_iron_deficiency.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/get_altitude_correction.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/get_smoking_correction.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/micronutr.html</loc>
-  </url>
-  <url>
-    <loc>https://nutriverse.io/micronutr/dev/reference/mnData.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://nutriverse.io/micronutr/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/CONTRIBUTING.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/LICENSE.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/articles/haemoglobinaemia.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/articles/index.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/articles/inflammation.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/articles/iodine-deficiency.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/articles/iron-deficiency.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/authors.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/index.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/news/index.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/correct_ferritin.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/correct_hb.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/detect_anaemia.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/detect_inflammation.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/detect_iodine.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/detect_iron_deficiency.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/get_altitude_correction.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/get_smoking_correction.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/index.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/micronutr.html</loc></url>
+<url><loc>https://nutriverse.io/micronutr/dev/reference/mnData.html</loc></url>
 </urlset>
+
