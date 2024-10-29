@@ -41,12 +41,8 @@ test_that("correction factor for altitude errors", {
 
 
 test_that("correct haemoglobin output is correct", {
-  expect_type(
-    correct_hb(hb = mnData$hb[1]), "double"
-  )
-  expect_type(
-    correct_hb(hb = mnData$hb[1], alt = mnData$altitude[1]), "double"
-  )
+  expect_warning(correct_hb(hb = mnData$hb[1]))
+  expect_warning(correct_hb(hb = mnData$hb[1], alt = mnData$altitude[1]))
   expect_type(
     correct_hb(hb = mnData$hb[1], alt = mnData$altitude[1], smoke = 0),
     "double"
