@@ -1,5 +1,15 @@
 # micronutr 0.1.1.9000
 
+This is a GitHub-only and R Universe-only development release. In this release:
+
+## Bug fixes
+
+* refactor tests for haemoglobin correction functions to resolve warning messages.
+
+## General updates
+
+* update `_pkgdown.yml` website template to match nutriverse theme.
+
 
 # micronutr 0.1.1
 

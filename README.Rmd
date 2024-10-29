@@ -56,7 +56,7 @@ You can install `micronutr` from [CRAN](https://cran.r-project.org) with:
 install.packages("micronutr")
 ```
 
-You can install the development version of `micronutr` from [nutriverse r-universe](https://nutriverse.r-universe.dev) with:
+You can install the development version of `micronutr` from [nutriverse R Universe](https://nutriverse.r-universe.dev) with:
 
 ```{r install-r-universe, echo = TRUE, eval = FALSE}
 install.packages(
