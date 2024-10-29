@@ -7,16 +7,18 @@ development:
 
 template:
   bootstrap: 5
-  bootswatch: cosmo
-  theme: haddock
-  ganalytics: #
+  bootswatch: pulse
+  theme: breeze-light
+  ganalytics: G-1V9EDVDNEZ
+  bslib:
+    pkgdown-nav-height: 100px
 
 navbar:
   bg: success
   type: light
   structure:
     left:  [home, reference, articles, news]
-    right: [mastodon, linkedin, github]
+    right: [mastodon, github]
 
   components:
     articles:
@@ -33,9 +35,6 @@ navbar:
     mastodon:
       icon: "fab fa-mastodon fa-lg"
       href: https://fosstodon.org/@nutriverse
-    # linkedin:
-    #   icon: "fab fa-linkedin fa-lg"
-    #   href: https://www.linkedin.com/company/
 
 home:
   #links:

@@ -42,17 +42,17 @@ The `micronutr` package provides tools for determining select vitamin
 and mineral deficiencies using R. Currently, `micronutr` has functions
 for:
 
-- Detecting **haemoglobinaemia** or anaemia based on an individual’s
-  *serum haemoglobin* level;
+  - Detecting **haemoglobinaemia** or anaemia based on an individual’s
+    *serum haemoglobin* level;
 
-- Detecting **inflammation** status based on *c-reactive protein (CRP)*
-  and *alpha(1)-acid-glycoprotein (AGP)*;
+  - Detecting **inflammation** status based on *c-reactive protein
+    (CRP)* and *alpha(1)-acid-glycoprotein (AGP)*;
 
-- Detecting **iron deficiency** status based on an individual’s *serum
-  ferritin* level;
+  - Detecting **iron deficiency** status based on an individual’s *serum
+    ferritin* level;
 
-- Detecting **iodine deficiency** status based on a population’s mean
-  urinary iodine concentration.
+  - Detecting **iodine deficiency** status based on a population’s mean
+    urinary iodine concentration.
 
 ## Installation
 
@@ -64,7 +64,7 @@ install.packages("micronutr")
 ```
 
 You can install the development version of `micronutr` from [nutriverse
-r-universe](https://nutriverse.r-universe.dev) with:
+R Universe](https://nutriverse.r-universe.dev) with:
 
 ``` r
 install.packages(
@@ -78,17 +78,17 @@ install.packages(
 `micronutr` comes packaged with vignettes that show how to use the
 package for the purposes described above.
 
-- [Detecting
-  **haemoglobinaemia**](https://nutriverse.io/micronutr/articles/haemoglobinaemia.html)
+  - [Detecting
+    **haemoglobinaemia**](https://nutriverse.io/micronutr/articles/haemoglobinaemia.html)
 
-- [Detecting
-  **inflammation**](https://nutriverse.io/micronutr/articles/inflammation.html)
+  - [Detecting
+    **inflammation**](https://nutriverse.io/micronutr/articles/inflammation.html)
 
-- [Detecting **iron
-  deficiency**](https://nutriverse.io/micronutr/articles/iron-deficiency.html)
+  - [Detecting **iron
+    deficiency**](https://nutriverse.io/micronutr/articles/iron-deficiency.html)
 
-- [Detecting **iodine
-  deficiency**](https://nutriverse.io/micronutr/articles/iodine-deficiency.html)
+  - [Detecting **iodine
+    deficiency**](https://nutriverse.io/micronutr/articles/iodine-deficiency.html)
 
 ## Citation
 
@@ -102,8 +102,9 @@ citation("micronutr")
 #> 
 #>   Ernest Guevarra, Nicholus Tint Zaw (2024). _micronutr: Determining
 #>   Vitamin and Mineral Status of Populations_.
-#>   doi:10.5281/zenodo.7503846 <https://doi.org/10.5281/zenodo.7503846>,
-#>   R package version 0.1.1, <https://nutriverse.io/micronutr/>.
+#>   doi:10.5281/zenodo.7503846
+#>   <https://doi.org/10.5281/zenodo.7503846>, R package version 0.1.1,
+#>   <https://nutriverse.io/micronutr/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
