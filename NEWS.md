@@ -1,6 +1,6 @@
 # micronutr 0.1.1.9000
 
-This is a GitHub-only and R Universe-only development release. In this release:
+This is a GitHub- and R Universe-only development release. In this release:
 
 ## Bug fixes
 
@@ -8,13 +8,15 @@ This is a GitHub-only and R Universe-only development release. In this release:
 
 ## General updates
 
-* update `_pkgdown.yml` website template to match nutriverse theme.
+* update `_pkgdown.yml` website template to match nutriverse theme and other general updates.
 
+<br/>
 
 # micronutr 0.1.1
 
 This is the first CRAN release of the `micronutr` package.
 
+<br/>
 
 # micronutr 0.0.0.9001
 
@@ -24,6 +26,7 @@ The update corrects missing links to community guidelines on code of conduct and
 
 This update also allows for an initial Zenodo DOI to be allocated to the release in preparation for eventual CRAN publication.
 
+<br/>
 
 # micronutr 0.0.0.9000
 
