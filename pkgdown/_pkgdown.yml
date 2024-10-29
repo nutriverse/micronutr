@@ -18,7 +18,7 @@ navbar:
   type: light
   structure:
     left:  [home, reference, articles, news]
-    right: [mastodon, github]
+    right: [search, mastodon, github]
 
   components:
     articles:
