@@ -7,15 +7,16 @@ development:
 
 template:
   bootstrap: 5
-  bootswatch: pulse
   theme: breeze-light
   ganalytics: G-1V9EDVDNEZ
   bslib:
+    bootswatch: pulse
     pkgdown-nav-height: 100px
+    success: "#004225"
 
 navbar:
   bg: success
-  type: light
+  type: dark
   structure:
     left:  [home, reference, articles, news]
     right: [search, mastodon, github]
@@ -34,6 +35,7 @@ navbar:
         href: articles/iodine-deficiency.html
     mastodon:
       icon: "fab fa-mastodon fa-lg"
+      aria-label: Mastodon
       href: https://fosstodon.org/@nutriverse
 
 home:
