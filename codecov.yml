@@ -1,8 +1,5 @@
 comment: false
 
-ignore:
-  - "R/utils.R"
-
 coverage:
   status:
     project:
