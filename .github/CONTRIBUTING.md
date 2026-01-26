@@ -8,9 +8,9 @@
 
 * Fork this repository to your Github account
 
-* Clone your version on your account down to your machine from your account
+* Clone your forked version to your machine
 
-```
+```bash
 git clone https://github.com/<yourgithubusername>/micronutr.git
 ```
 

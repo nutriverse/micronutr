@@ -27,7 +27,7 @@ library(micronutr)
 [![CRAN](http://cranlogs.r-pkg.org/badges/grand-total/micronutr)](https://cran.r-project.org/package=micronutr)
 [![R-CMD-check](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/nutriverse/micronutr/actions/workflows/test-coverage.yaml)
-[![Codecov test coverage](https://codecov.io/gh/nutriverse/micronutr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/micronutr?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/nutriverse/micronutr/graph/badge.svg)](https://app.codecov.io/gh/nutriverse/micronutr)
 [![CodeFactor](https://www.codefactor.io/repository/github/nutriverse/micronutr/badge)](https://www.codefactor.io/repository/github/nutriverse/micronutr)
 [![DOI](https://zenodo.org/badge/584725138.svg)](https://zenodo.org/badge/latestdoi/584725138)
 <!-- badges: end -->
@@ -36,9 +36,9 @@ Vitamin and mineral deficiencies continue to be a significant public health prob
 
 This package provides tools for determining select vitamin and mineral deficiencies based on World Health Organization (WHO) guidelines found [here](https://www.who.int/teams/nutrition-and-food-safety/databases/vitamin-and-mineral-nutrition-information-system).
 
-## What does `micronutr` do?
+## About the package
 
-The `micronutr` package provides tools for determining select vitamin and mineral deficiencies using R. Currently, `micronutr` has functions for:
+The `{micronutr}` package provides tools for determining select vitamin and mineral deficiencies using R. Currently, `{micronutr}` has functions for:
 
 * Detecting **haemoglobinaemia** or anaemia based on an individual's *serum haemoglobin* level;
 
@@ -50,24 +50,34 @@ The `micronutr` package provides tools for determining select vitamin and minera
 
 ## Installation
 
-You can install `micronutr` from [CRAN](https://cran.r-project.org) with:
+::: {.pkgdown-release}
+You can install `{micronutr}` from [CRAN](https://cran.r-project.org) with:
 
-```{r install-cran, echo = TRUE, eval = FALSE}
+```R
 install.packages("micronutr")
 ```
+:::
 
-You can install the development version of `micronutr` from [nutriverse R Universe](https://nutriverse.r-universe.dev) with:
+::: {.pkgdown-devel}
+You can install the development version of `{micronutr}` from GitHub using the `{pak}` package with:
 
-```{r install-r-universe, echo = TRUE, eval = FALSE}
+```R
+if (!require("pak")) install.packages("pak")
+pak::pak("nutriverse/pak")
+```
+You can also install `{micronutr}` from the [nutriverse R Universe](https://nutriverse.r-universe.dev) with:
+
+```R
 install.packages(
   "micronutr", 
   repos = c('https://nutriverse.r-universe.dev', 'https://cloud.r-project.org')
 )
 ```
+:::
 
 ## Usage
 
-`micronutr` comes packaged with vignettes that show how to use the package for the purposes described above.
+`{micronutr}` comes packaged with vignettes that show how to use the package for the purposes described above.
 
 * [Detecting **haemoglobinaemia**](https://nutriverse.io/micronutr/articles/haemoglobinaemia.html)
 
@@ -79,7 +89,7 @@ install.packages(
 
 ## Citation
 
-If you find the `micronutr` package useful, please cite using the suggested citation provided by a call to the `citation` function as follows:
+If you use `{micronutr}` in your work, please cite using the suggested citation provided by a call to the `citation` function as follows:
 
 ```{r citation, echo = TRUE, eval = TRUE}
 citation("micronutr")
@@ -93,12 +103,14 @@ This project is released with a [Contributor Code of Conduct](https://nutriverse
 
 ## References
 
-1. Guideline on haemoglobin cutoffs to define anaemia in individuals and populations. Geneva: World
-Health Organization; 2024. Licence: CC BY-NC-SA 3.0 IGO.
+1. Guideline on haemoglobin cutoffs to define anaemia in individuals and populations. Geneva: World Health Organization; 2024. Licence: CC BY-NC-SA 3.0 IGO.
 
 2. Serum ferritin concentrations for the assessment of iron status in individuals and populations: technical brief. Geneva: World Health Organization; 2020. License: CC BY-NC-SA 3.0 IGO.
 
 3. C-reactive protein concentrations as a marker of inflammation or infection for interpreting biomarkers of micronutrient status. Vitamin and Mineral Nutrition Information System. Geneva: World Health Organization; 2014.
 
-4. Urinary iodine concentrations for determining iodine status deficiency in populations. Vitamin and Mineral
-Nutrition Information System. Geneva: World Health Organization; 2013.
+4. Urinary iodine concentrations for determining iodine status deficiency in populations. Vitamin and Mineral Nutrition Information System. Geneva: World Health Organization; 2013.
+
+&nbsp;
+
+[![This is part of the nutriverse project under the Oxford iHealth initiative of the MSc in International Health and Tropical Medicine, Nuffield Department of Medicine, University of Oxford](https://github.com/nutriverse/nutriverse-images/blob/main/nutriverse/nutriverse_footer.png?raw=true)](https://nutriverse.io)

@@ -1,7 +1,7 @@
 Package: micronutr
 Type: Package
 Title: Determining Vitamin and Mineral Status of Populations
-Version: 0.1.1.9000
+Version: 0.1.1
 Authors@R: c(
     person("Ernest", "Guevarra", comment = c(ORCID = "0000-0002-4887-4415"), 
            email = "ernest@guevarra.io", role = c("aut", "cre", "cph")),
@@ -28,7 +28,7 @@ Suggests:
 Encoding: UTF-8
 Language: en-GB
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 URL: https://nutriverse.io/micronutr/, https://github.com/nutriverse/micronutr
 BugReports: https://github.com/nutriverse/micronutr/issues

@@ -1,4 +1,4 @@
-# micronutr 0.1.1.9000
+<!-- # micronutr 0.1.1.9000
 
 This is a GitHub- and R Universe-only development release. In this release:
 
@@ -10,8 +10,7 @@ This is a GitHub- and R Universe-only development release. In this release:
 
 * update `_pkgdown.yml` website template to match nutriverse theme and other general updates.
 
-<br/>
-
+<br/> -->
 # micronutr 0.1.1
 
 This is the first CRAN release of the `micronutr` package.
